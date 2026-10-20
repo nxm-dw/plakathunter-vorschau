@@ -33,14 +33,14 @@
   --blue:#145DA0;--blue-l:#7DBBF2;
   --sodium:#FFB547;--sodium-2:#FFC86E;
   --dl:rgba(255,255,255,.14);--ll:rgba(1,46,72,.14);
-  --dm:rgba(255,255,255,.7);
+  --dm:#fff;
   --ease:cubic-bezier(.16,.84,.24,1);
   --pad:clamp(20px,4vw,56px);
   --disp:"Archivo","Arial Narrow",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Inter",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:90px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{font-family:var(--body);font-feature-settings:"cv11","ss01";font-size:1.0625rem;line-height:1.55;color:#fff;background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -87,23 +87,57 @@ p{text-wrap:pretty}
 .btn-full{width:100%}.btn-full>span{flex:1;justify-content:flex-start}
 
 /* Header */
-.hd{position:fixed;inset:0 0 auto;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
-.hd.sc{background:rgba(1,46,72,.88);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-color:var(--dl)}
-.hd .w{display:flex;align-items:center;gap:24px;height:84px}
-.logo{flex:none;display:block}.logo img{height:36px;width:auto;max-width:none}
-.hd nav ul{display:flex;list-style:none;gap:2px;margin-left:16px}
-.hd nav a{display:block;white-space:nowrap;padding:10px 11px;font-size:.9375rem;font-weight:550;text-decoration:none;color:var(--dm);transition:color .2s}
-.hd nav a:hover{color:#fff}
-.hd .sp{flex:1}
-.hd .tel{white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;text-decoration:none;line-height:1.2}
-.hd .tel .lbl{color:var(--dm);font-size:.6875rem}
-.hd .tel b{font-family:var(--mono);font-weight:600;font-size:.9375rem;letter-spacing:.02em}
-.hd .btn,.hd .tel,.logo,.burger{flex:none}
-.hd .btn{height:48px}.hd .btn>b{width:48px}.hd .btn>span{padding:0 18px}
-.burger{display:none;width:48px;height:48px;border-radius:3px;box-shadow:inset 0 0 0 1.5px var(--dl);place-items:center}
-@media(max-width:1720px){.hd .tel{display:none}}
-@media(max-width:1220px){.hd nav{display:none}.burger{display:grid}.hd .tel{display:flex}}
-@media(max-width:760px){.hd .tel,.hd .btn{display:none}.logo img{height:30px}}
+.hd{position:fixed;inset:0 0 auto;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:transform .45s var(--ease)}
+.util{height:40px;font-size:.8125rem;color:var(--dm);border-bottom:1px solid var(--dl);background:rgba(1,44,68,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .3s}
+.util .w{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.u-l{font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.6875rem}
+.u-r{display:flex;list-style:none;gap:28px;align-items:center}
+.u-r li{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.u-r svg{color:var(--sodium)}
+.u-r a{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:650;text-decoration:none;font-variant-numeric:tabular-nums}
+.u-r a:hover{color:var(--sodium)}
+.u-t{color:var(--dm)}
+.hd.sc{transform:translateY(-40px)}
+.hd.sc .util{opacity:0}
+.hd>.w{position:relative;margin-top:14px;transition:margin .4s var(--ease)}
+.hd.sc>.w{margin-top:12px}
+.bar{display:flex;align-items:center;gap:14px;height:72px;padding:0 8px 0 22px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(1,44,68,.42);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 18px 50px -24px rgba(0,0,0,.6);transition:background .35s,border-color .35s}
+.hd.sc .bar,.hd.mopen .bar{background:rgba(1,52,79,.94);border-color:rgba(255,255,255,.2)}
+.logo{flex:none;display:block}.logo img{height:34px;width:auto;max-width:none}
+.nav{margin-left:4px}
+.nav ul{display:flex;list-style:none;gap:2px}
+.nl{position:relative;display:inline-flex;align-items:center;gap:6px;height:72px;padding:0 11px;font-size:.9375rem;font-weight:550;text-decoration:none;color:#fff;white-space:nowrap;transition:color .2s}
+.nl:after{content:"";position:absolute;left:11px;right:11px;bottom:18px;height:2px;background:var(--sodium);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nl:hover,.nl[aria-expanded="true"]{color:#fff}
+.nl:hover:after,.nl[aria-expanded="true"]:after{transform:none}
+.nl svg{transition:transform .3s var(--ease);opacity:.8}
+.nl[aria-expanded="true"] svg{transform:rotate(180deg)}
+.bar .sp{flex:1}
+.tbtn{flex:none;width:56px;height:56px;display:grid;place-items:center;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22);color:#fff;transition:box-shadow .2s,color .2s}
+.tbtn:hover{box-shadow:inset 0 0 0 1.5px var(--sodium);color:var(--sodium)}
+.bar .btn{flex:none;height:56px}.bar .btn>b{width:56px}
+.burger{display:none;flex:none;width:56px;height:56px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22);place-items:center}
+.mega{position:absolute;left:var(--pad);right:var(--pad);top:calc(100% + 8px);display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:8px;padding:8px;border:1px solid rgba(255,255,255,.18);border-radius:4px;background:rgba(1,52,79,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 40px 80px -30px rgba(0,0,0,.7);animation:mg .35s var(--ease)}
+@keyframes mg{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.mg-c{padding:22px 18px}
+.mg-c .lbl{color:var(--sodium);margin-bottom:10px}
+.mg-c ul{list-style:none}
+.mg-c a{display:block;padding:12px 12px;margin:0 -12px;border-radius:3px;text-decoration:none;transition:background .2s}
+.mg-c a:hover{background:rgba(255,255,255,.07)}
+.mg-c b{display:block;font-weight:650;font-size:1rem}
+.mg-c span{display:block;color:var(--dm);font-size:.875rem}
+.mg-card{position:relative;border-radius:3px;overflow:hidden;min-height:260px;display:flex;align-items:flex-end;isolation:isolate}
+.mg-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.mg-card:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(1,44,68,.2),rgba(1,44,68,.92))}
+.mg-card>div{padding:22px}
+.mg-card .lbl{color:var(--sodium)}
+.mg-t{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:2.2rem;line-height:.95;margin:8px 0 6px}
+.mg-s{color:var(--dm);font-size:.9375rem;margin-bottom:16px}
+.bar .tbtn{display:none}
+@media(max-width:1440px){.nl{padding:0 9px;font-size:.875rem}.nl:after{left:9px;right:9px}.nav{margin-left:0}.bar{gap:12px}.bar .btn>span{padding:0 16px}}
+@media(max-width:1240px){.nav,.mega{display:none!important}.burger{display:grid}.bar .tbtn{display:grid}.util .u-l{display:none}}
+@media(max-width:900px){.util{display:none}.hd.sc{transform:none}.hd>.w{margin-top:10px}}
+@media(max-width:600px){.bar{height:64px;padding:0 6px 0 14px;gap:8px}.bar .btn{display:none}.tbtn,.burger{width:50px;height:50px}.logo img{height:30px}}
 .mm{position:fixed;inset:0;z-index:70;background:var(--night);padding:calc(env(safe-area-inset-top,0px) + 100px) var(--pad) 40px;display:flex;flex-direction:column;overflow:auto;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
 .mm.open{visibility:visible;opacity:1}
 .mm ul{list-style:none}
@@ -117,10 +151,10 @@ p{text-wrap:pretty}
 .hero .bg img{width:100%;height:100%;object-fit:cover;object-position:70% 50%;transform:scale(1.08);animation:hz 14s var(--ease) forwards}
 @keyframes hz{to{transform:scale(1)}}
 .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(1,46,72,.95) 0%,rgba(1,46,72,.82) 38%,rgba(1,46,72,.35) 70%,rgba(1,46,72,.55) 100%),linear-gradient(0deg,rgba(1,46,72,1) 0%,rgba(1,46,72,0) 32%)}
-.hero .w{flex:1;display:grid;grid-template-columns:1fr minmax(360px,440px);gap:clamp(30px,5vw,90px);align-items:end;padding-top:calc(env(safe-area-inset-top,0px) + 140px);padding-bottom:56px;width:100%}
+.hero .w{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,440px);gap:clamp(30px,5vw,90px);align-items:end;padding-top:calc(env(safe-area-inset-top,0px) + 170px);padding-bottom:56px;width:100%}
 .hero .lbl{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--dm);margin-bottom:26px}
 .hero .lbl span:first-child{color:var(--sodium)}
-.hero h1{font-size:clamp(46px,6.9vw,112px);position:relative}
+.hero h1{font-size:clamp(46px,5.4vw,92px);position:relative}
 .hero h1 .ln{display:block;overflow:hidden;padding:.12em 0 .04em;margin-top:-.12em;white-space:nowrap}
 @media(max-width:600px){.hero h1 .ln{white-space:normal}}
 .hero h1 .ln>span{display:block;transform:translateY(105%);animation:up 1s var(--ease) forwards}
@@ -144,7 +178,7 @@ p{text-wrap:pretty}
 .inp:focus-within{border-color:var(--sodium);background:rgba(255,255,255,.1)}
 .inp svg{flex:none;color:var(--sodium)}
 .inp input{flex:1;min-width:0;height:100%;background:none;border:0;outline:0;font-size:1.0625rem}
-.inp input::placeholder{color:rgba(255,255,255,.62)}
+.inp input::placeholder{color:#fff}
 .chk fieldset{border:0;margin-bottom:22px}
 .chk legend{font-size:.875rem;font-weight:600;margin-bottom:8px}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
@@ -178,10 +212,10 @@ p{text-wrap:pretty}
 
 /* PRINZIP: Abfahrtstafel */
 .pz{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,6vw,110px)}
-.pz .steps>div{min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding-block:40px;color:rgba(255,255,255,.56);transition:color .5s}
+.pz .steps>div{min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding-block:40px;color:#fff;transition:color .5s}
 .pz .steps>div.on{color:#fff}
-.pz .steps>div:not(.on) p{color:rgba(255,255,255,.56)}
-.pz .no{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:clamp(90px,11vw,170px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55)}
+
+.pz .no{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:clamp(90px,11vw,170px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px #fff}
 .pz .steps>div.on .no{-webkit-text-stroke-color:var(--sodium)}
 .pz h3{font-size:clamp(34px,3.6vw,54px);margin:22px 0 14px}
 .pz .steps p{color:var(--dm);font-size:1.125rem;max-width:42ch}
@@ -196,8 +230,8 @@ p{text-wrap:pretty}
 .board .req strong{font-weight:600;font-size:1rem}
 .rows{display:grid}
 .row{display:grid;grid-template-columns:1.5fr 1.1fr .9fr 1fr;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.07);font-size:.8125rem;transition:background .5s}
-.row.hd2{color:rgba(255,255,255,.62);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;padding-block:10px}
-.row .st{color:rgba(255,255,255,.62)}
+.row.hd2{color:#fff;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;padding-block:10px}
+.row .st{color:#fff}
 .row .v{text-align:right;font-weight:600;font-size:.9375rem}
 .fl{display:inline-flex;gap:2px}
 .fl i{font-style:normal;display:inline-grid;place-items:center;min-width:.95em;height:1.5em;background:#023a5a;border-radius:2px;padding:0 1px;position:relative;overflow:hidden}
@@ -278,13 +312,13 @@ p{text-wrap:pretty}
 .kd h3{font-size:1.125rem;font-weight:700;margin:18px 0 6px}
 .kd p{color:var(--dm);font-size:.9375rem}
 .inc{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;list-style:none;margin-top:60px;border-top:1px solid var(--dl)}
-.inc li{display:flex;gap:14px;padding:20px 0;border-bottom:1px solid var(--dl);font-size:1rem;color:rgba(255,255,255,.88)}
+.inc li{display:flex;gap:14px;padding:20px 0;border-bottom:1px solid var(--dl);font-size:1rem;color:#fff}
 .inc svg{flex:none;color:var(--sodium);margin-top:3px}
 @media(max-width:1000px){.kd{grid-template-columns:1fr 1fr}.kd>div:nth-child(2){border-right:0}.kd>div:nth-child(3){padding-left:0}.kd>div:nth-child(n+3){border-top:1px solid var(--dl)}.inc{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.kd{grid-template-columns:1fr}.kd>div{border-right:0!important;padding-left:0!important;padding-right:0;border-top:1px solid var(--dl)}.kd>div:first-child{border-top:0}.inc{grid-template-columns:1fr}}
 
 /* ABLAUF */
-.ab{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink)}
+.ab{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
 .ab li{list-style:none;padding:28px 28px 10px 0}
 .ab li+li{padding-left:28px;border-left:1px solid var(--ll)}
 .ab .who{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;display:inline-block;padding:4px 8px;border-radius:2px;background:var(--ink);color:#fff}
@@ -293,7 +327,7 @@ p{text-wrap:pretty}
 .ab h3{font-size:1.625rem;font-weight:800;line-height:1.05;margin-bottom:10px}
 .ab p{color:var(--muted);font-size:1rem}
 .ab .t{font-family:var(--mono);font-size:.8125rem;margin-top:16px;font-weight:600;color:var(--ink)}
-@media(max-width:1000px){.ab{grid-template-columns:1fr 1fr}.ab li:nth-child(3){padding-left:0;border-left:0}.ab li:nth-child(n+3){border-top:1px solid var(--ll)}}
+@media(max-width:1100px){.ab{grid-template-columns:1fr 1fr}.ab li:nth-child(3){padding-left:0;border-left:0}.ab li:nth-child(n+3){border-top:1px solid var(--ll)}}
 @media(max-width:600px){.ab{grid-template-columns:1fr}.ab li{padding-left:0!important;border-left:0!important;padding-right:0}.ab li+li{border-top:1px solid var(--ll)}}
 
 /* REFERENZEN */
@@ -396,6 +430,8 @@ p{text-wrap:pretty}
 .draft{transition:opacity .3s,transform .3s}.draft.off{opacity:0;transform:translateY(12px);pointer-events:none}
 @media(max-width:760px){.draft{display:none}}
 
+.rc>*,.ab>*,.hero .w>*,.eg>*,.vt>*,.mw>*,.fq>*,.pz>*{min-width:0}
+.opts button{white-space:normal;text-align:left}
 .rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 .rv.vis{opacity:1;transform:none}
 .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
@@ -428,7 +464,7 @@ body.lock{overflow:hidden}
 .big-inp:focus-within{border-color:var(--sodium)}
 .big-inp svg{flex:none;color:var(--sodium)}
 .big-inp input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:clamp(1.375rem,2.4vw,2rem);font-weight:600;padding:8px 0}
-.big-inp input::placeholder{color:rgba(255,255,255,.55)}
+.big-inp input::placeholder{color:#fff}
 .big-inp input[aria-invalid="true"]{color:#FFD5D0}
 .sugg{list-style:none;margin-top:8px;border:1px solid var(--dl);border-radius:3px;overflow:hidden;background:var(--night-2)}
 .sugg li{padding:12px 16px;cursor:pointer;border-top:1px solid var(--dl);font-size:.9375rem}
@@ -599,22 +635,57 @@ body.lock{overflow:hidden}
 </svg>
 
 <header class="hd" id="hd">
-  <div class="w">
-    <a href="#inhalt" class="logo"><img src="img/PH-Logo-Eckig-weiss.png" alt="Plakathunter, zum Seitenanfang" width="707" height="114"></a>
-    <nav aria-label="Hauptmenü">
-      <ul>
-        <li><a href="#zielgruppen">Für Eigentümer</a></li>
-        <li><a href="#zielgruppen">Projektentwicklung</a></li>
-        <li><a href="#zielgruppen">Kommunen</a></li>
-        <li><a href="#prinzip">So arbeiten wir</a></li>
-        <li><a href="#faq">Ratgeber</a></li>
-        <li><a href="#martin">Über uns</a></li>
+  <div class="util">
+    <div class="w">
+      <span class="u-l">Makler für Werbeflächen · bundesweit</span>
+      <ul class="u-r">
+        <li><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Kostenfrei für Eigentümer</li>
+        <li><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Antwort in 48 Stunden</li>
+        <li><a href="tel:+4915156145220"><svg width="14" height="14" aria-hidden="true"><use href="#i-tel"/></svg>0151 561 452 20</a><span class="u-t">Mo bis Fr, 8 bis 18 Uhr</span></li>
       </ul>
-    </nav>
-    <div class="sp"></div>
-    <a class="tel" href="tel:+4915156145220"><span class="lbl">Martin Weiss direkt</span><b>0151 561 452 20</b></a>
-    <button class="btn btn-s" type="button" data-open><span>Standort prüfen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
-    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mm"><span class="sr">Menü öffnen</span><svg width="24" height="24" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="w">
+    <div class="bar">
+      <a href="#inhalt" class="logo"><img src="img/PH-Logo-Eckig-weiss.png" alt="Plakathunter, zum Seitenanfang" width="707" height="114"></a>
+      <nav aria-label="Hauptmenü" class="nav">
+        <ul>
+          <li class="has-mega"><button type="button" class="nl" id="megaBtn" aria-expanded="false" aria-controls="mega">Für Eigentümer<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button></li>
+          <li><a class="nl" href="#zielgruppen">Projektentwicklung</a></li>
+          <li><a class="nl" href="#zielgruppen">Kommunen</a></li>
+          <li><a class="nl" href="#prinzip">So arbeiten wir</a></li>
+          <li><a class="nl" href="#faq">Ratgeber</a></li>
+          <li><a class="nl" href="#martin">Über uns</a></li>
+        </ul>
+      </nav>
+      <div class="sp"></div>
+      <a class="tbtn" href="tel:+4915156145220"><span class="sr">Martin Weiss anrufen, 0151 561 452 20</span><svg width="20" height="20" aria-hidden="true"><use href="#i-tel"/></svg></a>
+      <button class="btn btn-s" type="button" data-open><span>Standort prüfen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mm"><span class="sr">Menü öffnen</span><svg width="24" height="24" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+    <div class="mega" id="mega" hidden>
+      <div class="mg-c">
+        <p class="lbl">Nach Fläche</p>
+        <ul>
+          <li><a href="#zielgruppen"><b>Grundstück</b><span>Großfläche, City Star, freistehend</span></a></li>
+          <li><a href="#zielgruppen"><b>Hauswand und Fassade</b><span>Giebel, Brandwand, beleuchtet</span></a></li>
+          <li><a href="#zielgruppen"><b>Landwirtschaft</b><span>Äcker an Bundesstraßen</span></a></li>
+        </ul>
+      </div>
+      <div class="mg-c">
+        <p class="lbl">Nach Situation</p>
+        <ul>
+          <li><a href="#zielgruppen"><b>Gewerbe und Märkte</b><span>Parkplatz, Zufahrt, Fassade</span></a></li>
+          <li><a href="#zielgruppen"><b>Hausverwaltung</b><span>mehrere Objekte, ein Rahmen</span></a></li>
+          <li><a href="#konditionen"><b>Ertrag und Konditionen</b><span>Spannen, Laufzeit, Kosten</span></a></li>
+        </ul>
+      </div>
+      <div class="mg-card">
+        <img src="img/GF_Hauswand_02.jpg" alt="">
+        <div><p class="lbl">Standort-Check</p><p class="mg-t">Was bringt <span class="nb">Ihr Standort?</span></p><p class="mg-s">Adresse eingeben, Einschätzung in zwei Minuten.</p>
+        <button class="btn btn-s" type="button" data-open><span>Standort prüfen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button></div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -639,7 +710,7 @@ body.lock{overflow:hidden}
   <div class="bg"><img src="img/GF_Hauswand_02.jpg" alt="" fetchpriority="high"></div>
   <div class="w">
     <div>
-      <p class="lbl"><span>Makler für Werbeflächen</span><span>Bundesweit</span><span>Für Eigentümer kostenfrei</span></p>
+      <p class="lbl"><span>Werbefläche vermieten</span><span>Hauswand · Grundstück · Bauzaun</span></p>
       <h1 id="h1" class="cap"><span class="ln"><span>Ihre Fläche.</span></span><span class="ln"><span>Mehrere Angebote.</span></span><span class="ln"><span>Ein Makler.</span></span></h1>
       <p class="lead">Wir stellen Ihre Hauswand, Ihr Grundstück oder Ihren Bauzaun allen passenden Außenwerbern vor, vergleichen die Angebote und verhandeln für Sie. Sie unterschreiben nur, <span class="nb">was passt.</span></p>
       <div class="ctas">
@@ -824,7 +895,7 @@ body.lock{overflow:hidden}
       <li class="rv"><button type="button" data-open data-who="privat" data-img="0"><span class="nr" aria-hidden="true">01</span><span class="tt">Private Eigentümer</span><span class="ds">Hauswand, Giebel oder Grundstück an einer belebten Straße. Vertraglich sauber geregelt, ohne <span class="nb">eigenen Aufwand.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter-Slider_01.jpg" alt="" loading="lazy"></span></button></li>
       <li class="rv"><button type="button" data-open data-who="projekt" data-img="1"><span class="nr" aria-hidden="true">02</span><span class="tt">Projektentwicklung<small>Neu</small></span><span class="ds">Bauzaun, Gerüst und Zwischennutzung als zusätzlicher Ertrag in der Projektkalkulation, mit fest <span class="nb">geregeltem Rückbau.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter-CSB_2.jpg" alt="" loading="lazy"></span></button></li>
       <li class="rv"><button type="button" data-open data-who="gewerbe" data-img="2"><span class="nr" aria-hidden="true">03</span><span class="tt">Gewerbe, Verwaltung</span><span class="ds">Märkte, Parkplätze, Fassaden. Ein Makler und ein Rahmenvertrag für <span class="nb">alle Objekte.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/CSB_04-scaled.jpg" alt="" loading="lazy"></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="kommune" data-img="3"><span class="nr" aria-hidden="true">04</span><span class="tt">Kommunen, Landwirte</span><span class="ds">Ortseinfahrten, städtische Flächen und Äcker an Bundesstraßen, mit transparentem <span class="nb">Verfahren.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter_videoboard_01.jpg" alt="" loading="lazy"></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="kommune" data-img="3"><span class="nr" aria-hidden="true">04</span><span class="tt">Kommunen, Landwirte</span><span class="ds">Ortseinfahrten, städtische Flächen und Äcker an Bundesstraßen, mit <span class="nb">transparentem Verfahren.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter_videoboard_01.jpg" alt="" loading="lazy"></span></button></li>
     </ul>
   </div>
   <div class="hov" id="hov" aria-hidden="true"><img src="img/Plakathunter-Slider_01.jpg" alt=""><img src="img/Plakathunter-CSB_2.jpg" alt=""><img src="img/CSB_04-scaled.jpg" alt=""><img src="img/Plakathunter_videoboard_01.jpg" alt=""></div>
@@ -1167,6 +1238,18 @@ const hd=$('#hd'),mbar=$('#mbar');
 const dr=$('.draft');const onS=()=>{hd.classList.toggle('sc',scrollY>30);dr.classList.toggle('off',scrollY>120&&scrollY+innerHeight<document.documentElement.scrollHeight-40);mbar.classList.toggle('show',scrollY>innerHeight*.6)};
 addEventListener('scroll',onS,{passive:true});onS();
 
+/* Mega-Menü (Disclosure-Muster) */
+const mb=$('#megaBtn'),mg=$('#mega'),hdr=$('#hd');let mgT;
+const megaSet=o=>{mb.setAttribute('aria-expanded',o);mg.hidden=!o;hdr.classList.toggle('mopen',o)};
+mb.addEventListener('click',()=>megaSet(mb.getAttribute('aria-expanded')!=='true'));
+if(matchMedia('(hover:hover)').matches){
+  [mb.parentElement,mg].forEach(el=>{el.addEventListener('mouseenter',()=>{clearTimeout(mgT);megaSet(true)});el.addEventListener('mouseleave',()=>{mgT=setTimeout(()=>megaSet(false),220)})});
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!mg.hidden){megaSet(false);mb.focus()}});
+document.addEventListener('click',e=>{if(!mg.hidden&&!e.target.closest('#mega,#megaBtn'))megaSet(false)});
+mg.addEventListener('focusout',e=>{if(!mg.contains(e.relatedTarget)&&e.relatedTarget!==mb)megaSet(false)});
+$$('#mega a').forEach(a=>a.addEventListener('click',()=>megaSet(false)));
+
 /* Mobiles Menü */
 const mm=$('#mm'),burger=$('#burger');
 const mmOpen=()=>{mm.inert=false;mm.classList.add('open');burger.setAttribute('aria-expanded','true');document.body.classList.add('lock');setTimeout(()=>$('#mmx').focus(),50)};
@@ -1299,7 +1382,7 @@ const openFn=(o={})=>{
 const closeFn=()=>{fn.classList.remove('open');fn.inert=true;BG.forEach(el=>el.inert=false);document.body.classList.remove('lock');if(lastFocus&&lastFocus.focus)lastFocus.focus()};
 $('#fnX').onclick=closeFn;$('#fnDone').onclick=closeFn;
 
-$$('[data-open]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();if(mm.classList.contains('open'))mmClose(false);openFn({from:b.dataset.from,who:b.dataset.who})}));
+$$('[data-open]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();if(mm.classList.contains('open'))mmClose(false);megaSet(false);openFn({from:b.dataset.from,who:b.dataset.who})}));
 const ht=$('[data-hero-typ]');let heroTyp='';
 ht.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const on=b.getAttribute('aria-pressed')!=='true';press(ht,on?b:null);heroTyp=on?b.dataset.v:''});
 $('#heroCheck').addEventListener('submit',e=>{e.preventDefault();openFn({adr:e.target.adr.value.trim(),fl:heroTyp})});
