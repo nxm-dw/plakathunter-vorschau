@@ -6,9 +6,10 @@
 <title>Plakathunter · Makler für Werbeflächen</title>
 <meta name="description" content="Plakathunter vermittelt Ihre Hauswand, Ihr Grundstück oder Ihren Bauzaun an Außenwerber. Mehrere Angebote, ein Ansprechpartner, für Eigentümer kostenfrei.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#07111C">
+<meta name="theme-color" content="#01405F">
 <link rel="icon" href="img/favicon.png">
 <link rel="preload" href="fonts/Archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="vendor/leaflet.css">
 <script type="application/ld+json">
@@ -19,26 +20,28 @@
 {"@type":"Question","name":"Wie viel Miete bringt eine Werbefläche?","acceptedAnswer":{"@type":"Answer","text":"Je Werbeträger zwischen 600 und 7.000 Euro im Jahr, abhängig von Lage, Sichtbarkeit, Verkehr und Format."}},
 {"@type":"Question","name":"Wie lange läuft ein Vertrag?","acceptedAnswer":{"@type":"Answer","text":"Mindestens fünf Jahre. Gekündigt wird mit sechs Monaten zum Vertragsende."}},
 {"@type":"Question","name":"Brauche ich eine Baugenehmigung?","acceptedAnswer":{"@type":"Answer","text":"In der Regel ja. Den Bauantrag stellt der Außenwerber, Sie unterschreiben nur die Zustimmung als Eigentümer."}},
+{"@type":"Question","name":"Wie verdient Plakathunter an der Vermittlung?","acceptedAnswer":{"@type":"Answer","text":"Plakathunter erhält im Erfolgsfall eine Vermittlungsprovision vom Außenwerber. Für Eigentümer entstehen keine Kosten."}},
 {"@type":"Question","name":"Welche Werbung kommt auf meine Fläche?","acceptedAnswer":{"@type":"Answer","text":"Sittenwidrige und politische Werbung ist vertraglich ausgeschlossen. Auf Wunsch auch Konkurrenzwerbung zu Ihrem eigenen Betrieb."}}
-]}]}
+]},
+{"@type":"HowTo","name":"Werbefläche über Plakathunter vermieten","step":[{"@type":"HowToStep","name":"Standort prüfen","text":"Adresse, Art der Fläche und Fotos angeben, eine erste Ertragsspanne sehen."},{"@type":"HowToStep","name":"Angebote einholen","text":"Plakathunter stellt den Standort passenden Außenwerbern vor und holt Angebote ein."},{"@type":"HowToStep","name":"Vertrag wählen","text":"Die Angebote im Vergleich prüfen und nur das passende unterschreiben."},{"@type":"HowToStep","name":"Aufbau und Miete","text":"Der Außenwerber übernimmt Genehmigung und Aufbau, die Miete kommt vierteljährlich im Voraus."}]}]}
 </script>
 <style>
 :root{
-  --night:#07111C;--night-2:#0B1A2A;--night-3:#112538;
+  --night:#01405F;--night-2:#01344F;--night-3:#02557F;--deep:#012C44;
   --paper:#EEECE6;--paper-2:#E2DFD6;--white:#fff;
-  --ink:#07111C;--muted:#4A5662;
+  --ink:#01405F;--muted:#4A5662;
   --blue:#145DA0;--blue-l:#7DBBF2;
   --sodium:#FFB547;--sodium-2:#FFC86E;
-  --dl:rgba(255,255,255,.14);--ll:rgba(7,17,28,.14);
+  --dl:rgba(255,255,255,.14);--ll:rgba(1,46,72,.14);
   --dm:rgba(255,255,255,.7);
   --ease:cubic-bezier(.16,.84,.24,1);
   --pad:clamp(20px,4vw,56px);
-  --disp:"Archivo",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --disp:"Archivo","Arial Narrow",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Inter",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:90px}
-body{font-family:var(--disp);font-size:1.0625rem;line-height:1.55;color:#fff;background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:var(--body);font-feature-settings:"cv11","ss01";font-size:1.0625rem;line-height:1.55;color:#fff;background:var(--night);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
 button,input{font:inherit;color:inherit}
@@ -51,9 +54,9 @@ button{cursor:pointer;border:0;background:none}
 .w{max-width:1360px;margin:0 auto;padding-inline:var(--pad)}
 .nb{white-space:nowrap}
 @media(max-width:380px){h1 .nb,h2 .nb{white-space:normal}}
-.cap{font-weight:820;font-stretch:64%;text-transform:uppercase;line-height:.9;letter-spacing:-.005em;text-wrap:balance}
+.cap{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;line-height:.9;letter-spacing:-.005em;text-wrap:balance}
 p{text-wrap:pretty}
-.lbl{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.lbl{font-family:var(--mono);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;font-variant-numeric:tabular-nums}
 .dim{color:var(--dm)}
 .paper{background:var(--paper);color:var(--ink)}
 .paper .dim{color:var(--muted)}
@@ -67,9 +70,9 @@ p{text-wrap:pretty}
 @media(max-width:900px){.sh{grid-template-columns:1fr}.sh p:not(.lbl){justify-self:start}}
 
 /* Buttons: rechteckig, Pfeilsegment */
-.btn{display:inline-flex;align-items:stretch;height:58px;font-weight:700;font-size:1rem;text-decoration:none;white-space:nowrap;border-radius:3px;overflow:hidden;transition:transform .3s var(--ease)}
+.btn{flex-shrink:0;max-width:100%;display:inline-flex;align-items:stretch;height:58px;font-weight:700;font-size:1rem;text-decoration:none;white-space:nowrap;border-radius:3px;overflow:hidden;transition:transform .3s var(--ease)}
 .btn>span{display:flex;align-items:center;padding:0 22px}
-.btn>b{display:grid;place-items:center;width:58px;border-left:1px solid rgba(7,17,28,.18);transition:background .3s}
+.btn>b{display:grid;place-items:center;width:58px;border-left:1px solid rgba(1,46,72,.18);transition:background .3s}
 .btn svg{width:20px;height:20px;transition:transform .35s var(--ease)}
 .btn:hover svg{transform:translateX(4px)}
 .btn-s{background:var(--sodium);color:var(--ink)}
@@ -80,12 +83,12 @@ p{text-wrap:pretty}
 .btn-o{color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
 .btn-o>b{border-color:currentColor}
 .btn-o:hover{background:rgba(255,255,255,.06)}
-.paper .btn-o:hover{background:rgba(7,17,28,.05)}
+.paper .btn-o:hover{background:rgba(1,46,72,.05)}
 .btn-full{width:100%}.btn-full>span{flex:1;justify-content:flex-start}
 
 /* Header */
 .hd{position:fixed;inset:0 0 auto;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
-.hd.sc{background:rgba(7,17,28,.88);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-color:var(--dl)}
+.hd.sc{background:rgba(1,46,72,.88);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-color:var(--dl)}
 .hd .w{display:flex;align-items:center;gap:24px;height:84px}
 .logo{flex:none;display:block}.logo img{height:36px;width:auto;max-width:none}
 .hd nav ul{display:flex;list-style:none;gap:2px;margin-left:16px}
@@ -95,15 +98,16 @@ p{text-wrap:pretty}
 .hd .tel{white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;text-decoration:none;line-height:1.2}
 .hd .tel .lbl{color:var(--dm);font-size:.6875rem}
 .hd .tel b{font-family:var(--mono);font-weight:600;font-size:.9375rem;letter-spacing:.02em}
+.hd .btn,.hd .tel,.logo,.burger{flex:none}
 .hd .btn{height:48px}.hd .btn>b{width:48px}.hd .btn>span{padding:0 18px}
 .burger{display:none;width:48px;height:48px;border-radius:3px;box-shadow:inset 0 0 0 1.5px var(--dl);place-items:center}
-@media(max-width:1560px){.hd .tel{display:none}}
+@media(max-width:1720px){.hd .tel{display:none}}
 @media(max-width:1220px){.hd nav{display:none}.burger{display:grid}.hd .tel{display:flex}}
 @media(max-width:760px){.hd .tel,.hd .btn{display:none}.logo img{height:30px}}
 .mm{position:fixed;inset:0;z-index:70;background:var(--night);padding:calc(env(safe-area-inset-top,0px) + 100px) var(--pad) 40px;display:flex;flex-direction:column;overflow:auto;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
 .mm.open{visibility:visible;opacity:1}
 .mm ul{list-style:none}
-.mm li a{display:block;font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:2.6rem;line-height:1;padding:12px 0;border-bottom:1px solid var(--dl);text-decoration:none}
+.mm li a{font-family:var(--disp);display:block;font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:2.6rem;line-height:1;padding:12px 0;border-bottom:1px solid var(--dl);text-decoration:none}
 .mm .x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);right:var(--pad);width:48px;height:48px;border-radius:3px;box-shadow:inset 0 0 0 1.5px var(--dl);display:grid;place-items:center}
 .mm .btn{margin-top:28px}
 
@@ -112,7 +116,7 @@ p{text-wrap:pretty}
 .hero .bg{position:absolute;inset:0;z-index:-2}
 .hero .bg img{width:100%;height:100%;object-fit:cover;object-position:70% 50%;transform:scale(1.08);animation:hz 14s var(--ease) forwards}
 @keyframes hz{to{transform:scale(1)}}
-.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,17,28,.95) 0%,rgba(7,17,28,.82) 38%,rgba(7,17,28,.35) 70%,rgba(7,17,28,.55) 100%),linear-gradient(0deg,rgba(7,17,28,1) 0%,rgba(7,17,28,0) 32%)}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(1,46,72,.95) 0%,rgba(1,46,72,.82) 38%,rgba(1,46,72,.35) 70%,rgba(1,46,72,.55) 100%),linear-gradient(0deg,rgba(1,46,72,1) 0%,rgba(1,46,72,0) 32%)}
 .hero .w{flex:1;display:grid;grid-template-columns:1fr minmax(360px,440px);gap:clamp(30px,5vw,90px);align-items:end;padding-top:calc(env(safe-area-inset-top,0px) + 140px);padding-bottom:56px;width:100%}
 .hero .lbl{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--dm);margin-bottom:26px}
 .hero .lbl span:first-child{color:var(--sodium)}
@@ -128,7 +132,7 @@ p{text-wrap:pretty}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;opacity:0;animation:fi .8s .65s forwards}
 
 /* Standort-Check Panel */
-.chk{background:rgba(11,26,42,.78);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid var(--dl);border-radius:4px;padding:26px;position:relative;opacity:0;transform:translateY(24px);animation:pn 1s .45s var(--ease) forwards}
+.chk{background:rgba(1,44,68,.8);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid var(--dl);border-radius:4px;padding:26px;position:relative;opacity:0;transform:translateY(24px);animation:pn 1s .45s var(--ease) forwards}
 @keyframes pn{to{opacity:1;transform:none}}
 .chk:before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--sodium)}
 .chk .top{display:flex;justify-content:space-between;color:var(--dm);margin-bottom:16px}
@@ -155,7 +159,7 @@ p{text-wrap:pretty}
 .hstats .w{display:grid;grid-template-columns:repeat(4,1fr)}
 .hstats div.s{padding:20px 0 24px;border-left:1px solid var(--dl);padding-left:22px}
 .hstats div.s:first-child{border-left:0;padding-left:0}
-.hstats .n{display:block;font-weight:800;font-stretch:66%;font-size:clamp(28px,2.8vw,40px);line-height:1}
+.hstats .n{font-family:var(--disp);display:block;font-weight:800;font-stretch:66%;font-size:clamp(28px,2.8vw,40px);line-height:1}
 .hstats .lbl{color:var(--dm);margin-top:8px;display:block}
 @media(max-width:1000px){.hero .w{grid-template-columns:1fr;align-items:start}.chk{max-width:560px}}
 @media(max-width:760px){.hstats .w{grid-template-columns:1fr 1fr}.hstats div.s:nth-child(3){border-left:0;padding-left:0}.hstats div.s{border-top:1px solid var(--dl)}.hstats div.s:nth-child(-n+2){border-top:0}.hero .bg img{object-position:80% 50%}.chk{padding:20px}.hero .ctas .btn-o{display:none}}
@@ -177,12 +181,12 @@ p{text-wrap:pretty}
 .pz .steps>div{min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding-block:40px;color:rgba(255,255,255,.56);transition:color .5s}
 .pz .steps>div.on{color:#fff}
 .pz .steps>div:not(.on) p{color:rgba(255,255,255,.56)}
-.pz .no{font-weight:820;font-stretch:64%;font-size:clamp(90px,11vw,170px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55)}
+.pz .no{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:clamp(90px,11vw,170px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55)}
 .pz .steps>div.on .no{-webkit-text-stroke-color:var(--sodium)}
 .pz h3{font-size:clamp(34px,3.6vw,54px);margin:22px 0 14px}
 .pz .steps p{color:var(--dm);font-size:1.125rem;max-width:42ch}
 .pz .stick{position:sticky;top:110px;height:max-content;padding-block:7vh}
-.board{background:#03080E;border:1px solid var(--dl);border-radius:4px;overflow:hidden;font-family:var(--mono);box-shadow:0 40px 100px -30px rgba(0,0,0,.8)}
+.board{font-variant-numeric:tabular-nums;background:var(--deep);border:1px solid var(--dl);border-radius:4px;overflow:hidden;font-family:var(--mono);box-shadow:0 40px 100px -30px rgba(0,0,0,.8)}
 .board .bh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--dl);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
 .board .bh b{color:var(--sodium);font-weight:500;display:flex;align-items:center;gap:8px}
 .board .bh b i{width:8px;height:8px;border-radius:50%;background:var(--sodium);animation:bl 1.4s steps(2) infinite}
@@ -196,7 +200,7 @@ p{text-wrap:pretty}
 .row .st{color:rgba(255,255,255,.62)}
 .row .v{text-align:right;font-weight:600;font-size:.9375rem}
 .fl{display:inline-flex;gap:2px}
-.fl i{font-style:normal;display:inline-grid;place-items:center;min-width:.95em;height:1.5em;background:#111d2b;border-radius:2px;padding:0 1px;position:relative;overflow:hidden}
+.fl i{font-style:normal;display:inline-grid;place-items:center;min-width:.95em;height:1.5em;background:#023a5a;border-radius:2px;padding:0 1px;position:relative;overflow:hidden}
 .fl i:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.6)}
 .flip{animation:fp .5s var(--ease)}
 @keyframes fp{0%{transform:rotateX(90deg);opacity:.2}100%{transform:none;opacity:1}}
@@ -212,28 +216,28 @@ p{text-wrap:pretty}
 .rc fieldset{border:0;margin-bottom:28px}
 .rc legend{display:block;font-weight:700;font-size:.9375rem;margin-bottom:12px}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
-.opts button{padding:12px 16px;font-weight:600;font-size:.9375rem;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(7,17,28,.3);transition:all .2s;display:inline-flex;gap:8px;align-items:center}
+.opts button{padding:12px 16px;font-weight:600;font-size:.9375rem;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);transition:all .2s;display:inline-flex;gap:8px;align-items:center}
 .opts button:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .opts button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
 .opts svg{width:18px;height:18px}
-.stepper{display:inline-flex;align-items:center;box-shadow:inset 0 0 0 1.5px rgba(7,17,28,.3);border-radius:3px}
+.stepper{display:inline-flex;align-items:center;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);border-radius:3px}
 .stepper button{width:52px;height:52px;display:grid;place-items:center;font-size:1.4rem;font-weight:600}
-.stepper button:hover{background:rgba(7,17,28,.06)}
+.stepper button:hover{background:rgba(1,46,72,.06)}
 .stepper output{min-width:60px;text-align:center;font-family:var(--mono);font-weight:600;font-size:1.125rem}
 .rc .note{font-size:.8125rem;color:var(--muted);margin-top:14px;max-width:52ch}
 .bb{position:relative;padding-top:64px}
 .bb .lamps{position:absolute;top:0;left:6%;right:6%;display:flex;justify-content:space-between}
 .bb .lamps i{position:relative;width:62px;height:64px}
-.bb .lamps i:before{content:"";position:absolute;left:28px;top:0;width:5px;height:38px;background:#2a3540}
-.bb .lamps i:after{content:"";position:absolute;left:8px;top:34px;width:46px;height:9px;border-radius:2px;background:#2a3540;box-shadow:0 8px 34px 10px rgba(255,214,140,.55)}
-.bb .frame{background:#1b252f;padding:14px;border-radius:3px;box-shadow:0 30px 60px -24px rgba(7,17,28,.6)}
+.bb .lamps i:before{content:"";position:absolute;left:28px;top:0;width:5px;height:38px;background:#20384b}
+.bb .lamps i:after{content:"";position:absolute;left:8px;top:34px;width:46px;height:9px;border-radius:2px;background:#20384b;box-shadow:0 8px 34px 10px rgba(255,214,140,.55)}
+.bb .frame{background:#13293a;padding:14px;border-radius:3px;box-shadow:0 30px 60px -24px rgba(1,46,72,.6)}
 .poster{position:relative;aspect-ratio:356/252;background:var(--night);overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,34px)}
 .poster:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,224,170,.16),rgba(255,224,170,0) 45%);pointer-events:none}
 .poster .pt{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .poster .pt img{height:clamp(18px,2.2vw,28px);width:auto}
 .poster .pk{color:var(--sodium)}
-.poster .pv{font-weight:820;font-stretch:62%;font-size:clamp(50px,7.4vw,120px);line-height:.85;letter-spacing:-.01em;white-space:nowrap}
-.poster .pv small{display:block;font-size:.26em;font-stretch:70%;letter-spacing:.02em;margin-top:.4em;color:var(--sodium)}
+.poster .pv{font-family:var(--disp);font-weight:820;font-stretch:62%;font-size:clamp(50px,7.4vw,120px);line-height:.85;letter-spacing:-.01em;white-space:nowrap}
+.poster .pv small{font-family:var(--disp);display:block;font-size:.26em;font-stretch:70%;letter-spacing:.02em;margin-top:.4em;color:var(--sodium)}
 .poster .pb{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:clamp(.625rem,.9vw,.8125rem);text-transform:uppercase;letter-spacing:.06em;color:var(--dm)}
 .poster .strips{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none;z-index:3}
 .poster .strips i{background:var(--paper-2);transform:scaleY(0);transform-origin:top}
@@ -241,7 +245,7 @@ p{text-wrap:pretty}
 .poster.paste .strips i:nth-child(2){animation-delay:.05s}.poster.paste .strips i:nth-child(3){animation-delay:.1s}.poster.paste .strips i:nth-child(4){animation-delay:.15s}.poster.paste .strips i:nth-child(5){animation-delay:.2s}.poster.paste .strips i:nth-child(6){animation-delay:.25s}
 @keyframes paste{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 .bb .legs{display:flex;justify-content:space-around;padding:0 22%}
-.bb .legs i{width:16px;height:70px;background:linear-gradient(90deg,#1b252f,#33404c)}
+.bb .legs i{width:16px;height:70px;background:linear-gradient(90deg,#13293a,#2b475d)}
 .bb .ground{height:2px;background:var(--ll)}
 .bb .five{display:flex;justify-content:space-between;gap:20px;margin-top:22px;font-size:.9375rem}
 .bb .five b{font-family:var(--mono);font-weight:600}
@@ -250,12 +254,12 @@ p{text-wrap:pretty}
 /* ZIELGRUPPEN: Liste mit Bild */
 .tl{list-style:none;border-top:1px solid var(--ll);position:relative}
 .tl li{border-bottom:1px solid var(--ll)}
-.tl button{width:100%;display:grid;grid-template-columns:70px minmax(0,1.1fr) minmax(0,.9fr) 56px;gap:24px;align-items:center;padding:30px 0;text-align:left;position:relative;transition:padding .4s var(--ease)}
+.tl button{width:100%;display:grid;grid-template-columns:56px minmax(0,1.3fr) minmax(0,.8fr) 56px;gap:28px;align-items:center;padding:30px 0;text-align:left;position:relative;transition:padding .4s var(--ease)}
 .tl .nr{font-family:var(--mono);font-size:.875rem;color:var(--muted)}
-.tl .tt{font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(34px,4.4vw,68px);line-height:.9}
-.tl .tt small{display:inline-block;vertical-align:top;margin-left:12px;font-family:var(--mono);font-weight:500;font-stretch:100%;font-size:.6875rem;letter-spacing:.08em;padding:4px 8px;background:var(--sodium);color:var(--ink);border-radius:2px;line-height:1.3}
+.tl .tt{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(32px,3.7vw,58px);line-height:.92;overflow-wrap:anywhere;hyphens:manual}
+.tl .tt small{display:inline-block;vertical-align:.9em;margin-left:12px;white-space:nowrap;font-family:var(--mono);font-weight:500;font-size:.6875rem;letter-spacing:.08em;padding:4px 8px;background:var(--sodium);color:var(--ink);border-radius:2px;line-height:1.3}
 .tl .ds{color:var(--muted);font-size:1rem;max-width:44ch}
-.tl .ar{width:56px;height:56px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(7,17,28,.3);display:grid;place-items:center;transition:all .35s var(--ease)}
+.tl .ar{width:56px;height:56px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);display:grid;place-items:center;transition:all .35s var(--ease)}
 .tl button:hover .ar,.tl button:focus-visible .ar{background:var(--ink);color:#fff;box-shadow:none}
 .tl button:hover{padding-left:16px}
 .tl .th{display:none}
@@ -269,7 +273,7 @@ p{text-wrap:pretty}
 .kd{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--dl)}
 .kd>div{padding:34px 26px 38px;border-right:1px solid var(--dl)}
 .kd>div:first-child{padding-left:0}.kd>div:last-child{border-right:0}
-.kd p.n{color:#fff;font-weight:820;font-stretch:62%;font-size:clamp(48px,5.4vw,84px);line-height:.88;white-space:nowrap}
+.kd p.n{font-family:var(--disp);color:#fff;font-weight:820;font-stretch:62%;font-size:clamp(48px,5.4vw,84px);line-height:.88;white-space:nowrap}
 .kd .n small{font-size:.42em;color:var(--sodium);margin-left:4px}
 .kd h3{font-size:1.125rem;font-weight:700;margin:18px 0 6px}
 .kd p{color:var(--dm);font-size:.9375rem}
@@ -285,8 +289,8 @@ p{text-wrap:pretty}
 .ab li+li{padding-left:28px;border-left:1px solid var(--ll)}
 .ab .who{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;display:inline-block;padding:4px 8px;border-radius:2px;background:var(--ink);color:#fff}
 .ab .who.y{background:var(--sodium);color:var(--ink)}
-.ab .n{display:block;font-weight:820;font-stretch:62%;font-size:96px;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--ink);margin:22px 0 16px}
-.ab h3{font-size:1.625rem;font-weight:800;font-stretch:80%;line-height:1.05;margin-bottom:10px}
+.ab .n{font-family:var(--disp);display:block;font-weight:820;font-stretch:62%;font-size:96px;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--ink);margin:22px 0 16px}
+.ab h3{font-size:1.625rem;font-weight:800;line-height:1.05;margin-bottom:10px}
 .ab p{color:var(--muted);font-size:1rem}
 .ab .t{font-family:var(--mono);font-size:.8125rem;margin-top:16px;font-weight:600;color:var(--ink)}
 @media(max-width:1000px){.ab{grid-template-columns:1fr 1fr}.ab li:nth-child(3){padding-left:0;border-left:0}.ab li:nth-child(n+3){border-top:1px solid var(--ll)}}
@@ -307,7 +311,7 @@ p{text-wrap:pretty}
 .galnav button:hover{box-shadow:inset 0 0 0 1.5px #fff}
 .qs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
 .qs figure{border:1px solid var(--dl);border-radius:3px;padding:32px;display:flex;flex-direction:column;gap:26px;justify-content:space-between}
-.qs blockquote{font-size:clamp(1.25rem,1.8vw,1.625rem);line-height:1.35;font-weight:500;font-stretch:90%}
+.qs blockquote{font-size:clamp(1.25rem,1.8vw,1.625rem);line-height:1.35;font-weight:500;}
 .qs figcaption{display:flex;justify-content:space-between;gap:16px;align-items:end}
 .qs figcaption b{display:block}
 .qs .lbl{color:var(--dm)}
@@ -318,19 +322,19 @@ p{text-wrap:pretty}
 .mw{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,6vw,110px);align-items:center}
 .por{position:relative;aspect-ratio:4/5;border-radius:3px;overflow:hidden;background:var(--ink)}
 .por img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);opacity:.5}
-.por:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,93,160,.55),rgba(7,17,28,.92))}
-.por .mono{position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-weight:820;font-stretch:62%;font-size:clamp(150px,18vw,280px);color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.4);padding-bottom:12%}
-.por .tag{position:absolute;z-index:3;left:18px;top:18px;color:#fff;background:rgba(7,17,28,.75);padding:6px 10px;border-radius:2px}
+.por:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,93,160,.55),rgba(1,46,72,.92))}
+.por .mono{font-family:var(--disp);position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-weight:820;font-stretch:62%;font-size:clamp(150px,18vw,280px);color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.4);padding-bottom:12%}
+.por .tag{position:absolute;z-index:3;left:18px;top:18px;color:#fff;background:rgba(1,46,72,.75);padding:6px 10px;border-radius:2px}
 .por .nm{position:absolute;z-index:3;left:24px;right:24px;bottom:22px;color:#fff;display:flex;justify-content:space-between;align-items:end;gap:12px}
-.por .nm b{font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:2.4rem;line-height:.9}
+.por .nm b{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:2.4rem;line-height:.9}
 .por .nm .lbl{color:var(--dm);text-align:right}
-.mw blockquote{font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(38px,4.6vw,74px);line-height:.92;text-wrap:balance;margin:20px 0 28px}
+.mw blockquote{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(38px,4.6vw,74px);line-height:.92;text-wrap:balance;margin:20px 0 28px}
 .mw blockquote em{font-style:normal;color:var(--blue)}
 .mw p.t{color:var(--muted);font-size:1.125rem;max-width:50ch}
 .ch{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;border-top:1px solid var(--ll)}
 .ch>*{display:flex;flex-direction:column;gap:6px;padding:20px 20px 20px 0;text-decoration:none;text-align:left;border-bottom:1px solid var(--ll);transition:background .25s}
 .ch>*+*{padding-left:20px;border-left:1px solid var(--ll)}
-.ch>*:hover{background:rgba(7,17,28,.04)}
+.ch>*:hover{background:rgba(1,46,72,.04)}
 .ch svg{color:var(--blue);margin-bottom:8px}
 .ch b{font-size:1.0625rem}
 .ch span{color:var(--muted);font-size:.875rem}
@@ -344,9 +348,9 @@ p{text-wrap:pretty}
 .fq .side .btn{margin-top:28px}
 .fq details{border-top:1px solid var(--ll)}
 .fq details:last-child{border-bottom:1px solid var(--ll)}
-.fq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;cursor:pointer;font-weight:750;font-stretch:84%;font-size:clamp(1.25rem,1.7vw,1.5rem)}
+.fq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;cursor:pointer;font-weight:750;font-size:clamp(1.25rem,1.7vw,1.5rem)}
 .fq summary::-webkit-details-marker{display:none}
-.fq summary .pl{flex:none;width:44px;height:44px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(7,17,28,.3);display:grid;place-items:center;transition:transform .35s var(--ease),background .3s}
+.fq summary .pl{flex:none;width:44px;height:44px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);display:grid;place-items:center;transition:transform .35s var(--ease),background .3s}
 .fq details[open] summary .pl svg{transform:rotate(45deg)}
 .fq summary .pl svg{transition:transform .35s var(--ease)}
 .fq details[open] summary .pl{background:var(--ink);color:#fff;box-shadow:none}
@@ -356,10 +360,10 @@ p{text-wrap:pretty}
 /* CTA */
 .cta{position:relative;overflow:hidden;isolation:isolate}
 .cta>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.cta:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,17,28,.94) 25%,rgba(7,17,28,.62))}
+.cta:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(1,46,72,.94) 25%,rgba(1,46,72,.62))}
 .cta .w{padding-block:clamp(90px,12vw,180px)}
 .cta .lbl{color:var(--sodium)}
-.cta .big{display:block;margin-top:22px;font-weight:820;font-stretch:62%;text-transform:uppercase;font-size:clamp(64px,13vw,220px);line-height:.82;letter-spacing:-.01em;text-align:left}
+.cta .big{font-family:var(--disp);display:block;margin-top:22px;font-weight:820;font-stretch:62%;text-transform:uppercase;font-size:clamp(64px,13vw,220px);line-height:.82;letter-spacing:-.01em;text-align:left}
 .cta .big span{display:inline-block;transition:color .3s}
 .cta .big:hover span,.cta .big:focus-visible span{color:var(--sodium)}
 .cta .big svg{width:.6em;height:.6em;vertical-align:-.02em;transition:transform .5s var(--ease)}
@@ -368,7 +372,7 @@ p{text-wrap:pretty}
 .cta .row2{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 
 /* FOOTER */
-.ft{background:var(--night);border-top:1px solid var(--dl);padding:80px 0 calc(40px + env(safe-area-inset-bottom,0px));font-size:.9375rem;color:var(--dm)}
+.ft{background:var(--deep);border-top:1px solid var(--dl);padding:80px 0 calc(40px + env(safe-area-inset-bottom,0px));font-size:.9375rem;color:var(--dm)}
 .ft-g{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
 .ft img{height:34px;width:auto;margin-bottom:22px}
 .ft h2{color:#fff;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
@@ -381,13 +385,15 @@ p{text-wrap:pretty}
 @media(max-width:560px){.ft-g{grid-template-columns:1fr}}
 
 /* Mobile-Leiste */
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,17,28,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--dl);transform:translateY(110%);transition:transform .45s var(--ease)}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(1,46,72,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--dl);transform:translateY(110%);transition:transform .45s var(--ease)}
 .mbar.show{transform:none}
 .mbar .btn{flex:1;height:52px}.mbar .btn>b{width:52px}.mbar .btn>span{flex:1}
 .mbar a.ic{width:52px;height:52px;border-radius:3px;box-shadow:inset 0 0 0 1.5px var(--dl);display:grid;place-items:center;flex:none}
 @media(max-width:760px){.mbar{display:flex}body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
 
-.draft{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;font-family:var(--mono);font-size:.6875rem;letter-spacing:.04em;background:#fff;color:var(--ink);padding:7px 11px;border-radius:2px;box-shadow:0 6px 20px -6px rgba(0,0,0,.5)}
+.draft{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.6875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#fff;color:#4A5662;padding:8px 12px;border-radius:2px;box-shadow:0 6px 20px -6px rgba(0,0,0,.5)}
+.draft img{height:18px;width:auto}
+.draft{transition:opacity .3s,transform .3s}.draft.off{opacity:0;transform:translateY(12px);pointer-events:none}
 @media(max-width:760px){.draft{display:none}}
 
 .rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -434,7 +440,7 @@ body.lock{overflow:hidden}
 .consent-box a{color:#fff}
 .consent-box .btn{height:48px}.consent-box .btn>b{width:48px}
 .map{position:relative;height:clamp(220px,34vh,380px);margin-top:16px;border-radius:3px;overflow:hidden;border:1px solid var(--dl)}
-.map .hint{position:absolute;left:10px;bottom:28px;z-index:500;background:rgba(7,17,28,.88);color:#fff;padding:7px 12px;border-radius:2px;font-size:.8125rem;max-width:calc(100% - 20px)}
+.map .hint{position:absolute;left:10px;bottom:28px;z-index:500;background:rgba(1,46,72,.88);color:#fff;padding:7px 12px;border-radius:2px;font-size:.8125rem;max-width:calc(100% - 20px)}
 .leaflet-container{font:inherit;background:var(--night-2)}
 .pin{width:44px;height:44px}
 .ch-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -460,7 +466,7 @@ body.lock{overflow:hidden}
 .thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;list-style:none}
 .thumbs li{position:relative;width:104px;height:104px;border-radius:3px;overflow:hidden}
 .thumbs img{width:100%;height:100%;object-fit:cover}
-.thumbs button{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:2px;background:rgba(7,17,28,.85);display:grid;place-items:center}
+.thumbs button{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:2px;background:rgba(1,46,72,.85);display:grid;place-items:center}
 .tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;list-style:none}
 .tips li{display:flex;gap:10px;font-size:.875rem;color:var(--dm)}
 .tips svg{flex:none;color:var(--sodium);margin-top:2px}
@@ -500,7 +506,7 @@ body.lock{overflow:hidden}
 .ex{background:var(--paper);color:var(--ink);display:flex;flex-direction:column;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 26px) 32px 30px}
 .ex .lbl{color:var(--muted)}
 .ex .eh{display:flex;justify-content:space-between;align-items:center}
-.ex .poster{margin-top:16px;border:12px solid #1b252f;border-radius:2px}
+.ex .poster{margin-top:16px;border:12px solid #13293a;border-radius:2px}
 .ex .poster .pv{font-size:clamp(40px,4.2vw,72px)}
 .ex .poster .pk{color:var(--sodium)}
 .ex dl{margin-top:24px;border-top:1px solid var(--ll)}
@@ -509,14 +515,58 @@ body.lock{overflow:hidden}
 .ex dd{font-weight:600}
 .ex dd.e{color:#5C6670;font-weight:400}
 .ex .pc{display:flex;gap:14px;align-items:center;margin-top:auto;padding-top:26px;font-size:.9375rem}
-.ex .av{width:54px;height:54px;border-radius:2px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:820;font-stretch:64%;font-size:1.4rem;flex:none}
+.ex .av{font-family:var(--disp);width:54px;height:54px;border-radius:2px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:820;font-stretch:64%;font-size:1.4rem;flex:none}
 .ex .pc b{display:block}
 .ex .pc a{font-family:var(--mono);font-weight:600;color:var(--blue)}
 .ex .ok3{list-style:none;display:grid;gap:8px;margin-top:20px;font-size:.875rem;color:var(--muted)}
 .ex .ok3 li{display:flex;gap:10px}
 .ex .ok3 svg{flex:none;color:var(--blue);margin-top:2px}
 .mest{display:none}
-@media(max-width:1080px){.fn{grid-template-columns:1fr}.ex{display:none}.mest{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding:12px 14px;border:1px solid var(--dl);border-radius:3px}.mest b{font-weight:820;font-stretch:66%;font-size:1.5rem;color:var(--sodium)}}
+@media(max-width:1080px){.fn{grid-template-columns:1fr}.ex{display:none}.mest{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding:12px 14px;border:1px solid var(--dl);border-radius:3px}.mest b{font-family:var(--disp);font-weight:820;font-stretch:66%;font-size:1.5rem;color:var(--sodium)}}
+
+/* EIGNUNG */
+.eg{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,4vw,60px);align-items:stretch}
+.eq fieldset{border:0;border-top:1px solid var(--ll);padding:22px 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 30px;align-items:center}
+.eq fieldset:last-child{border-bottom:1px solid var(--ll)}
+.eq legend{float:left;font-weight:600;font-size:1.0625rem;padding:0;max-width:52ch}
+.yn{display:flex;gap:6px}
+.yn button{padding:11px 16px;font-weight:600;font-size:.9375rem;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,64,95,.35);white-space:nowrap}
+.yn button:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.yn button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.er{background:var(--night);color:#fff;border-radius:3px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.er .lights{display:flex;gap:8px;margin-bottom:10px}
+.er .lights i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.18);transition:background .4s,box-shadow .4s}
+.er .lights i.y{background:var(--sodium);box-shadow:0 0 14px 2px rgba(255,181,71,.6)}
+.er .lights i.h{background:rgba(255,181,71,.45)}
+.er .lbl{color:var(--sodium)}
+.er h3{font-size:clamp(34px,3.4vw,52px)}
+.er p{color:var(--dm)}
+.er .btn{margin-top:auto;align-self:flex-start}
+.e3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);margin-top:clamp(40px,5vw,70px)}
+.e3 h3{font-size:1.25rem;font-weight:750;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.e3 ul{list-style:none;display:grid;gap:10px}
+.e3 li{padding-left:22px;position:relative;color:var(--muted)}
+.e3 li:before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--blue)}
+.e3>div:last-child li:before{background:#B3261E}
+@media(max-width:1000px){.eg{grid-template-columns:1fr}.e3{grid-template-columns:1fr}}
+@media(max-width:700px){.eq fieldset{grid-template-columns:1fr}.yn{flex-wrap:wrap}}
+/* VERTRAG */
+.vt{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,90px);align-items:center;margin-top:clamp(56px,7vw,100px)}
+.vt h3{font-size:clamp(36px,4vw,60px);margin:14px 0 18px}
+.vt .btn{margin-top:26px}
+.sheet{background:#fff;color:var(--ink);border-radius:2px;padding:clamp(22px,3vw,40px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6);transform:rotate(-1.2deg)}
+.sheet .sh2{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+.sheet .sh2 .lbl{color:var(--muted)}
+.sheet .sh2 img{height:22px;width:auto}
+.sheet dl div{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--ll)}
+.sheet dt{font-weight:700;color:var(--blue)}
+.sheet dd{color:var(--muted);font-size:.9375rem}
+.sheet dd b{display:block;color:var(--ink);font-size:1rem}
+@media(max-width:1000px){.vt{grid-template-columns:1fr}.sheet{transform:none}}
+/* TIPPGEBER */
+.tip{margin-top:16px;border:1px solid var(--dl);border-left:4px solid var(--sodium);border-radius:3px;padding:clamp(22px,3vw,36px);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.tip h3{font-size:clamp(30px,3vw,44px);margin:10px 0 8px}
+.tip p.dim{max-width:56ch}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.hero h1 .ln>span{transform:none}.tick .tr{animation:none}}
 </style>
@@ -615,7 +665,7 @@ body.lock{overflow:hidden}
         </div>
       </fieldset>
       <button class="btn btn-s btn-full" type="submit"><span>Ersteinschätzung starten</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
-      <p class="fine"><span><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Kostenfrei</span><span><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Unverbindlich</span><span><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Nichts wird gesendet, bevor Sie absenden</span></p>
+      <p class="fine"><span><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Kostenfrei</span><span><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Antwort in 48 Stunden</span><span><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Nichts wird gesendet, bevor Sie absenden</span></p>
     </form>
   </div>
   <div class="hstats">
@@ -730,11 +780,43 @@ body.lock{overflow:hidden}
   </div>
 </section>
 
+
+<!-- EIGNUNG -->
+<section class="sec paper" id="eignung" aria-labelledby="egT" style="padding-top:0">
+  <div class="w">
+    <div class="sh">
+      <p class="lbl rv"><i>03</i> Eignungs-Check</p>
+      <h2 class="cap rv d1" id="egT">Passt <span class="nb">Ihre Fläche?</span></h2>
+      <p class="dim rv d2">Vier Fragen, ehrliche Antwort. Nicht jede Fläche ist geeignet, und das sagen wir Ihnen lieber vorher als nach <span class="nb">dem Bauantrag.</span></p>
+    </div>
+    <div class="eg">
+      <div class="eq rv" id="eq">
+        <fieldset><legend>Ist die Fläche von einer Straße mit Durchgangsverkehr gut zu sehen?</legend><div class="yn" data-q="0"><button type="button" aria-pressed="false" data-v="1">Ja</button><button type="button" aria-pressed="false" data-v="0">Nein</button><button type="button" aria-pressed="false" data-v="0.5">Weiß nicht</button></div></fieldset>
+        <fieldset><legend>Hat die Wand mindestens 4 × 3 m ohne Fenster, oder das Grundstück etwa 2 m² direkt an der Straße?</legend><div class="yn" data-q="1"><button type="button" aria-pressed="false" data-v="1">Ja</button><button type="button" aria-pressed="false" data-v="0">Nein</button><button type="button" aria-pressed="false" data-v="0.5">Weiß nicht</button></div></fieldset>
+        <fieldset><legend>Liegt die Fläche in einem Misch- oder Gewerbegebiet oder an einer Hauptstraße?</legend><div class="yn" data-q="2"><button type="button" aria-pressed="false" data-v="1">Ja</button><button type="button" aria-pressed="false" data-v="0">Nein</button><button type="button" aria-pressed="false" data-v="0.5">Weiß nicht</button></div></fieldset>
+        <fieldset><legend>Ist das Gebäude frei von Denkmalschutz?</legend><div class="yn" data-q="3"><button type="button" aria-pressed="false" data-v="1">Ja</button><button type="button" aria-pressed="false" data-v="0">Nein</button><button type="button" aria-pressed="false" data-v="0.5">Weiß nicht</button></div></fieldset>
+      </div>
+      <div class="er rv d1" id="er" aria-live="polite">
+        <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="lbl" id="erL">0 von 4 beantwortet</p>
+        <h3 class="cap" id="erT">Ihre Einschätzung</h3>
+        <p id="erP">Beantworten Sie die vier Fragen, dann sehen Sie, wie gut die Voraussetzungen sind.</p>
+        <button class="btn btn-s" type="button" data-open><span>Standort prüfen lassen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
+      </div>
+    </div>
+    <div class="e3">
+      <div class="rv"><h3>Was wir brauchen</h3><ul><li>Sichtbarkeit von einer belebten Straße</li><li>Wand ab etwa 4 × 3 m ohne Fenster oder Grundstück ab etwa 2 m²</li><li>Ihre Zustimmung als Eigentümer, bei Eigentümergemeinschaften der Beschluss</li></ul></div>
+      <div class="rv d1"><h3>Was wir bieten</h3><ul><li>Angebote mehrerer Außenwerber im Vergleich</li><li>Rückmeldung innerhalb von 48 Stunden</li><li>Begleitung bis zur ersten Mietzahlung und darüber hinaus</li></ul></div>
+      <div class="rv d2"><h3>Was meist nicht geht</h3><ul><li>Denkmalgeschützte Gebäude und Ensembles</li><li>Reine Wohngebiete, je nach Bebauungsplan</li><li>Abstand unter 40 m zur Autobahn oder unter 20 m zur Bundesstraße außerorts</li></ul></div>
+    </div>
+  </div>
+</section>
+
 <!-- ZIELGRUPPEN -->
 <section class="sec paper" id="zielgruppen" aria-labelledby="zgT" style="padding-top:0">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>03</i> Für wen wir arbeiten</p>
+      <p class="lbl rv"><i>04</i> Für wen wir arbeiten</p>
       <h2 class="cap rv d1" id="zgT">Jede Fläche hat <span class="nb">ihren Markt.</span></h2>
       <p class="dim rv d2">Wir kennen die Formate, die Genehmigungswege und die Außenwerber, die genau für Ihre Art von Fläche <span class="nb">gut zahlen.</span></p>
     </div>
@@ -752,8 +834,8 @@ body.lock{overflow:hidden}
 <section class="sec" id="konditionen" aria-labelledby="kdT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>04</i> Konditionen</p>
-      <h2 class="cap rv d1" id="kdT">Zahlen statt <span class="nb">Versprechen.</span></h2>
+      <p class="lbl rv"><i>05</i> Konditionen</p>
+      <h2 class="cap rv d1" id="kdT">Klare Zahlen. <span class="nb">Klare Verträge.</span></h2>
       <p class="dim rv d2">Was Sie bekommen, was Sie nichts kostet und wie lange Sie gebunden sind. Alles steht im Vertrag, alles erklären wir vor <span class="nb">der Unterschrift.</span></p>
     </div>
     <div class="kd rv">
@@ -762,14 +844,25 @@ body.lock{overflow:hidden}
       <div><p class="n">5<small>Jahre</small></p><h3>Mindestlaufzeit</h3><p>danach Kündigung mit sechs Monaten zum Vertragsende</p></div>
       <div><p class="n">¼<small>jährlich</small></p><h3>Miete im Voraus</h3><p>pünktlich aufs Konto, Stromkosten auf den Cent erstattet</p></div>
     </div>
-    <ul class="inc">
-      <li class="rv"><svg width="20" height="20" aria-hidden="true"><use href="#i-ck"/></svg>Den Bauantrag stellt der Außenwerber, Sie stimmen nur als Eigentümer zu</li>
-      <li class="rv d1"><svg width="20" height="20" aria-hidden="true"><use href="#i-ck"/></svg>Politische und sittenwidrige Werbung ist vertraglich ausgeschlossen</li>
-      <li class="rv d2"><svg width="20" height="20" aria-hidden="true"><use href="#i-ck"/></svg>Der Rückbau am Vertragsende ist fest geregelt und kostenfrei</li>
-      <li class="rv"><svg width="20" height="20" aria-hidden="true"><use href="#i-ck"/></svg>Haftung und Versicherung liegen beim Vertragspartner</li>
-      <li class="rv d1"><svg width="20" height="20" aria-hidden="true"><use href="#i-ck"/></svg>Auf Wunsch keine Konkurrenzwerbung zu Ihrem eigenen Betrieb</li>
-      <li class="rv d2"><svg width="20" height="20" aria-hidden="true"><use href="#i-ck"/></svg>Ein fester Ansprechpartner über die gesamte Laufzeit</li>
-    </ul>
+    <div class="vt">
+      <div class="rv">
+        <p class="lbl" style="color:var(--sodium)">Der Vertrag auf einen Blick</p>
+        <h3 class="cap">Eine Seite. <span class="nb">Keine Überraschungen.</span></h3>
+        <p class="dim">Das Wesentliche passt auf eine Seite. Den Mustervertrag schicken wir Ihnen vorab, damit Sie ihn in Ruhe lesen oder prüfen <span class="nb">lassen können.</span></p>
+        <button class="btn btn-o" type="button" data-open><span>Mustervertrag anfordern</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
+      </div>
+      <div class="sheet rv d1">
+        <div class="sh2"><span class="lbl">Mietvertrag Werbefläche · Muster</span><img src="img/PH-Logo-farbig-frei.png" alt=""></div>
+        <dl>
+          <div><dt>§ 1</dt><dd><b>Laufzeit</b>Mindestens 5 Jahre, Kündigung 6 Monate zum Vertragsende</dd></div>
+          <div><dt>§ 2</dt><dd><b>Miete</b>Vierteljährlich im Voraus, Strom wird über Zwischenzähler erstattet</dd></div>
+          <div><dt>§ 3</dt><dd><b>Genehmigung und Aufbau</b>Bauantrag, Montage und Kosten trägt der Außenwerber</dd></div>
+          <div><dt>§ 4</dt><dd><b>Haftung</b>Versicherung und Verkehrssicherung liegen beim Außenwerber</dd></div>
+          <div><dt>§ 5</dt><dd><b>Werbeinhalte</b>Keine politische oder sittenwidrige Werbung, Branchen und Konkurrenz ausschließbar</dd></div>
+          <div><dt>§ 6</dt><dd><b>Rückbau</b>Zum Vertragsende kostenfrei, Fläche im ursprünglichen Zustand</dd></div>
+        </dl>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -777,13 +870,13 @@ body.lock{overflow:hidden}
 <section class="sec paper" id="ablauf" aria-labelledby="abT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>05</i> Der Ablauf</p>
+      <p class="lbl rv"><i>06</i> Der Ablauf</p>
       <h2 class="cap rv d1" id="abT">Fünf Minuten <span class="nb">für Sie.</span></h2>
       <p class="dim rv d2">Von der Anfrage bis zur ersten Miete vergehen meist wenige Wochen. Genehmigung und Aufbau organisiert der Partner, wir halten Sie auf <span class="nb">dem Laufenden.</span></p>
     </div>
     <ol class="ab">
       <li class="rv"><span class="who y">Sie</span><span class="n" aria-hidden="true">01</span><h3>Standort prüfen</h3><p>Adresse, Fläche, Fotos. Sie sehen sofort eine <span class="nb">erste Spanne.</span></p><p class="t">5 Minuten</p></li>
-      <li class="rv d1"><span class="who">Plakathunter</span><span class="n" aria-hidden="true">02</span><h3>Angebote einholen</h3><p>Rückruf, Standortexposé, Anfrage an die passenden <span class="nb">Außenwerber.</span></p><p class="t">5 bis 10 Tage</p></li>
+      <li class="rv d1"><span class="who">Plakathunter</span><span class="n" aria-hidden="true">02</span><h3>Angebote einholen</h3><p>Rückruf, Standortexposé, Anfrage an die <span class="nb">passenden Außenwerber.</span></p><p class="t">5 bis 10 Tage</p></li>
       <li class="rv d2"><span class="who y">Sie</span><span class="n" aria-hidden="true">03</span><h3>Vertrag wählen</h3><p>Angebote im Vergleich, Sie unterschreiben nur, <span class="nb">was passt.</span></p><p class="t">ein Termin</p></li>
       <li class="rv d3"><span class="who">Partner</span><span class="n" aria-hidden="true">04</span><h3>Aufbau und Miete</h3><p>Genehmigung, Montage, Wartung. Die Miete kommt vierteljährlich <span class="nb">im Voraus.</span></p><p class="t">ab Aufbau</p></li>
     </ol>
@@ -794,7 +887,7 @@ body.lock{overflow:hidden}
 <section class="sec" id="referenzen" aria-labelledby="rfT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>06</i> Vermittelte Standorte</p>
+      <p class="lbl rv"><i>07</i> Vermittelte Standorte</p>
       <h2 class="cap rv d1" id="rfT">Echte Flächen. <span class="nb">Echte Miete.</span></h2>
       <div class="galnav rv d2" style="justify-self:end"><button type="button" id="gPrev" aria-controls="gal"><span class="sr">Vorheriger Standort</span><svg width="22" height="22" aria-hidden="true"><use href="#i-al"/></svg></button><button type="button" id="gNext" aria-controls="gal"><span class="sr">Nächster Standort</span><svg width="22" height="22" aria-hidden="true"><use href="#i-ar"/></svg></button></div>
     </div>
@@ -810,6 +903,10 @@ body.lock{overflow:hidden}
       <figure class="rv"><span class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</span><blockquote>„Drei Angebote bekommen, das beste ausgesucht. Herr Weiss hat alles mit dem Außenwerber geregelt, ich musste nur unterschreiben.“</blockquote><figcaption><span><b>R. K., Eigentümer</b><span class="lbl">Hauswand · Mainz</span></span><span class="lbl">Beispiel</span></figcaption></figure>
       <figure class="rv d1"><span class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</span><blockquote>„Der Bauzaun hat über zwei Jahre einen fünfstelligen Betrag gebracht. Das stand in keiner unserer Kalkulationen.“</blockquote><figcaption><span><b>Projektentwickler</b><span class="lbl">Rhein-Main</span></span><span class="lbl">Beispiel</span></figcaption></figure>
     </div>
+    <div class="tip rv">
+      <div><p class="lbl" style="color:var(--sodium)">Für Makler, Verwalter und Tippgeber</p><h3 class="cap">Sie kennen eine gute Fläche?</h3><p class="dim">Empfehlen Sie uns den Standort. Kommt ein Vertrag zustande, erhalten Sie eine <span class="nb">Prämie von uns.</span></p></div>
+      <button class="btn btn-s" type="button" data-open><span>Fläche empfehlen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
+    </div>
   </div>
 </section>
 
@@ -823,7 +920,7 @@ body.lock{overflow:hidden}
       <div class="nm"><b>Martin<br>Weiss</b><span class="lbl">Inhaber<br>Eppstein</span></div>
     </div>
     <div>
-      <p class="lbl rv" style="display:flex;gap:14px"><i style="font-style:normal;color:var(--blue)">07</i> Ihr Ansprechpartner</p>
+      <p class="lbl rv" style="display:flex;gap:14px"><i style="font-style:normal;color:var(--blue)">08</i> Ihr Ansprechpartner</p>
       <h2 class="sr" id="mwT">Martin Weiss, Ihr Ansprechpartner</h2>
       <blockquote class="rv d1">„Ich arbeite für den <em>Eigentümer</em>, nicht für <span class="nb">den Außenwerber.“</span></blockquote>
       <p class="t rv d2">Sie sprechen von der ersten Frage bis zum laufenden Vertrag mit derselben Person. Kein Callcenter, keine Warteschleife. Und wenn an der Fläche etwas ist, rufen Sie <span class="nb">einfach an.</span></p>
@@ -840,7 +937,7 @@ body.lock{overflow:hidden}
 <section class="sec paper" id="faq" aria-labelledby="fqT" style="padding-top:0">
   <div class="w fq">
     <div class="side">
-      <p class="lbl rv" style="display:flex;gap:14px"><i style="font-style:normal;color:var(--blue)">08</i> Häufige Fragen</p>
+      <p class="lbl rv" style="display:flex;gap:14px"><i style="font-style:normal;color:var(--blue)">09</i> Häufige Fragen</p>
       <h2 class="cap rv d1" id="fqT" style="margin-top:20px">Vorher <span class="nb">gefragt.</span></h2>
       <p class="rv d2">Weitere Antworten zu Steuer, Genehmigung, Abständen und Rückbau finden Sie im <span class="nb">Ratgeber.</span></p>
       <a class="btn btn-o rv d3" href="#faq"><span>Zum Ratgeber</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></a>
@@ -850,7 +947,8 @@ body.lock{overflow:hidden}
       <details><summary>Wie viel Miete bringt eine Werbefläche?<span class="pl" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Je Werbeträger zwischen 600 und 7.000 Euro im Jahr. Entscheidend sind Lage, Sichtbarkeit, Verkehr und Format. Manche Standorte eignen sich für mehrere <span class="nb">Werbeträger.</span></p></details>
       <details><summary>Wie lange läuft ein Vertrag?<span class="pl" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Mindestens fünf Jahre. Gekündigt wird mit sechs Monaten zum Vertragsende. Der Rückbau ist im Vertrag geregelt und für <span class="nb">Sie kostenfrei.</span></p></details>
       <details><summary>Brauche ich eine Baugenehmigung?<span class="pl" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">In der Regel ja. Den Bauantrag stellt der Außenwerber, Sie unterschreiben nur die Zustimmung als Eigentümer. Wir sagen Ihnen vorher, wie die Chancen an Ihrem <span class="nb">Standort stehen.</span></p></details>
-      <details><summary>Welche Werbung kommt auf meine Fläche?<span class="pl" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Sittenwidrige und politische Werbung ist vertraglich ausgeschlossen. Auf Wunsch auch Konkurrenzwerbung zu Ihrem eigenen Betrieb oder <span class="nb">Ihren Mietern.</span></p></details>
+      <details><summary>Wie verdient Plakathunter daran?<span class="pl" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Im Erfolgsfall zahlt der Außenwerber uns eine Vermittlungsprovision. Ihre Miete wird dadurch nicht geschmälert, und für Sie entstehen <span class="nb">keine Kosten.</span></p></details>
+      <details><summary>Welche Werbung kommt auf meine Fläche?<span class="pl" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Sittenwidrige und politische Werbung ist vertraglich ausgeschlossen. Auf Wunsch schließen wir auch einzelne Branchen aus, etwa Alkohol, Glücksspiel oder Konkurrenz zu Ihrem Betrieb <span class="nb">und Ihren Mietern.</span></p></details>
     </div>
   </div>
 </section>
@@ -891,7 +989,7 @@ body.lock{overflow:hidden}
   <button class="btn btn-s" type="button" data-open><span>Standort prüfen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
 </aside>
 
-<div class="draft" aria-hidden="true">ENTWURF · NEXAS MEDIA · RELAUNCH 2027</div>
+<div class="draft" aria-hidden="true"><span>Entwurf</span><img src="img/nexas-media-logo.svg" alt="" width="1596" height="509"><span>Relaunch 2027</span></div>
 
 <!-- ============ FUNNEL ============ -->
 <div class="fn" id="fn" role="dialog" aria-modal="true" aria-labelledby="fnTitle" inert>
@@ -970,7 +1068,7 @@ body.lock{overflow:hidden}
         <label class="drop" id="drop"><input type="file" id="files" accept="image/jpeg,image/png" multiple aria-describedby="dropHint"><svg width="34" height="34" aria-hidden="true"><use href="#i-cam"/></svg><b>Fotos auswählen oder hier ablegen</b><small id="dropHint">JPG oder PNG, bis zu drei Bilder. Standortdaten im Foto (EXIF) werden vor dem Versand entfernt.</small></label>
         <ul class="thumbs" id="thumbs" aria-label="Ausgewählte Fotos"></ul>
         <ul class="tips">
-          <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ck"/></svg>Von der Straße aus, so wie Autofahrer die Fläche sehen</li>
+          <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ck"/></svg>Von der Straße aus, aus 10, 20 und 50 m Entfernung</li>
           <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ck"/></svg>Einmal frontal, einmal aus der Fahrtrichtung</li>
           <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ck"/></svg>Bei Tageslicht, die ganze Fläche im Bild</li>
         </ul>
@@ -1053,9 +1151,20 @@ const r100=n=>Math.round(n/100)*100;
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const press=(group,btn)=>$$('button',group).forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));
 
+
+/* Keine Einzelwörter in der letzten Zeile: letztes Wortpaar zusammenhalten */
+const keepLast=root=>$$('p,li,dd,summary,blockquote,h3,.ds,figcaption b,legend',root).forEach(el=>{
+  if(el.closest('.sr')||el.dataset.kl)return;el.dataset.kl=1;
+  const tw=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n,last=null;while(n=tw.nextNode())if(n.textContent.trim()&&!n.parentElement.closest('.pl,.sr,svg'))last=n;
+  if(!last||last.parentElement.closest('.nb'))return;
+  const t=last.textContent.replace(/\s+$/,''),i=t.lastIndexOf(' ');if(i<1)return;
+  if(t.length-i>22)return;
+  last.textContent=t.slice(0,i)+'\u00A0'+t.slice(i+1)+last.textContent.slice(t.length)});
+keepLast(document);
+
 /* Header, mobile Leiste */
 const hd=$('#hd'),mbar=$('#mbar');
-const onS=()=>{hd.classList.toggle('sc',scrollY>30);mbar.classList.toggle('show',scrollY>innerHeight*.6)};
+const dr=$('.draft');const onS=()=>{hd.classList.toggle('sc',scrollY>30);dr.classList.toggle('off',scrollY>120&&scrollY+innerHeight<document.documentElement.scrollHeight-40);mbar.classList.toggle('show',scrollY>innerHeight*.6)};
 addEventListener('scroll',onS,{passive:true});onS();
 
 /* Mobiles Menü */
@@ -1118,6 +1227,16 @@ const setAnz=d=>{const n=Math.min(4,Math.max(1,cs.anz+d));if(n===cs.anz)return;c
 $('#anzM').onclick=()=>setAnz(-1);$('#anzP').onclick=()=>setAnz(1);
 showCalc(false);
 new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){paste($('#poster'));o.disconnect()}},{threshold:.5}).observe($('#poster'));
+
+/* Eignungs-Check */
+const ans=[null,null,null,null];
+$$('#eq .yn').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;press(g,b);ans[+g.dataset.q]=+b.dataset.v;evalE()}));
+const evalE=()=>{const n=ans.filter(a=>a!==null).length,sc=ans.reduce((a,b)=>a+(b||0),0);
+  $$('#er .lights i').forEach((l,i)=>{l.className=ans[i]===1?'y':ans[i]===0.5?'h':''});
+  $('#erL').textContent=`${n} von 4 beantwortet`;
+  let t='Ihre Einschätzung',p='Beantworten Sie die vier Fragen, dann sehen Sie, wie gut die Voraussetzungen sind.';
+  if(n===4){if(sc>=3.5){t='Sehr gute Voraussetzungen';p='Ihre Fläche erfüllt alle Kriterien. Lassen Sie uns die Angebote einholen.'}else if(sc>=2.5){t='Gute Chancen';p='Einzelne Punkte klären wir bei der Standortprüfung, das ist häufig lösbar.'}else{t='Prüfen wir gemeinsam';p='Einige Kriterien sind schwierig. Wir schauen uns den Standort trotzdem kostenlos an und sagen Ihnen ehrlich, ob es sich lohnt.'}}
+  $('#erT').textContent=t;$('#erP').textContent=p};
 
 /* Zielgruppen Hover-Bild */
 const hov=$('#hov'),himgs=$$('img',hov);
@@ -1243,7 +1362,7 @@ $('#mapOn').onclick=()=>{
   if(st.adr)geo(st.adr);
   $('#fAdr').focus();
 };
-const pinIcon=()=>L.divIcon({className:'',html:'<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7.5-6.6-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.4 12 22 12 22z" fill="#FFB547" stroke="#07111C" stroke-width="1.4"/><circle cx="12" cy="9.8" r="2.8" fill="#07111C"/></svg>',iconSize:[44,44],iconAnchor:[22,42]});
+const pinIcon=()=>L.divIcon({className:'',html:'<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7.5-6.6-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.4 12 22 12 22z" fill="#FFB547" stroke="#01405F" stroke-width="1.4"/><circle cx="12" cy="9.8" r="2.8" fill="#01405F"/></svg>',iconSize:[44,44],iconAnchor:[22,42]});
 const pin=(lat,lng,man)=>{st.lat=lat;st.lng=lng;if(!marker){marker=L.marker([lat,lng],{icon:pinIcon(),draggable:true,keyboard:true,title:'Position der Fläche'}).addTo(map);marker.on('dragend',()=>{const p=marker.getLatLng();st.lat=p.lat;st.lng=p.lng;$('#mHint').textContent='Pin gesetzt.'})}else marker.setLatLng([lat,lng]);$('#mHint').textContent=man?'Pin gesetzt. Sie können ihn verschieben.':'Pin auf die genaue Fläche ziehen oder ins Bild tippen.'};
 const geo=async q=>{if(!mapOK||!q)return;try{const r=await fetch(`${PH}&limit=1&q=${encodeURIComponent(q)}`),j=await r.json(),f=j.features&&j.features[0];if(f){const[lng,lat]=f.geometry.coordinates;map.setView([lat,lng],18);pin(lat,lng,false)}}catch(e){}};
 let sT,sRes=[],sIdx=-1;
