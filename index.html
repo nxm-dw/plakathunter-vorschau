@@ -65,7 +65,7 @@ p{text-wrap:pretty}
 .sh .lbl{grid-column:1/-1;display:flex;gap:14px;align-items:center}
 .sh .lbl i{font-style:normal;color:var(--sodium)}
 .paper .sh .lbl i{color:var(--blue)}
-.sh h2{font-size:clamp(44px,6.4vw,96px)}
+.sh h2{font-size:clamp(36px,6vw,84px)}
 .sh p:not(.lbl){max-width:44ch;justify-self:end;font-size:1.0625rem}
 @media(max-width:900px){.sh{grid-template-columns:1fr}.sh p:not(.lbl){justify-self:start}}
 
@@ -91,8 +91,9 @@ p{text-wrap:pretty}
 .util{height:40px;font-size:.8125rem;color:var(--dm);border-bottom:1px solid var(--dl);background:rgba(1,44,68,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .3s}
 .util .w{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .u-l{font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.6875rem}
-.u-r{display:flex;list-style:none;gap:28px;align-items:center}
-.u-r li{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.u-r{display:flex;list-style:none;gap:0;align-items:center}
+.u-r li{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:0 18px;border-left:1px solid var(--dl)}
+.u-r li:first-child{border-left:0}
 .u-r svg{color:var(--sodium)}
 .u-r a{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:650;text-decoration:none;font-variant-numeric:tabular-nums}
 .u-r a:hover{color:var(--sodium)}
@@ -147,18 +148,19 @@ p{text-wrap:pretty}
 
 /* HERO */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;background:var(--night)}
-.hbg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%);mask-image:linear-gradient(180deg,#000 30%,transparent 95%)}
+.hbg{position:absolute;inset:0;z-index:-1;overflow:hidden}
 .hbg .glow{position:absolute;right:-8%;top:-18%;width:70vw;height:70vw;max-width:1100px;max-height:1100px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,181,71,.28),rgba(255,181,71,.08) 45%,transparent 70%)}
 .hbg .trail{position:absolute;left:-30%;bottom:22%;width:60%;height:2px;background:linear-gradient(90deg,transparent,var(--sodium),transparent);opacity:.7;animation:tr 2.6s .6s var(--ease) forwards;transform:translateX(0)}
 @keyframes tr{to{transform:translateX(260%);opacity:0}}
 .hin{flex:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(48px,6vw,120px);align-items:center;padding-top:calc(env(safe-area-inset-top,0px) + 176px);padding-bottom:64px;width:100%}
 .hk{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:24px}
 .hk span:first-child{color:var(--sodium)}
-.hero h1{font-size:clamp(44px,5.3vw,90px);position:relative}
+.hero h1{font-size:clamp(40px,4.6vw,66px);position:relative}
 .hero h1 .ln{display:block;overflow:hidden;padding:.08em 0 .02em;margin-top:-.08em;white-space:nowrap}
 .hero h1 .ln>span{display:block;transform:translateY(105%);animation:up 1s var(--ease) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}.hero h1 .ln:nth-child(3)>span{animation-delay:.24s}
-.hero h1 .ln:nth-child(3){color:var(--sodium)}
+.hero h1 .ln:nth-child(4){color:var(--sodium)}
+.hero h1 .ln:nth-child(4)>span{animation-delay:.36s}
 @keyframes up{to{transform:none}}
 .flap{position:relative;display:inline-block;vertical-align:top}
 .flap .ghost{visibility:hidden}
@@ -177,7 +179,7 @@ p{text-wrap:pretty}
 .hq .btn{height:58px}.hq .btn>b{width:58px}
 .hq-t{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:16px;opacity:0;animation:fi .8s .75s forwards}
 .hq-l{font-size:.875rem;font-weight:600}
-.hq-f{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin-top:20px;font-size:.875rem;opacity:0;animation:fi .8s .85s forwards}
+.hq-f{margin-top:18px;font-size:.9375rem;opacity:0;animation:fi .8s .85s forwards}
 .hq-f li{display:flex;align-items:center;gap:8px}
 .hq-f svg{color:var(--sodium)}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
@@ -233,62 +235,97 @@ p{text-wrap:pretty}
 .pz .steps>div{min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding-block:40px;color:#fff;transition:color .5s}
 .pz .steps>div.on{color:#fff}
 
-.pz .no{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:clamp(90px,11vw,170px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px #fff}
-.pz .steps>div.on .no{-webkit-text-stroke-color:var(--sodium)}
+.pz .no{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:1.25rem;line-height:1;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:3px;box-shadow:inset 0 0 0 1.5px #fff}
+.pz .steps>div.on .no{background:var(--sodium);color:var(--ink);box-shadow:none}
 .pz h3{font-size:clamp(34px,3.6vw,54px);margin:22px 0 14px}
 .pz .steps p{color:var(--dm);font-size:1.125rem;max-width:42ch}
 .pz .stick{position:sticky;top:110px;height:max-content;padding-block:7vh}
-.board{font-variant-numeric:tabular-nums;background:var(--deep);border:1px solid var(--dl);border-radius:4px;overflow:hidden;font-family:var(--mono);box-shadow:0 40px 100px -30px rgba(0,0,0,.8)}
-.board .bh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--dl);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
-.board .bh b{color:var(--sodium);font-weight:500;display:flex;align-items:center;gap:8px}
-.board .bh b i{width:8px;height:8px;border-radius:50%;background:var(--sodium);animation:bl 1.4s steps(2) infinite}
-@keyframes bl{50%{opacity:.15}}
-.board .req{padding:18px 20px;border-bottom:1px solid var(--dl);display:grid;grid-template-columns:1fr auto;gap:6px 20px;font-size:.875rem}
-.board .req span{color:var(--dm);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
-.board .req strong{font-weight:600;font-size:1rem}
-.rows{display:grid}
-.row{display:grid;grid-template-columns:1.5fr 1.1fr .9fr 1fr;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.07);font-size:.8125rem;transition:background .5s}
-.row.hd2{color:#fff;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;padding-block:10px}
-.row .st{color:#fff}
-.row .v{text-align:right;font-weight:600;font-size:.9375rem}
-.fl{display:inline-flex;gap:2px}
-.fl i{font-style:normal;display:inline-grid;place-items:center;min-width:.95em;height:1.5em;background:#023a5a;border-radius:2px;padding:0 1px;position:relative;overflow:hidden}
-.fl i:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.6)}
-.flip{animation:fp .5s var(--ease)}
-@keyframes fp{0%{transform:rotateX(90deg);opacity:.2}100%{transform:none;opacity:1}}
-.row.best{background:rgba(255,181,71,.12)}
-.row.best .v{color:var(--sodium)}
-.row.best .st{color:var(--sodium)}
-.board .bf{display:flex;justify-content:space-between;gap:12px;padding:16px 20px;font-size:.75rem;color:var(--dm);text-transform:uppercase;letter-spacing:.06em}
-.board .bf b{color:#fff;font-weight:600}
-@media(max-width:1000px){.pz{grid-template-columns:1fr}.pz .stick{position:relative;top:0;padding-block:0;order:-1}.pz .steps>div,.pz .steps>div p{min-height:auto;color:#fff;padding-block:30px}.pz .steps>div p{color:var(--dm);padding:0}.pz .no{font-size:72px}.row{grid-template-columns:1.4fr 1fr 1fr;font-size:.75rem}.row .fm{display:none}}
+.board{font-variant-numeric:tabular-nums;background:var(--deep);border:1px solid var(--dl);border-radius:4px;overflow:hidden;box-shadow:0 40px 100px -30px rgba(0,0,0,.8)}
+.board .bh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--dl);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.board .bh b{color:var(--sodium);font-weight:700;display:flex;align-items:center;gap:8px;text-align:right}
+.board .bh b i{width:8px;height:8px;border-radius:50%;background:var(--sodium);flex:none}
+.bsteps{display:grid;grid-template-columns:repeat(3,1fr);list-style:none;border-bottom:1px solid var(--dl)}
+.bsteps li{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:.875rem;font-weight:600;border-left:1px solid var(--dl);position:relative;transition:background .4s}
+.bsteps li:first-child{border-left:0}
+.bsteps li span{width:24px;height:24px;border-radius:2px;display:grid;place-items:center;font-size:.75rem;box-shadow:inset 0 0 0 1.5px #fff;transition:all .4s}
+.bsteps li:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--sodium);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.board[data-s="1"] .bsteps li[data-n="1"],.board[data-s="2"] .bsteps li[data-n="2"],.board[data-s="3"] .bsteps li[data-n="3"]{background:rgba(255,181,71,.12)}
+.board[data-s="1"] .bsteps li[data-n="1"]:after,.board[data-s="2"] .bsteps li[data-n="2"]:after,.board[data-s="3"] .bsteps li[data-n="3"]:after{transform:none}
+.board[data-s="1"] .bsteps li[data-n="1"] span,.board[data-s="2"] .bsteps li[data-n="2"] span,.board[data-s="3"] .bsteps li[data-n="3"] span,.board[data-s="2"] .bsteps li[data-n="1"] span,.board[data-s="3"] .bsteps li[data-n="1"] span,.board[data-s="3"] .bsteps li[data-n="2"] span{background:var(--sodium);color:var(--ink);box-shadow:none}
+.req{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--dl);transition:padding .5s var(--ease),background .5s}
+.rq-t{display:grid;gap:4px}
+.rq-t .lbl{color:var(--sodium)}
+.rq-t strong{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:1.6rem;line-height:1.04;transition:font-size .5s var(--ease)}
+.rq-t>span:last-child{font-size:.875rem}
+.rq-ph{display:flex;gap:8px}
+.rq-ph img{width:64px;height:48px;object-fit:cover;border-radius:2px;transition:all .5s var(--ease)}
+.board[data-s="1"] .req{padding:30px 20px;background:rgba(255,181,71,.08)}
+.board[data-s="1"] .rq-t strong{font-size:2.6rem}
+.board[data-s="1"] .rq-ph img{width:110px;height:82px}
+@media(max-width:1200px) and (min-width:1001px){.rq-ph img+img{display:none}}
+.bbody{position:relative;height:330px}
+.bexp{position:absolute;inset:0;padding:22px 20px;transition:opacity .4s}
+.board:not([data-s="1"]) .bexp{opacity:0;pointer-events:none}
+.bexp .lbl{color:var(--sodium);margin-bottom:10px}
+.bexp ul{list-style:none}
+.bexp li{display:grid;grid-template-columns:110px minmax(0,1fr) 28px;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.9375rem;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s var(--ease)}
+.bexp li span{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.bexp li i{font-style:normal;width:24px;height:24px;border-radius:2px;display:grid;place-items:center;background:var(--sodium);color:var(--ink);font-weight:800;font-size:.8125rem}
+.board[data-s="1"] .bexp li{opacity:1;transform:none}
+.board[data-s="1"] .bexp li:nth-child(2){transition-delay:.25s}.board[data-s="1"] .bexp li:nth-child(3){transition-delay:.5s}.board[data-s="1"] .bexp li:nth-child(4){transition-delay:.75s}
+.rows{position:absolute;inset:0}
+.row{position:absolute;left:0;right:0;top:0;height:66px;display:grid;grid-template-columns:1.1fr 1.6fr .9fr;gap:14px;align-items:center;padding:0 20px;border-bottom:1px solid rgba(255,255,255,.08);font-size:.875rem;opacity:0;transform:translateY(10px);transition:top .7s var(--ease),opacity .45s,transform .45s var(--ease),background .5s}
+.row.in{opacity:1;transform:none}
+.row .nm b{display:block;font-size:.9375rem}
+.row .nm small{display:block;font-size:.75rem}
+.row .bar{position:relative;height:10px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden}
+.row .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:#fff;transition:width .9s var(--ease)}
+.row .st{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.row .v{text-align:right;font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:1.5rem;line-height:1.04}
+.row.sending .bar i,.row.sent .bar i{width:100%!important;background:var(--sodium);animation:snd 1.1s var(--ease) both}
+.row.sent .bar i{animation:none;opacity:.45}
+@keyframes snd{from{transform:translateX(-100%)}to{transform:none}}
+.row.best{background:var(--sodium);color:var(--ink)}
+.row.best .bar{background:rgba(1,64,95,.2)}.row.best .bar i{background:var(--ink)}
+.rb{font-style:normal;margin-right:8px;font-size:.625rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;padding:2px 6px;border-radius:2px;vertical-align:1px}
+.row .nm{min-width:0;white-space:nowrap}
+.bsum{display:grid;grid-template-columns:1.3fr 1fr;border-top:1px solid var(--dl);max-height:0;overflow:hidden;transition:max-height .7s var(--ease)}
+.board[data-s="3"] .bsum{max-height:140px}
+.bsum>div{padding:18px 20px;display:grid;gap:4px}
+.bsum>div+div{border-left:1px solid var(--dl)}
+.bsum .lbl{color:var(--sodium)}
+.bsum b{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:2.2rem;line-height:1.04}
+@media(max-width:1000px){.pz{grid-template-columns:1fr}.pz .stick{top:76px;padding-block:0;z-index:2}.pz .steps>div{min-height:60vh;padding-block:30px}}
+@media(max-width:600px){.req{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:1fr 1fr;height:58px}.row .bar{display:none}.bbody{height:290px}.bsteps li{padding:10px 8px;font-size:.75rem;gap:6px}.board[data-s="1"] .rq-ph img{width:80px;height:60px}.rq-ph img{width:48px;height:36px}.bsum b{font-size:1.6rem}.board[data-s="1"] .rq-t strong{font-size:2rem}}
 
 /* RECHNER mit Plakatwand */
-.rc{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(30px,5vw,90px);align-items:center}
-.rc fieldset{border:0;margin-bottom:28px}
-.rc legend{display:block;font-weight:700;font-size:.9375rem;margin-bottom:12px}
+.rc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,5vw,90px);align-items:center}
+.rc h2{font-size:clamp(36px,3.6vw,56px)}
+.rc-p{color:var(--muted);margin:12px 0 22px;max-width:46ch}
+.rc fieldset{border:0;margin-bottom:16px}
+.rc legend{display:block;font-weight:700;font-size:.9375rem;margin-bottom:10px}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
-.opts button{padding:12px 16px;font-weight:600;font-size:.9375rem;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);transition:all .2s;display:inline-flex;gap:8px;align-items:center}
+.opts button{padding:10px 14px;font-weight:600;font-size:.9375rem;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);transition:all .2s;display:inline-flex;gap:8px;align-items:center}
 .opts button:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .opts button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
 .opts svg{width:18px;height:18px}
 .stepper{display:inline-flex;align-items:center;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);border-radius:3px}
-.stepper button{width:52px;height:52px;display:grid;place-items:center;font-size:1.4rem;font-weight:600}
+.stepper button{width:46px;height:46px;display:grid;place-items:center;font-size:1.4rem;font-weight:600}
 .stepper button:hover{background:rgba(1,46,72,.06)}
 .stepper output{min-width:60px;text-align:center;font-family:var(--mono);font-weight:600;font-size:1.125rem}
-.rc .note{font-size:.8125rem;color:var(--muted);margin-top:14px;max-width:52ch}
-.bb{position:relative;padding-top:64px}
+.rc .note{font-size:.8125rem;color:var(--muted);margin-top:10px;max-width:52ch}
+.bb{position:relative;padding-top:46px;max-width:640px;width:100%;justify-self:end}
 .bb .lamps{position:absolute;top:0;left:6%;right:6%;display:flex;justify-content:space-between}
-.bb .lamps i{position:relative;width:62px;height:64px}
-.bb .lamps i:before{content:"";position:absolute;left:28px;top:0;width:5px;height:38px;background:#20384b}
-.bb .lamps i:after{content:"";position:absolute;left:8px;top:34px;width:46px;height:9px;border-radius:2px;background:#20384b;box-shadow:0 8px 34px 10px rgba(255,214,140,.55)}
+.bb .lamps i{position:relative;width:62px;height:46px}
+.bb .lamps i:before{content:"";position:absolute;left:28px;top:0;width:5px;height:26px;background:#20384b}
+.bb .lamps i:after{content:"";position:absolute;left:8px;top:22px;width:46px;height:9px;border-radius:2px;background:#20384b;box-shadow:0 8px 34px 10px rgba(255,214,140,.55)}
 .bb .frame{background:#13293a;padding:14px;border-radius:3px;box-shadow:0 30px 60px -24px rgba(1,46,72,.6)}
 .poster{position:relative;aspect-ratio:356/252;background:var(--night);overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,34px)}
 .poster:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,224,170,.16),rgba(255,224,170,0) 45%);pointer-events:none}
 .poster .pt{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .poster .pt img{height:clamp(18px,2.2vw,28px);width:auto}
 .poster .pk{color:var(--sodium)}
-.poster .pv{font-family:var(--disp);font-weight:820;font-stretch:62%;font-size:clamp(50px,7.4vw,120px);line-height:.85;letter-spacing:-.01em;white-space:nowrap}
+.poster .pv{font-family:var(--disp);font-weight:820;font-stretch:62%;font-size:clamp(46px,5.4vw,96px);line-height:.85;letter-spacing:-.01em;white-space:nowrap}
 .poster .pv small{font-family:var(--disp);display:block;font-size:.26em;font-stretch:70%;letter-spacing:.02em;margin-top:.4em;color:var(--sodium)}
 .poster .pb{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:clamp(.625rem,.9vw,.8125rem);text-transform:uppercase;letter-spacing:.06em;color:var(--dm)}
 .poster .strips{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none;z-index:3}
@@ -297,7 +334,7 @@ p{text-wrap:pretty}
 .poster.paste .strips i:nth-child(2){animation-delay:.05s}.poster.paste .strips i:nth-child(3){animation-delay:.1s}.poster.paste .strips i:nth-child(4){animation-delay:.15s}.poster.paste .strips i:nth-child(5){animation-delay:.2s}.poster.paste .strips i:nth-child(6){animation-delay:.25s}
 @keyframes paste{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 .bb .legs{display:flex;justify-content:space-around;padding:0 22%}
-.bb .legs i{width:16px;height:70px;background:linear-gradient(90deg,#13293a,#2b475d)}
+.bb .legs i{width:16px;height:36px;background:linear-gradient(90deg,#13293a,#2b475d)}
 .bb .ground{height:2px;background:var(--ll)}
 .bb .five{display:flex;justify-content:space-between;gap:20px;margin-top:22px;font-size:.9375rem}
 .bb .five b{font-family:var(--mono);font-weight:600}
@@ -306,20 +343,19 @@ p{text-wrap:pretty}
 /* ZIELGRUPPEN: Liste mit Bild */
 .tl{list-style:none;border-top:1px solid var(--ll);position:relative}
 .tl li{border-bottom:1px solid var(--ll)}
-.tl button{width:100%;display:grid;grid-template-columns:56px minmax(0,1.3fr) minmax(0,.8fr) 56px;gap:28px;align-items:center;padding:30px 0;text-align:left;position:relative;transition:padding .4s var(--ease)}
-.tl .nr{font-family:var(--mono);font-size:.875rem;color:var(--muted)}
+.tl button{width:100%;display:grid;grid-template-columns:56px minmax(0,1.3fr) auto minmax(0,.8fr) 56px;gap:0 28px;align-items:center;padding:30px 0;text-align:left;position:relative;transition:padding .4s var(--ease)}
+.tl .nr{font-family:var(--mono);font-size:.875rem;color:var(--muted);display:grid;gap:8px;justify-items:start}
+.tl .nr small{font-size:.625rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--sodium);color:var(--ink);padding:3px 7px;border-radius:2px}
 .tl .tt{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(32px,3.7vw,58px);line-height:1.04;overflow-wrap:anywhere;hyphens:manual}
 .tl .tt small{display:inline-block;vertical-align:.9em;margin-left:12px;white-space:nowrap;font-family:var(--mono);font-weight:500;font-size:.6875rem;letter-spacing:.08em;padding:4px 8px;background:var(--sodium);color:var(--ink);border-radius:2px;line-height:1.3}
 .tl .ds{color:var(--muted);font-size:1rem;max-width:44ch}
 .tl .ar{width:56px;height:56px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(1,46,72,.3);display:grid;place-items:center;transition:all .35s var(--ease)}
 .tl button:hover .ar,.tl button:focus-visible .ar{background:var(--ink);color:#fff;box-shadow:none}
-.tl button:hover{padding-left:16px}
-.tl .th{display:none}
-.hov{position:fixed;left:0;top:0;width:340px;aspect-ratio:4/3;border-radius:3px;overflow:hidden;pointer-events:none;z-index:20;opacity:0;transform:translate(-50%,-50%) scale(.85) rotate(-3deg);transition:opacity .3s,transform .45s var(--ease)}
-.hov.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
-.hov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
-.hov img.on{opacity:1}
-@media(hover:none),(max-width:900px){.hov{display:none}.tl button{grid-template-columns:minmax(0,1fr) 56px;gap:14px 16px}.tl .nr{display:none}.tl .ds{grid-column:1/2}.tl .ar{grid-row:1;grid-column:2}.tl .th{display:block;grid-column:1/-1;aspect-ratio:16/8;border-radius:3px;overflow:hidden}.tl .th img{width:100%;height:100%;object-fit:cover}.tl button:hover{padding-left:0}}
+
+.tl .th{display:block;width:0;height:120px;border-radius:3px;overflow:hidden;opacity:0;margin-right:-28px;transition:width .5s var(--ease),opacity .35s,margin .5s var(--ease)}
+.tl .th img{width:180px;height:120px;object-fit:cover}
+.tl button:hover .th,.tl button:focus-visible .th{width:180px;opacity:1;margin-right:0}
+@media(hover:none),(max-width:900px){.tl button{grid-template-columns:minmax(0,1fr) 56px;gap:14px 16px}.tl .nr{display:none}.tl .tt{grid-column:1;grid-row:1}.tl .ar{grid-row:1;grid-column:2}.tl .th{grid-column:1/-1;grid-row:2;width:auto!important;height:auto;opacity:1;margin:0!important;aspect-ratio:16/8}.tl .th img{width:100%;height:100%}.tl .ds{grid-column:1/-1;grid-row:3}}
 
 /* KONDITIONEN */
 .kd{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--dl)}
@@ -341,7 +377,7 @@ p{text-wrap:pretty}
 .ab li+li{padding-left:32px;border-left:1px solid var(--ll)}
 .ab .who{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;display:inline-block;padding:4px 8px;border-radius:2px;background:var(--ink);color:#fff}
 .ab .who.y{background:var(--sodium);color:var(--ink)}
-.ab .n{font-family:var(--disp);display:block;font-weight:820;font-stretch:62%;font-size:96px;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--ink);margin:22px 0 16px}
+.ab .n{display:block;font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:2.4rem;line-height:1;color:var(--ink);margin:20px 0 10px}
 .ab h3{font-size:1.625rem;font-weight:800;line-height:1.05;margin-bottom:10px}
 .ab p{color:var(--muted);font-size:1rem}
 .ab .t{font-family:var(--mono);font-size:.8125rem;margin-top:16px;font-weight:600;color:var(--ink)}
@@ -376,7 +412,7 @@ p{text-wrap:pretty}
 .mfil button:hover{box-shadow:inset 0 0 0 1.5px #fff}
 .mfil button[aria-pressed="true"]{background:var(--sodium);color:var(--ink);box-shadow:none}
 .mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,90px);align-items:center}
-.dmap{position:relative;width:100%;max-width:560px;justify-self:center;aspect-ratio:1000/1356}
+.dmap{position:relative;width:100%;max-width:min(470px,calc((100svh - 260px)/1.356));justify-self:center;aspect-ratio:1000/1356}
 .dmap svg{position:absolute;inset:0;width:100%;height:100%}
 .dmap .dots{fill:rgba(255,255,255,.2)}
 .mp{position:absolute;width:28px;height:28px;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;transition:transform .3s var(--ease),opacity .3s}
@@ -414,7 +450,10 @@ p{text-wrap:pretty}
 .por .nm{position:absolute;z-index:3;left:24px;right:24px;bottom:22px;color:#fff;display:flex;justify-content:space-between;align-items:end;gap:12px}
 .por .nm b{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:2.4rem;line-height:1.04}
 .por .nm .lbl{color:var(--dm);text-align:right}
-.mw blockquote{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(38px,4.6vw,74px);line-height:1.04;text-wrap:balance;margin:20px 0 28px}
+.mw blockquote{position:relative;font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(30px,2.9vw,46px);line-height:1.08;margin:0 0 28px}
+.mw blockquote .ql{display:block;white-space:nowrap}
+.mw blockquote .q1{position:absolute;right:100%;top:0;margin-right:.04em}
+@media(max-width:1100px){.mw blockquote .q1{position:static}.mw blockquote .ql{display:inline;white-space:normal}}
 .mw blockquote em{font-style:normal;color:var(--blue)}
 .mw p.t{color:var(--muted);font-size:1.125rem;max-width:50ch}
 .ch{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;border-top:1px solid var(--ll)}
@@ -631,13 +670,21 @@ body.lock{overflow:hidden}
 .er h3{font-size:clamp(34px,3.4vw,52px)}
 .er p{color:var(--dm)}
 .er .btn{margin-top:auto;align-self:flex-start}
-.e3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);margin-top:clamp(40px,5vw,70px)}
-.e3 h3{font-size:1.25rem;font-weight:750;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
-.e3 ul{list-style:none;display:grid;gap:10px}
-.e3 li{padding-left:22px;position:relative;color:var(--muted)}
-.e3 li:before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--blue)}
-.e3>div:last-child li:before{background:#B3261E}
-@media(max-width:1000px){.eg{grid-template-columns:1fr}.e3{grid-template-columns:1fr}}
+.e3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(40px,5vw,64px)}
+.ec{border-radius:4px;padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column;gap:22px}
+.ec h3{font-family:var(--disp);font-weight:820;font-stretch:64%;text-transform:uppercase;font-size:clamp(28px,2.4vw,38px);line-height:1.04;white-space:nowrap}
+.ec ul{list-style:none;display:grid;gap:18px}
+.ec li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:center}
+.ec .ei{width:44px;height:44px;border-radius:3px;display:grid;place-items:center}
+.ec b{display:block;font-size:1.0625rem;font-weight:700;white-space:nowrap}
+.ec small{display:block;font-size:.875rem;line-height:1.4;white-space:nowrap}
+@media(max-width:1280px) and (min-width:1101px){.ec small{white-space:normal}}
+.ec-a{background:var(--night);color:#fff}.ec-a .ei{background:var(--sodium);color:var(--ink)}
+.ec-b{background:#fff;color:var(--ink);box-shadow:0 30px 60px -30px rgba(1,46,72,.35)}.ec-b .ei{background:var(--ink);color:#fff}.ec-b small{color:var(--muted)}
+.ec-c{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(1,64,95,.25)}.ec-c .ei{background:#F6E2DF;color:#9E2A1F}.ec-c small{color:var(--muted)}
+@media(max-width:1100px){.e3{grid-template-columns:1fr}}
+@media(max-width:1000px){.eg{grid-template-columns:1fr}}
+@media(max-width:420px){.ec b{white-space:normal}}
 @media(max-width:700px){.eq fieldset{grid-template-columns:1fr}.yn{flex-wrap:wrap}}
 /* VERTRAG */
 .vt{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,110px);align-items:center;margin-top:clamp(56px,7vw,100px)}
@@ -692,8 +739,8 @@ body.lock{overflow:hidden}
     <div class="w">
       <span class="u-l">Makler für Werbeflächen · bundesweit</span>
       <ul class="u-r">
-        <li><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Kostenfrei für Eigentümer</li>
-        <li><svg width="14" height="14" aria-hidden="true"><use href="#i-ck"/></svg>Antwort in 48 Stunden</li>
+        <li>Kostenfrei für Eigentümer</li>
+        <li>Antwort in 48 Stunden</li>
         <li><a href="tel:+4915156145220"><svg width="14" height="14" aria-hidden="true"><use href="#i-tel"/></svg>0151 561 452 20</a><span class="u-t">Mo bis Fr, 8 bis 18 Uhr</span></li>
       </ul>
     </div>
@@ -760,16 +807,16 @@ body.lock{overflow:hidden}
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="h1">
-  <div class="hbg" aria-hidden="true"><i class="glow"></i><i class="trail"></i></div>
+  
   <div class="w hin">
     <div class="hl">
-      <p class="lbl hk"><span>Werbefläche vermieten</span><span>Hauswand · Grundstück · Bauzaun</span></p>
-      <h1 id="h1" class="cap">
-        <span class="ln"><span>Ihre <span class="flap" aria-hidden="true"><span class="ghost">Grundstück.</span><span class="fv" id="flap">Hauswand.</span></span><span class="sr">Fläche.</span></span></span>
-        <span class="ln"><span>Mehrere Angebote.</span></span>
-        <span class="ln"><span>Ein Makler.</span></span>
+            <h1 id="h1" class="cap">
+        <span class="ln"><span>Wir vermieten</span></span>
+        <span class="ln"><span><span class="flap" aria-hidden="true"><span class="ghost">Ihr Grundstück</span><span class="fv" id="flap">Ihre Hauswand</span></span><span class="sr">Ihre Fläche</span></span></span>
+        <span class="ln"><span>an den Außenwerber,</span></span>
+        <span class="ln"><span>der am meisten zahlt.</span></span>
       </h1>
-      <p class="lead">Wir stellen Ihre Fläche allen passenden Außenwerbern vor, vergleichen die Angebote und verhandeln für Sie. Für Eigentümer <span class="nb">komplett kostenfrei.</span></p>
+      <p class="lead">Plakathunter ist Makler, nicht Mieter. Martin Weiss fragt für Ihren Standort bei mehreren Außenwerbern an, legt Ihnen die Angebote nebeneinander und verhandelt nach. Sie zahlen dafür <span class="nb">nichts.</span></p>
       <form class="hq" id="heroCheck" novalidate aria-label="Standort-Check starten">
         <label class="hq-in"><span class="sr">Adresse der Fläche</span><svg width="22" height="22" aria-hidden="true"><use href="#i-pin"/></svg><input type="text" name="adr" autocomplete="street-address" placeholder="Adresse Ihrer Fläche"></label>
         <button class="btn btn-s" type="submit"><span>Standort prüfen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
@@ -784,11 +831,7 @@ body.lock{overflow:hidden}
           <button type="button" aria-pressed="false" data-v="Acker an Straße">Acker</button>
         </div>
       </div>
-      <ul class="hq-f">
-        <li><svg width="16" height="16" aria-hidden="true"><use href="#i-ck"/></svg>Kostenfrei</li>
-        <li><svg width="16" height="16" aria-hidden="true"><use href="#i-ck"/></svg>Antwort in 48 Stunden</li>
-        <li><svg width="16" height="16" aria-hidden="true"><use href="#i-ck"/></svg>Nichts wird gesendet, bevor Sie absenden</li>
-      </ul>
+      <p class="hq-f">Kostenfrei für Eigentümer. Sie hören innerhalb von 48 Stunden von uns.</p>
     </div>
     <figure class="hc" aria-label="Beispiel: drei Angebote für eine Hauswand, das beste mit 2.950 Euro pro Jahr">
       <img src="img/Plakathunter-Slider_01.jpg" alt="" fetchpriority="high">
@@ -838,25 +881,37 @@ body.lock{overflow:hidden}
 <section class="sec" id="prinzip" aria-labelledby="pzT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>01</i> Das Makler-Prinzip</p>
-      <h2 class="cap rv d1" id="pzT">Einer fragt. <span class="nb">Alle bieten.</span></h2>
-      <p class="dim rv d2">Wer direkt an einen Außenwerber vermietet, bekommt genau ein Angebot. Wir fragen den Markt an und legen Ihnen die Angebote nebeneinander, bevor Sie <span class="nb">etwas unterschreiben.</span></p>
+      <h2 class="cap rv d1" id="pzT">Warum ein Makler <span class="nb">mehr herausholt</span></h2>
+      <p class="dim rv d2">Ein Außenwerber macht Ihnen ein Angebot, und zwar seines. Wir fragen bei allen an, die für Ihren Standort in Frage kommen. Im Beispiel rechts lag das beste Angebot 1.100 € pro Jahr über <span class="nb">dem niedrigsten.</span></p>
     </div>
     <div class="pz">
       <div class="steps" id="pzSteps">
-        <div class="on" data-s="1"><span class="no" aria-hidden="true">01</span><h3 class="cap">Sie beschreiben Ihre Fläche</h3><p>Adresse, Art der Fläche, zwei Handyfotos. Das dauert etwa fünf Minuten und ist <span class="nb">völlig unverbindlich.</span></p></div>
-        <div data-s="2"><span class="no" aria-hidden="true">02</span><h3 class="cap">Wir fragen den Markt an</h3><p>Wir prüfen Sichtbarkeit und Verkehr, erstellen ein Standortexposé und stellen es allen passenden <span class="nb">Außenwerbern vor.</span></p></div>
-        <div data-s="3"><span class="no" aria-hidden="true">03</span><h3 class="cap">Sie wählen das beste Angebot</h3><p>Sie sehen alle Angebote im Vergleich, mit unserer Empfehlung. Wir verhandeln nach und begleiten Sie bis zur <span class="nb">ersten Miete.</span></p></div>
+        <div class="on" data-s="1"><span class="no" aria-hidden="true">1</span><h3 class="cap">Sie schicken uns Adresse und Fotos</h3><p>Zwei Handyfotos von der Straße aus reichen für die erste Einschätzung. Ein Termin vor Ort ist dafür <span class="nb">nicht nötig.</span></p></div>
+        <div data-s="2"><span class="no" aria-hidden="true">2</span><h3 class="cap">Wir fragen bei den Außenwerbern an</h3><p>Aus Ihren Angaben wird ein Standortexposé mit Lage, Verkehr und Format. Das geht an alle Außenwerber, die in Ihrer <span class="nb">Region bauen.</span></p></div>
+        <div data-s="3"><span class="no" aria-hidden="true">3</span><h3 class="cap">Sie entscheiden, wir verhandeln nach</h3><p>Sie bekommen die Angebote nebeneinander, mit Miete, Laufzeit und Format. Mit dem besten gehen wir noch einmal <span class="nb">ins Gespräch.</span></p></div>
       </div>
       <div class="stick">
-        <div class="board" id="board" role="img" aria-label="Beispiel: Eine Anfrage für eine Hauswand in Mainz geht an fünf Außenwerber, das beste Angebot liegt bei 2.950 Euro pro Jahr.">
+        <div class="board" id="board" data-s="1" role="img" aria-label="Beispiel: Eine Anfrage für eine Hauswand in Mainz geht an fünf Außenwerber. Das beste Angebot liegt mit 2.950 Euro pro Jahr 1.100 Euro über dem niedrigsten.">
           <div class="bh"><span>Angebotsvergleich · Beispiel</span><b><i></i><span id="bStat">Anfrage eingegangen</span></b></div>
-          <div class="req"><span>Standort</span><span>Format</span><strong>Hauswand · Mainz</strong><strong>Großfläche 18/1</strong></div>
-          <div class="rows" id="bRows">
-            <div class="row hd2"><span>Außenwerber</span><span class="fm">Format</span><span>Status</span><span class="v">€ / Jahr</span></div>
+          <ol class="bsteps" aria-hidden="true"><li data-n="1"><span>1</span>Anfrage</li><li data-n="2"><span>2</span>Marktabfrage</li><li data-n="3"><span>3</span>Vergleich</li></ol>
+          <div class="req">
+            <div class="rq-t"><span class="lbl">Ihre Anfrage</span><strong>Hauswand · Mainz</strong><span>Großfläche 18/1 · Hauptstraße · 2 Fotos</span></div>
+            <div class="rq-ph" aria-hidden="true"><img src="img/GF_Hauswand_02.jpg" alt=""><img src="img/grossflaeche_07.jpg" alt=""></div>
           </div>
-          <div class="bf"><span>Laufzeit 10 Jahre</span><span>Gesamt <b id="bTot">–</b></span></div>
-        </div>
+          <div class="bbody">
+            <div class="bexp" aria-hidden="true">
+              <p class="lbl">Standortexposé wird erstellt</p>
+              <ul>
+                <li><span>Lage</span><b>Hauptstraße, Innenstadt</b><i>✓</i></li>
+                <li><span>Verkehr</span><b>ca. 18.000 Fahrzeuge am Tag</b><i>✓</i></li>
+                <li><span>Sichtbarkeit</span><b>frontal, ab 60 m Entfernung</b><i>✓</i></li>
+                <li><span>Format</span><b>Großfläche 18/1, beleuchtbar</b><i>✓</i></li>
+              </ul>
+            </div>
+            <div class="rows" id="bRows"></div>
+          </div>
+          <div class="bsum" aria-hidden="true"><div><span class="lbl">Bestes gegenüber niedrigstem Angebot</span><b>+1.100 € pro Jahr</b></div><div><span class="lbl">Über 10 Jahre</span><b>+11.000 €</b></div></div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -865,13 +920,10 @@ body.lock{overflow:hidden}
 <!-- RECHNER -->
 <section class="sec paper" id="rechner" aria-labelledby="rcT">
   <div class="w">
-    <div class="sh">
-      <p class="lbl rv"><i>02</i> Ertragsrechner</p>
-      <h2 class="cap rv d1" id="rcT">Was hängt <span class="nb">an Ihrer Wand?</span></h2>
-      <p class="dim rv d2">Drei Angaben, eine erste Spanne. Die Werte beruhen auf vermittelten Standorten und sind eine Orientierung, kein <span class="nb">verbindliches Angebot.</span></p>
-    </div>
     <div class="rc">
       <div class="rv">
+        <h2 class="cap" id="rcT">Was eine Werbefläche <span class="nb">im Jahr bringt</span></h2>
+        <p class="rc-p">Die Spannen stammen aus Verträgen, die wir vermittelt haben. Verbindlich wird es erst mit dem Angebot <span class="nb">des Außenwerbers.</span></p>
         <fieldset><legend>Welche Fläche haben Sie?</legend>
           <div class="opts" data-g="typ">
             <button type="button" aria-pressed="true" data-v="wand"><svg aria-hidden="true"><use href="#i-wall"/></svg>Hauswand</button>
@@ -918,9 +970,8 @@ body.lock{overflow:hidden}
 <section class="sec paper" id="eignung" aria-labelledby="egT" style="padding-top:0">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>03</i> Eignungs-Check</p>
-      <h2 class="cap rv d1" id="egT">Passt <span class="nb">Ihre Fläche?</span></h2>
-      <p class="dim rv d2">Vier Fragen, ehrliche Antwort. Nicht jede Fläche ist geeignet, und das sagen wir Ihnen lieber vorher als nach <span class="nb">dem Bauantrag.</span></p>
+      <h2 class="cap rv d1" id="egT">Eignet sich <span class="nb">Ihre Fläche?</span></h2>
+      <p class="dim rv d2">Das sind die vier Fragen, die wir auch am Telefon stellen. Wenn etwas dagegen spricht, erfahren Sie es vorher und nicht erst nach <span class="nb">dem Bauantrag.</span></p>
     </div>
     <div class="eg">
       <div class="eq rv" id="eq">
@@ -937,11 +988,8 @@ body.lock{overflow:hidden}
         <button class="btn btn-s" type="button" data-open><span>Standort prüfen lassen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
       </div>
     </div>
-    <div class="e3">
-      <div class="rv"><h3>Was wir brauchen</h3><ul><li>Sichtbarkeit von einer belebten Straße</li><li>Wand ab etwa 4 × 3 m ohne Fenster oder Grundstück ab etwa 2 m²</li><li>Ihre Zustimmung als Eigentümer, bei Eigentümergemeinschaften der Beschluss</li></ul></div>
-      <div class="rv d1"><h3>Was wir bieten</h3><ul><li>Angebote mehrerer Außenwerber im Vergleich</li><li>Rückmeldung innerhalb von 48 Stunden</li><li>Begleitung bis zur ersten Mietzahlung und darüber hinaus</li></ul></div>
-      <div class="rv d2"><h3>Was meist nicht geht</h3><ul><li>Denkmalgeschützte Gebäude und Ensembles</li><li>Reine Wohngebiete, je nach Bebauungsplan</li><li>Abstand unter 40 m zur Autobahn oder unter 20 m zur Bundesstraße außerorts</li></ul></div>
-    </div>
+    <div class="e3"><div class="ec ec-a rv"><h3>Was wir brauchen</h3><ul><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.9"/></svg></span><span><b>Sicht von der Straße</b><small>Autofahrer sehen die Fläche frontal</small></span></li><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 17L17 3l4 4L7 21z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2" stroke="currentColor" stroke-width="1.9"/></svg></span><span><b>Wand ab 4 × 3 m</b><small>oder Grundstück ab 2 m²</small></span></li><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 20h16M6 16l9-9 3 3-9 9H6z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg></span><span><b>Ihre Zustimmung</b><small>bei einer WEG per Beschluss</small></span></li></ul></div><div class="ec ec-b rv"><h3>Was wir bieten</h3><ul><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></span><span><b>Mehrere Angebote</b><small>direkt nebeneinander</small></span></li><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.9"/></svg></span><span><b>Antwort in 48 Stunden</b><small>an Werktagen</small></span></li><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 13l4 4 5-1 7-6-2-2-5 3H9l-2-2-4 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span><b>Begleitung</b><small>bis zur ersten Miete und danach</small></span></li></ul></div><div class="ec ec-c rv"><h3>Was meist nicht geht</h3><ul><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></span><span><b>Denkmalschutz</b><small>Gebäude und Ensembles</small></span></li><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></span><span><b>Reines Wohngebiet</b><small>je nach Bebauungsplan</small></span></li><li><span class="ei" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></span><span><b>Zu nah an der Autobahn</b><small>unter 40 m, Bundesstraße 20 m</small></span></li></ul></div></div>
+  </div>
   </div>
 </section>
 
@@ -949,27 +997,24 @@ body.lock{overflow:hidden}
 <section class="sec paper" id="zielgruppen" aria-labelledby="zgT" style="padding-top:0">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>04</i> Für wen wir arbeiten</p>
-      <h2 class="cap rv d1" id="zgT">Jede Fläche hat <span class="nb">ihren Markt.</span></h2>
-      <p class="dim rv d2">Wir kennen die Formate, die Genehmigungswege und die Außenwerber, die genau für Ihre Art von Fläche <span class="nb">gut zahlen.</span></p>
+      <h2 class="cap rv d1" id="zgT">Für wen <span class="nb">wir arbeiten</span></h2>
+      <p class="dim rv d2">Die meisten Anfragen kommen von privaten Eigentümern. Immer öfter melden sich auch Bauträger, Hausverwaltungen <span class="nb">und Gemeinden.</span></p>
     </div>
     <ul class="tl" id="tl">
-      <li class="rv"><button type="button" data-open data-who="privat" data-img="0"><span class="nr" aria-hidden="true">01</span><span class="tt">Private Eigentümer</span><span class="ds">Hauswand, Giebel oder Grundstück an einer belebten Straße. Vertraglich sauber geregelt, ohne <span class="nb">eigenen Aufwand.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter-Slider_01.jpg" alt="" loading="lazy"></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="projekt" data-img="1"><span class="nr" aria-hidden="true">02</span><span class="tt">Projektentwicklung<small>Neu</small></span><span class="ds">Bauzaun, Gerüst und Zwischennutzung als zusätzlicher Ertrag in der Projektkalkulation, mit fest <span class="nb">geregeltem Rückbau.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter-CSB_2.jpg" alt="" loading="lazy"></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="gewerbe" data-img="2"><span class="nr" aria-hidden="true">03</span><span class="tt">Gewerbe, Verwaltung</span><span class="ds">Märkte, Parkplätze, Fassaden. Ein Makler und ein Rahmenvertrag für <span class="nb">alle Objekte.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/CSB_04-scaled.jpg" alt="" loading="lazy"></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="kommune" data-img="3"><span class="nr" aria-hidden="true">04</span><span class="tt">Kommunen, Landwirte</span><span class="ds">Ortseinfahrten, städtische Flächen und Äcker an Bundesstraßen, mit <span class="nb">transparentem Verfahren.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span><span class="th" aria-hidden="true"><img src="img/Plakathunter_videoboard_01.jpg" alt="" loading="lazy"></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="privat" data-img="0"><span class="nr" aria-hidden="true">01</span><span class="tt">Private Eigentümer</span><span class="th" aria-hidden="true"><img src="img/GF_Hauswand_02.jpg" alt="" loading="lazy"></span><span class="ds">Hauswand, Giebel oder Grundstück an einer belebten Straße. Vertraglich sauber geregelt, ohne <span class="nb">eigenen Aufwand.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="projekt" data-img="1"><span class="nr" aria-hidden="true">02<small>Neu</small></span><span class="tt">Projektentwicklung</span><span class="th" aria-hidden="true"><img src="img/projekt-baustelle-kran.jpg" alt="" loading="lazy"></span><span class="ds">Bauzaun, Gerüst und Zwischennutzung als zusätzlicher Ertrag in der Projektkalkulation, mit fest <span class="nb">geregeltem Rückbau.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="gewerbe" data-img="2"><span class="nr" aria-hidden="true">03</span><span class="tt">Gewerbe, Verwaltung</span><span class="th" aria-hidden="true"><img src="img/CSB_04-scaled.jpg" alt="" loading="lazy"></span><span class="ds">Märkte, Parkplätze, Fassaden. Ein Makler und ein Rahmenvertrag für <span class="nb">alle Objekte.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="kommune" data-img="3"><span class="nr" aria-hidden="true">04</span><span class="tt">Kommunen, Landwirte</span><span class="th" aria-hidden="true"><img src="img/feld-werbetafel.jpg" alt="" loading="lazy"></span><span class="ds">Ortseinfahrten, städtische Flächen und Äcker an Bundesstraßen, mit <span class="nb">transparentem Verfahren.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
     </ul>
   </div>
-  <div class="hov" id="hov" aria-hidden="true"><img src="img/Plakathunter-Slider_01.jpg" alt=""><img src="img/Plakathunter-CSB_2.jpg" alt=""><img src="img/CSB_04-scaled.jpg" alt=""><img src="img/Plakathunter_videoboard_01.jpg" alt=""></div>
 </section>
 
 <!-- KONDITIONEN -->
 <section class="sec" id="konditionen" aria-labelledby="kdT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>05</i> Konditionen</p>
-      <h2 class="cap rv d1" id="kdT">Klare Zahlen. <span class="nb">Klare Verträge.</span></h2>
-      <p class="dim rv d2">Was Sie bekommen, was Sie nichts kostet und wie lange Sie gebunden sind. Alles steht im Vertrag, alles erklären wir vor <span class="nb">der Unterschrift.</span></p>
+      <h2 class="cap rv d1" id="kdT">Was Sie bekommen <span class="nb">und was nicht</span></h2>
+      <p class="dim rv d2">Diese Punkte stehen in jedem Vertrag, den wir vermitteln. Was davon abweicht, besprechen wir vor <span class="nb">der Unterschrift.</span></p>
     </div>
     <div class="kd rv">
       <div><p class="n">7.000<small>€</small></p><h3>Miete pro Jahr, bis zu</h3><p>je Werbeträger, ab 600 €, abhängig von Lage, Format und Sichtbarkeit</p></div>
@@ -979,9 +1024,8 @@ body.lock{overflow:hidden}
     </div>
     <div class="vt">
       <div class="rv">
-        <p class="lbl" style="color:var(--sodium)">Der Vertrag auf einen Blick</p>
-        <h3 class="cap">Eine Seite. <span class="nb">Klare Regeln.</span></h3>
-        <p class="dim">Das Wesentliche passt auf eine Seite. Den Mustervertrag schicken wir Ihnen vorab, damit Sie ihn in Ruhe lesen oder prüfen <span class="nb">lassen können.</span></p>
+        <h3 class="cap">Den Mustervertrag lesen <span class="nb">Sie vorher</span></h3>
+        <p class="dim">Die wichtigsten Regelungen passen auf eine Seite. Wir schicken Ihnen den Vertrag vorab, damit Sie ihn in Ruhe lesen oder von Ihrem Anwalt prüfen <span class="nb">lassen können.</span></p>
         <button class="btn btn-o" type="button" data-open><span>Mustervertrag anfordern</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
       </div>
       <div class="sheet rv d1">
@@ -1003,15 +1047,14 @@ body.lock{overflow:hidden}
 <section class="sec paper" id="ablauf" aria-labelledby="abT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>06</i> Der Ablauf</p>
-      <h2 class="cap rv d1" id="abT">Fünf Minuten <span class="nb">für Sie.</span></h2>
-      <p class="dim rv d2">Von der Anfrage bis zur ersten Miete vergehen meist wenige Wochen. Genehmigung und Aufbau organisiert der Partner, wir halten Sie auf <span class="nb">dem Laufenden.</span></p>
+      <h2 class="cap rv d1" id="abT">So läuft eine <span class="nb">Vermittlung ab</span></h2>
+      <p class="dim rv d2">Wie lange es bis zur ersten Miete dauert, hängt vor allem vom Bauamt ab. Den Bauantrag stellt der Außenwerber, wir sagen Ihnen Bescheid, sobald <span class="nb">er durch ist.</span></p>
     </div>
     <ol class="ab">
-      <li class="rv"><span class="who y">Sie</span><span class="n" aria-hidden="true">01</span><h3>Standort prüfen</h3><p>Adresse, Fläche, Fotos. Sie sehen sofort eine <span class="nb">erste Spanne.</span></p><p class="t">5 Minuten</p></li>
-      <li class="rv d1"><span class="who">Plakathunter</span><span class="n" aria-hidden="true">02</span><h3>Angebote einholen</h3><p>Rückruf, Standortexposé, Anfrage an die <span class="nb">passenden Außenwerber.</span></p><p class="t">5 bis 10 Tage</p></li>
-      <li class="rv d2"><span class="who y">Sie</span><span class="n" aria-hidden="true">03</span><h3>Vertrag wählen</h3><p>Angebote im Vergleich, Sie unterschreiben nur, <span class="nb">was passt.</span></p><p class="t">ein Termin</p></li>
-      <li class="rv d3"><span class="who">Partner</span><span class="n" aria-hidden="true">04</span><h3>Aufbau und Miete</h3><p>Genehmigung, Montage, Wartung. Die Miete kommt vierteljährlich <span class="nb">im Voraus.</span></p><p class="t">ab Aufbau</p></li>
+      <li class="rv"><span class="who y">Sie</span><span class="n" aria-hidden="true">1</span><h3>Standort prüfen</h3><p>Adresse, Fläche, Fotos. Sie sehen sofort eine <span class="nb">erste Spanne.</span></p><p class="t">5 Minuten</p></li>
+      <li class="rv d1"><span class="who">Plakathunter</span><span class="n" aria-hidden="true">2</span><h3>Angebote einholen</h3><p>Rückruf, Standortexposé, Anfrage an die <span class="nb">passenden Außenwerber.</span></p><p class="t">5 bis 10 Tage</p></li>
+      <li class="rv d2"><span class="who y">Sie</span><span class="n" aria-hidden="true">3</span><h3>Vertrag wählen</h3><p>Angebote im Vergleich, Sie unterschreiben nur, <span class="nb">was passt.</span></p><p class="t">ein Termin</p></li>
+      <li class="rv d3"><span class="who">Partner</span><span class="n" aria-hidden="true">4</span><h3>Aufbau und Miete</h3><p>Genehmigung, Montage, Wartung. Die Miete kommt vierteljährlich <span class="nb">im Voraus.</span></p><p class="t">ab Aufbau</p></li>
     </ol>
   </div>
 </section>
@@ -1020,9 +1063,8 @@ body.lock{overflow:hidden}
 <section class="sec" id="referenzen" aria-labelledby="rfT">
   <div class="w">
     <div class="sh">
-      <p class="lbl rv"><i>07</i> Vermittelte Standorte</p>
-      <h2 class="cap rv d1" id="rfT">Echte Flächen. <span class="nb">Echte Miete.</span></h2>
-      <p class="dim rv d2">Eine Auswahl vermittelter Standorte in ganz Deutschland. Filtern Sie nach Zielgruppe und wählen Sie einen Punkt für <span class="nb">die Details.</span></p>
+      <h2 class="cap rv d1" id="rfT">Wo wir schon <span class="nb">vermittelt haben</span></h2>
+      <p class="dim rv d2">Eine Auswahl aus ganz Deutschland. Ein Klick auf einen Punkt zeigt Format, Miete und seit wann <span class="nb">die Fläche läuft.</span></p>
     </div>
   </div>
   <div class="w">
@@ -1038,7 +1080,7 @@ body.lock{overflow:hidden}
           <p class="mleg" aria-hidden="true"><span><i class="lq"></i>Unser Sitz in Eppstein</span><span><i class="lp"></i>Vermittelter Standort</span></p>
         </div>
         <article class="mcard" id="mcard" aria-live="polite">
-          <div class="mim"><img id="mImg" src="img/Plakathunter_GF_U-Schiene_02.jpg" alt=""></div>
+          <div class="mim"><img id="mImg" src="img/projekt-baustelle-kran.jpg" alt=""></div>
           <div class="mbd">
             <p class="lbl" id="mTyp">Projektentwicklung</p>
             <h3 class="cap" id="mCity">Gießen</h3>
@@ -1052,11 +1094,11 @@ body.lock{overflow:hidden}
   </div>
   <div class="w">
     <div class="qs">
-      <figure class="rv"><span class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</span><blockquote>„Drei Angebote bekommen, das beste ausgesucht. Herr Weiss hat alles mit dem Außenwerber geregelt, ich musste nur unterschreiben.“</blockquote><figcaption><span><b>R. K., Eigentümer</b><span class="lbl">Hauswand · Mainz</span></span><span class="lbl">Beispiel</span></figcaption></figure>
-      <figure class="rv d1"><span class="stars" role="img" aria-label="5 von 5 Sternen">★★★★★</span><blockquote>„Der Bauzaun hat über zwei Jahre einen fünfstelligen Betrag gebracht. Das stand in keiner unserer Kalkulationen.“</blockquote><figcaption><span><b>Projektentwickler</b><span class="lbl">Rhein-Main</span></span><span class="lbl">Beispiel</span></figcaption></figure>
+      <figure class="rv"><blockquote>„Drei Angebote bekommen, das beste ausgesucht. Herr Weiss hat alles mit dem Außenwerber geregelt, ich musste nur unterschreiben.“</blockquote><figcaption><span><b>R. K., Eigentümer</b><span class="lbl">Hauswand · Mainz</span></span><span class="lbl">Beispiel</span></figcaption></figure>
+      <figure class="rv d1"><blockquote>„Der Bauzaun hat über zwei Jahre einen fünfstelligen Betrag gebracht. Das stand in keiner unserer Kalkulationen.“</blockquote><figcaption><span><b>Projektentwickler</b><span class="lbl">Rhein-Main</span></span><span class="lbl">Beispiel</span></figcaption></figure>
     </div>
     <div class="tip rv">
-      <div><p class="lbl" style="color:var(--sodium)">Für Makler, Verwalter und Tippgeber</p><h3 class="cap">Sie kennen eine gute Fläche?</h3><p class="dim">Empfehlen Sie uns den Standort. Kommt ein Vertrag zustande, erhalten Sie eine <span class="nb">Prämie von uns.</span></p></div>
+      <div><p class="lbl" style="color:var(--sodium)">Für Makler, Verwalter und Tippgeber</p><h3 class="cap">Sie kennen eine gute Fläche?</h3><p class="dim">Wenn Sie als Makler oder Verwalter einen geeigneten Standort kennen, melden Sie ihn uns. Kommt ein Vertrag zustande, zahlen wir Ihnen <span class="nb">eine Prämie.</span></p></div>
       <button class="btn btn-s" type="button" data-open><span>Fläche empfehlen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
     </div>
   </div>
@@ -1072,12 +1114,11 @@ body.lock{overflow:hidden}
       <div class="nm"><b>Martin<br>Weiss</b><span class="lbl">Inhaber<br>Eppstein</span></div>
     </div>
     <div>
-      <p class="lbl rv" style="display:flex;gap:14px"><i style="font-style:normal;color:var(--blue)">08</i> Ihr Ansprechpartner</p>
       <h2 class="sr" id="mwT">Martin Weiss, Ihr Ansprechpartner</h2>
-      <blockquote class="rv d1">„Ich arbeite für den <em>Eigentümer</em>, nicht für <span class="nb">den Außenwerber.“</span></blockquote>
-      <p class="t rv d2">Sie sprechen von der ersten Frage bis zum laufenden Vertrag mit derselben Person. Kein Callcenter, keine Warteschleife. Und wenn an der Fläche etwas ist, rufen Sie <span class="nb">einfach an.</span></p>
+      <blockquote class="rv d1"><span class="q1" aria-hidden="true">„</span><span class="ql">Ich arbeite für den <em>Eigentümer,</em></span> <span class="ql">nicht für den Außenwerber.“</span></blockquote>
+      <p class="t rv d2">Sie haben von der ersten Frage bis zum Ende der Laufzeit denselben Ansprechpartner. Wenn an der Fläche etwas ist, rufen Sie direkt bei mir an. Die Nummer bleibt dieselbe, solange <span class="nb">der Vertrag läuft.</span></p>
       <div class="ch rv d3">
-        <a href="tel:+4915156145220"><svg width="22" height="22" aria-hidden="true"><use href="#i-tel"/></svg><b>Anrufen</b><span>0151 561 452 20, Mo bis Fr, 8 bis 18 Uhr</span></a>
+        <a href="tel:+4915156145220"><svg width="22" height="22" aria-hidden="true"><use href="#i-tel"/></svg><b>Anrufen</b><span>0151 561 452 20<br>Mo bis Fr, 8 bis 18 Uhr</span></a>
         <a href="https://wa.me/4915156145220" target="_blank" rel="noopener"><svg width="22" height="22" aria-hidden="true"><use href="#i-wa"/></svg><b>WhatsApp</b><span>Fotos schicken, öffnet WhatsApp<span class="sr"> in neuem Fenster</span></span></a>
         <button type="button" data-open data-from="rueckruf"><svg width="22" height="22" aria-hidden="true"><use href="#i-cal"/></svg><b>Rückruf wählen</b><span>Termin passend zu Ihnen</span></button>
       </div>
@@ -1089,8 +1130,7 @@ body.lock{overflow:hidden}
 <section class="sec paper" id="faq" aria-labelledby="fqT" style="padding-top:0">
   <div class="w fq">
     <div class="side">
-      <p class="lbl rv" style="display:flex;gap:14px"><i style="font-style:normal;color:var(--blue)">09</i> Häufige Fragen</p>
-      <h2 class="cap rv d1" id="fqT" style="margin-top:20px">Vorher <span class="nb">gefragt.</span></h2>
+      <h2 class="cap rv d1" id="fqT">Häufige <span class="nb">Fragen</span></h2>
       <p class="rv d2">Weitere Antworten zu Steuer, Genehmigung, Abständen und Rückbau finden Sie im <span class="nb">Ratgeber.</span></p>
       <a class="btn btn-o rv d3" href="#faq"><span>Zum Ratgeber</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></a>
     </div>
@@ -1109,10 +1149,9 @@ body.lock{overflow:hidden}
 <section class="cta" aria-labelledby="ctaT">
   <img src="img/Plakathunter-Slider_01.jpg" alt="" loading="lazy">
   <div class="w">
-    <p class="lbl">Kostenlos und unverbindlich</p>
     <h2 class="sr" id="ctaT">Jetzt Standort prüfen</h2>
     <button class="big" type="button" data-open><span>Standort</span><br><span>prüfen <svg aria-hidden="true"><use href="#i-ar"/></svg></span></button>
-    <p>Adresse eingeben, Fläche beschreiben, Ersteinschätzung sehen. Martin Weiss meldet sich zu dem Termin, den <span class="nb">Sie wählen.</span></p>
+    <p>Adresse eingeben, Fläche beschreiben, erste Spanne sehen. Danach ruft Martin Weiss Sie zu dem Termin an, den <span class="nb">Sie wählen.</span></p>
     <div class="row2">
       <a class="btn btn-o" href="tel:+4915156145220"><span>0151 561 452 20</span><b><svg aria-hidden="true"><use href="#i-tel"/></svg></b></a>
       <a class="btn btn-o" href="https://wa.me/4915156145220" target="_blank" rel="noopener"><span>WhatsApp<span class="sr"> (öffnet neues Fenster)</span></span><b><svg aria-hidden="true"><use href="#i-wa"/></svg></b></a>
@@ -1229,7 +1268,7 @@ body.lock{overflow:hidden}
       <section class="pane" data-p="6" aria-labelledby="q6">
         <p class="lbl">Kontakt</p>
         <h2 class="cap" id="q6" tabindex="-1">Wohin mit <span class="nb">den Angeboten?</span></h2>
-        <p class="sub">Pflichtfelder sind gekennzeichnet. Wir nutzen Ihre Angaben nur für diese Anfrage.</p>
+        <p class="sub">Pflichtfelder sind gekennzeichnet. Ihre Angaben verwenden wir nur für diese Anfrage.</p>
         <form id="cForm" novalidate>
           <div class="fg">
             <div class="f"><label for="fVn">Vorname <em>(Pflicht)</em></label><input id="fVn" autocomplete="given-name" required aria-describedby="eVn"><span class="err" id="eVn" hidden>Bitte Vornamen eingeben.</span></div>
@@ -1352,25 +1391,26 @@ tick.addEventListener('mouseenter',()=>tick.classList.add('paused'));
 tick.addEventListener('mouseleave',()=>{if(tb.getAttribute('aria-pressed')==='false')tick.classList.remove('paused')});
 tick.addEventListener('focusin',()=>tick.classList.add('paused'));
 
-/* Abfahrtstafel */
+/* Angebotstafel: drei klar verschiedene Zustände */
 const OFF=[['Außenwerber A','Großfläche',1850],['Außenwerber B','Großfläche beleuchtet',2300],['Außenwerber C','Premium beleuchtet',2950],['Außenwerber D','City Star',1600],['Außenwerber E','Großfläche',2100]];
-const rows=$('#bRows');
-OFF.forEach(o=>{const r=document.createElement('div');r.className='row';r.innerHTML=`<span>${o[0]}</span><span class="fm">${o[1]}</span><span class="st">–</span><span class="v">–</span>`;rows.appendChild(r)});
-const flapTxt=t=>`<span class="fl">${[...t].map(c=>`<i class="flip">${c}</i>`).join('')}</span>`;
+const rows=$('#bRows'),board=$('#board'),RH=66;
+const rEl=OFF.map(o=>{const r=document.createElement('div');r.className='row';r.innerHTML=`<span class="nm"><b>${o[0]}</b><small>${o[1]}</small></span><span class="bar"><i></i></span><span class="v"><span class="st">–</span></span>`;rows.appendChild(r);return r});
+rEl.forEach((r,i)=>r.style.top=i*RH+'px');
+const rh=()=>innerWidth<600?58:RH;
 let bState=0,bT=[];
-const board=s=>{
-  if(s===bState)return;bState=s;bT.forEach(clearTimeout);bT=[];
-  $$('.row:not(.hd2)',rows).forEach((r,i)=>{r.classList.remove('best');const st=$('.st',r),v=$('.v',r);
-    if(s===1){st.textContent='–';v.textContent='–'}
-    if(s===2){st.textContent='angefragt';v.textContent='…'}
-    if(s===3)bT.push(setTimeout(()=>{st.textContent=i===2?'Empfehlung':'Angebot';v.innerHTML=RM?eur(OFF[i][2]):flapTxt(eur(OFF[i][2]));if(i===2)r.classList.add('best')},RM?0:i*160));
-  });
+const setBoard=s=>{
+  if(s===bState)return;bState=s;bT.forEach(clearTimeout);bT=[];board.dataset.s=s;
   $('#bStat').textContent=['','Anfrage eingegangen','5 Außenwerber angefragt','5 Angebote, 1 Empfehlung'][s];
-  $('#bTot').textContent=s===3?'29.500 €':'–';
+  const T=(f,d)=>bT.push(setTimeout(f,RM?0:d));
+  if(s===1){rEl.forEach((r,i)=>{r.className='row';$('small',r).textContent=OFF[i][1];$('.bar i',r).style.width='0';$('.v',r).innerHTML='<span class="st">–</span>'})}
+  if(s===2){rEl.forEach((r,i)=>{r.style.top=i*rh()+'px';r.classList.remove('best','sent');$('small',r).textContent=OFF[i][1];$('.bar i',r).style.width='0';$('.v',r).innerHTML='<span class="st">angefragt</span>';T(()=>{r.classList.add('in','sending')},i*220);T(()=>{r.classList.remove('sending');r.classList.add('sent');$('.v',r).innerHTML='<span class="st">angefragt ✓</span>'},i*220+1200)})}
+  if(s===3){const max=Math.max(...OFF.map(o=>o[2])),rank=OFF.map((o,i)=>i).sort((a,b)=>OFF[b][2]-OFF[a][2]);
+    rEl.forEach((r,i)=>{r.classList.add('in');r.classList.remove('sending','sent');r.style.top=i*rh()+'px';$('.v',r).textContent=eur(OFF[i][2])+' €';$('.bar i',r).style.width=(OFF[i][2]/max*100)+'%'});
+    T(()=>{rank.forEach((idx,pos)=>{rEl[idx].style.top=pos*rh()+'px'});rEl[2].classList.add('best');$('small',rEl[2]).innerHTML='<em class="rb">Empfehlung</em>'+OFF[2][1]},900)}
 };
-board(1);
+setBoard(1);
 const pz=$$('#pzSteps>div');
-const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){pz.forEach(d=>d.classList.toggle('on',d===e.target));board(+e.target.dataset.s)}}),{rootMargin:'-45% 0px -45% 0px'});
+const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){pz.forEach(d=>d.classList.toggle('on',d===e.target));setBoard(+e.target.dataset.s)}}),{rootMargin:'-45% 0px -45% 0px'});
 pz.forEach(d=>pio.observe(d));
 
 /* Ertragsrechner */
@@ -1404,30 +1444,16 @@ const evalE=()=>{const n=ans.filter(a=>a!==null).length,sc=ans.reduce((a,b)=>a+(
 
 /* Fallblatt-Headline: Hauswand -> Grundstück -> Fläche, endet nach ca. 4 s */
 const flap=$('#flap');
-const setWord=(w,anim)=>{flap.innerHTML=[...w].map((c,i)=>`<i${anim?` class="fl" style="animation-delay:${i*45}ms"`:''}>${c}</i>`).join('')};
-if(RM)setWord('Fläche.',false);else{setWord('Hauswand.',false);setTimeout(()=>setWord('Grundstück.',true),1700);setTimeout(()=>setWord('Fläche.',true),3300)}
+const setWord=(w,anim)=>{flap.innerHTML=[...w].map((c,i)=>c===' '?' ':`<i${anim?` class="fl" style="animation-delay:${i*45}ms"`:''}>${c}</i>`).join('')};
+if(RM)setWord('Ihre Fläche',false);else{setWord('Ihre Hauswand',false);setTimeout(()=>setWord('Ihr Grundstück',true),1700);setTimeout(()=>setWord('Ihre Fläche',true),3300)}
 
 /* Referenzkarte */
-const PINS=[{"c": "Gießen", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun, 24 Monate", "y": 2024, "img": "Plakathunter_GF_U-Schiene_02.jpg", "m": "11.000 € gesamt", "x": 30.97, "yy": 63.15}, {"c": "Koblenz", "t": "privat", "tn": "Private Eigentümer", "f": "Giebelwand, beleuchtet", "y": 2022, "img": "Plakathunter-Slider_01.jpg", "m": "3.600 € pro Jahr", "x": 19.25, "yy": 59.99}, {"c": "Mannheim", "t": "gewerbe", "tn": "Gewerbe", "f": "City Star am Marktparkplatz", "y": 2023, "img": "CSB_04-scaled.jpg", "m": "3.100 € pro Jahr", "x": 28.71, "yy": 70.99}, {"c": "Würzburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Acker an der B 8", "y": 2023, "img": "Plakathunter_videoboard_01.jpg", "m": "4.200 € pro Jahr", "x": 44.62, "yy": 67.2}, {"c": "Kassel", "t": "privat", "tn": "Private Eigentümer", "f": "Zwei Großflächen am Grundstück", "y": 2021, "img": "Plakathunter_GF_beleuchtet_01.jpg", "m": "5.800 € pro Jahr", "x": 39.68, "yy": 47.96}, {"c": "Köln", "t": "gewerbe", "tn": "Gewerbe", "f": "Großfläche an Tankstelle", "y": 2023, "img": "Plakathunter_CSB_07.jpg", "m": "3.900 € pro Jahr", "x": 12.47, "yy": 52.65}, {"c": "Münster", "t": "privat", "tn": "Private Eigentümer", "f": "Hauswand an Ausfallstraße", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "2.700 € pro Jahr", "x": 19.68, "yy": 39.74}, {"c": "Bremen", "t": "privat", "tn": "Private Eigentümer", "f": "Großfläche an Hauswand", "y": 2022, "img": "grossflaeche_07.jpg", "m": "2.400 € pro Jahr", "x": 32.26, "yy": 25.56}, {"c": "Hamburg", "t": "projekt", "tn": "Projektentwicklung", "f": "Gerüstwerbung, 18 Monate", "y": 2025, "img": "Plakathunter-CSB_2.jpg", "m": "14.500 € gesamt", "x": 45.05, "yy": 19.62}, {"c": "Hannover", "t": "gewerbe", "tn": "Gewerbe", "f": "Parkplatz Fachmarkt", "y": 2024, "img": "CSB_04-scaled.jpg", "m": "3.300 € pro Jahr", "x": 42.26, "yy": 34.55}, {"c": "Berlin", "t": "privat", "tn": "Private Eigentümer", "f": "Brandwand, zwei Flächen", "y": 2025, "img": "GF_Hauswand_02.jpg", "m": "6.400 € pro Jahr", "x": 81.72, "yy": 32.65}, {"c": "Leipzig", "t": "kommune", "tn": "Kommune, Landwirt", "f": "City Star an Ortseinfahrt", "y": 2024, "img": "Plakathunter-CSB_01.jpg", "m": "2.900 € pro Jahr", "x": 70.65, "yy": 47.58}, {"c": "Nürnberg", "t": "privat", "tn": "Private Eigentümer", "f": "Grundstück an Hauptstraße", "y": 2023, "img": "Plakathunter_grossflaeche.jpg", "m": "2.200 € pro Jahr", "x": 56.77, "yy": 71.5}, {"c": "München", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun Wohnquartier", "y": 2025, "img": "Plakathunter_GF_U-Schiene_02.jpg", "m": "9.800 € gesamt", "x": 62.15, "yy": 88.08}, {"c": "Stuttgart", "t": "gewerbe", "tn": "Gewerbe", "f": "Fassade Autohaus", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "4.600 € pro Jahr", "x": 36.34, "yy": 79.98}, {"c": "Freiburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Feldrand an der B 31", "y": 2025, "img": "Plakathunter_videoboard_01.jpg", "m": "3.800 € pro Jahr", "x": 22.04, "yy": 89.98}];
+const PINS=[{"c": "Gießen", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun, 24 Monate", "y": 2024, "img": "projekt-baustelle-kran.jpg", "m": "11.000 € gesamt", "x": 30.97, "yy": 63.15}, {"c": "Koblenz", "t": "privat", "tn": "Private Eigentümer", "f": "Giebelwand, beleuchtet", "y": 2022, "img": "Plakathunter-Slider_01.jpg", "m": "3.600 € pro Jahr", "x": 19.25, "yy": 59.99}, {"c": "Mannheim", "t": "gewerbe", "tn": "Gewerbe", "f": "City Star am Marktparkplatz", "y": 2023, "img": "CSB_04-scaled.jpg", "m": "3.100 € pro Jahr", "x": 28.71, "yy": 70.99}, {"c": "Würzburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Acker an der B 8", "y": 2023, "img": "feld-werbetafel.jpg", "m": "4.200 € pro Jahr", "x": 44.62, "yy": 67.2}, {"c": "Kassel", "t": "privat", "tn": "Private Eigentümer", "f": "Zwei Großflächen am Grundstück", "y": 2021, "img": "Plakathunter_GF_beleuchtet_01.jpg", "m": "5.800 € pro Jahr", "x": 39.68, "yy": 47.96}, {"c": "Köln", "t": "gewerbe", "tn": "Gewerbe", "f": "Großfläche an Tankstelle", "y": 2023, "img": "Plakathunter_CSB_07.jpg", "m": "3.900 € pro Jahr", "x": 12.47, "yy": 52.65}, {"c": "Münster", "t": "privat", "tn": "Private Eigentümer", "f": "Hauswand an Ausfallstraße", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "2.700 € pro Jahr", "x": 19.68, "yy": 39.74}, {"c": "Bremen", "t": "privat", "tn": "Private Eigentümer", "f": "Großfläche an Hauswand", "y": 2022, "img": "grossflaeche_07.jpg", "m": "2.400 € pro Jahr", "x": 32.26, "yy": 25.56}, {"c": "Hamburg", "t": "projekt", "tn": "Projektentwicklung", "f": "Gerüstwerbung, 18 Monate", "y": 2025, "img": "projekt-baustelle-kran.jpg", "m": "14.500 € gesamt", "x": 45.05, "yy": 19.62}, {"c": "Hannover", "t": "gewerbe", "tn": "Gewerbe", "f": "Parkplatz Fachmarkt", "y": 2024, "img": "CSB_04-scaled.jpg", "m": "3.300 € pro Jahr", "x": 42.26, "yy": 34.55}, {"c": "Berlin", "t": "privat", "tn": "Private Eigentümer", "f": "Brandwand, zwei Flächen", "y": 2025, "img": "GF_Hauswand_02.jpg", "m": "6.400 € pro Jahr", "x": 81.72, "yy": 32.65}, {"c": "Leipzig", "t": "kommune", "tn": "Kommune, Landwirt", "f": "City Star an Ortseinfahrt", "y": 2024, "img": "Plakathunter-CSB_01.jpg", "m": "2.900 € pro Jahr", "x": 70.65, "yy": 47.58}, {"c": "Nürnberg", "t": "privat", "tn": "Private Eigentümer", "f": "Grundstück an Hauptstraße", "y": 2023, "img": "Plakathunter_grossflaeche.jpg", "m": "2.200 € pro Jahr", "x": 56.77, "yy": 71.5}, {"c": "München", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun Wohnquartier", "y": 2025, "img": "projekt-baustelle-kran.jpg", "m": "9.800 € gesamt", "x": 62.15, "yy": 88.08}, {"c": "Stuttgart", "t": "gewerbe", "tn": "Gewerbe", "f": "Fassade Autohaus", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "4.600 € pro Jahr", "x": 36.34, "yy": 79.98}, {"c": "Freiburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Feldrand an der B 31", "y": 2025, "img": "feld-werbetafel.jpg", "m": "3.800 € pro Jahr", "x": 22.04, "yy": 89.98}];
 const pinsEl=$$('.mp');
 const showPin=i=>{const d=PINS[i];pinsEl.forEach(b=>b.setAttribute('aria-pressed',b.dataset.i==i));const im=$('#mImg');im.style.opacity=0;setTimeout(()=>{im.src='img/'+d.img;im.style.opacity=1},RM?0:200);$('#mTyp').textContent=d.tn;$('#mCity').textContent=d.c;$('#mF').textContent=d.f;$('#mM').textContent=d.m;$('#mY').textContent=d.y};
 pinsEl.forEach(b=>b.addEventListener('click',()=>showPin(+b.dataset.i)));
 $$('.mfil button').forEach(f=>f.addEventListener('click',()=>{press($('.mfil'),f);const t=f.dataset.f;let first=null;pinsEl.forEach(b=>{const on=t==='alle'||b.dataset.t===t;b.classList.toggle('off',!on);b.disabled=!on;if(on&&first===null)first=+b.dataset.i});if(first!==null)showPin(first)}));
 showPin(0);
-
-/* Zielgruppen Hover-Bild */
-const hov=$('#hov'),himgs=$$('img',hov);
-if(matchMedia('(hover:hover) and (min-width:901px)').matches&&!RM){
-  let x=0,y=0,cx=0,cy=0,raf;
-  const loop=()=>{cx+=(x-cx)*.16;cy+=(y-cy)*.16;hov.style.left=cx+'px';hov.style.top=cy+'px';raf=requestAnimationFrame(loop)};
-  $$('#tl button').forEach(b=>{
-    b.addEventListener('mouseenter',e=>{x=cx=e.clientX+180;y=cy=e.clientY-20;himgs.forEach((im,i)=>im.classList.toggle('on',i==b.dataset.img));hov.classList.add('on');cancelAnimationFrame(raf);loop()});
-    b.addEventListener('mousemove',e=>{x=e.clientX+180;y=e.clientY-20});
-    b.addEventListener('mouseleave',()=>{hov.classList.remove('on');setTimeout(()=>cancelAnimationFrame(raf),400)});
-  });
-}
-
-
 
 /* ============ FUNNEL ============ */
 const fn=$('#fn'),panes=$$('.pane',fn),N=6;
