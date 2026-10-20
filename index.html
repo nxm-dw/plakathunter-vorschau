@@ -152,10 +152,10 @@ p{text-wrap:pretty}
 .hbg .glow{position:absolute;right:-8%;top:-18%;width:70vw;height:70vw;max-width:1100px;max-height:1100px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,181,71,.28),rgba(255,181,71,.08) 45%,transparent 70%)}
 .hbg .trail{position:absolute;left:-30%;bottom:22%;width:60%;height:2px;background:linear-gradient(90deg,transparent,var(--sodium),transparent);opacity:.7;animation:tr 2.6s .6s var(--ease) forwards;transform:translateX(0)}
 @keyframes tr{to{transform:translateX(260%);opacity:0}}
-.hin{flex:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(48px,6vw,120px);align-items:center;padding-top:calc(env(safe-area-inset-top,0px) + 176px);padding-bottom:64px;width:100%}
+.hin{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,6vw,120px);align-items:center;padding-top:calc(env(safe-area-inset-top,0px) + 176px);padding-bottom:64px;width:100%}
 .hk{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:24px}
 .hk span:first-child{color:var(--sodium)}
-.hero h1{font-size:clamp(40px,4.6vw,66px);position:relative}
+.hero h1{font-size:clamp(40px,4.1vw,62px);position:relative}
 .hero h1 .ln{display:block;overflow:hidden;padding:.08em 0 .02em;margin-top:-.08em;white-space:nowrap}
 .hero h1 .ln>span{display:block;transform:translateY(105%);animation:up 1s var(--ease) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}.hero h1 .ln:nth-child(3)>span{animation-delay:.24s}
@@ -186,37 +186,47 @@ p{text-wrap:pretty}
 .seg button{padding:8px 13px;font-size:.875rem;font-weight:600;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);transition:all .2s}
 .seg button:hover{box-shadow:inset 0 0 0 1.5px #fff}
 .seg button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:none}
-.hc{position:relative;margin:0;aspect-ratio:4/4.7;max-height:calc(100svh - 230px);width:100%;justify-self:end;border-radius:4px;overflow:hidden;box-shadow:0 50px 100px -40px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.12);opacity:0;transform:translateY(30px) scale(.98);animation:hcIn 1.2s .3s var(--ease) forwards}
+.hc{position:relative;margin:0;width:100%;justify-self:end;opacity:0;transform:translateY(30px);animation:hcIn 1.1s .25s var(--ease) forwards}
 @keyframes hcIn{to{opacity:1;transform:none}}
-.hc>img{width:100%;height:100%;object-fit:cover;object-position:72% 50%}
-.hc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,44,68,.25),rgba(1,44,68,0) 30%,rgba(1,44,68,0) 50%,rgba(1,44,68,.85))}
-.hc-tag{position:absolute;z-index:2;left:18px;top:18px;display:grid;gap:2px;background:rgba(1,44,68,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:12px 14px;border-radius:3px;border-left:3px solid var(--sodium);font-size:.875rem}
-.hc-tag .lbl{color:var(--sodium)}
-.hc-tag b{font-size:1rem}
-.hc-off{position:absolute;z-index:2;left:18px;right:18px;bottom:18px;display:grid;gap:8px}
-.of{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:3px;background:rgba(1,44,68,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);opacity:0;transform:translateY(16px);animation:ofIn .7s var(--ease) forwards}
-.of:nth-child(1){animation-delay:1.4s}.of:nth-child(2){animation-delay:2.1s}.of:nth-child(3){animation-delay:2.8s}
-@keyframes ofIn{to{opacity:1;transform:none}}
-.o-k{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:2px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
-.o-t{flex:1;min-width:0;font-size:.8125rem;line-height:1.3}
-.o-t b{display:block;font-size:.9375rem}
-.o-v{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:1.6rem;font-variant-numeric:tabular-nums}
-.of.best{background:#fff;color:var(--ink);border-color:#fff;position:relative}
-.of.best .o-k{background:var(--sodium);box-shadow:none}
-.o-b{position:absolute;right:12px;top:-11px;font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--sodium);color:var(--ink);padding:3px 8px;border-radius:2px}
-.hc-p{position:absolute;z-index:2;right:18px;top:18px;display:flex;align-items:center;gap:10px;background:#fff;color:var(--ink);padding:6px 14px 6px 6px;border-radius:3px;font-size:.8125rem;line-height:1.25}
-.hc-p b{display:block;font-size:.9375rem}
-.av2{width:38px;height:38px;border-radius:2px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:1.1rem}
+.hc-img{position:relative;aspect-ratio:3/2;border-radius:4px 4px 0 0;overflow:hidden;box-shadow:0 50px 100px -40px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.12);container-type:inline-size}
+.hc-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bbp{position:absolute;left:59.17%;top:34.88%;width:32.25%;height:32.75%;overflow:hidden;background:var(--night);box-shadow:0 0 2.2cqw .6cqw rgba(255,226,170,.35)}
+.bbp:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,236,200,.22),rgba(255,236,200,0) 40%),radial-gradient(ellipse at 50% -10%,rgba(255,240,210,.25),transparent 60%);pointer-events:none}
+.bbp-in{position:absolute;inset:0;padding:2.2cqw 2.4cqw;display:flex;flex-direction:column;justify-content:space-between}
+.bbp-t{display:flex;justify-content:space-between;align-items:center;gap:1cqw}
+.bbp-t img{height:2.4cqw;width:auto}
+.bbp-t span{font-size:1.25cqw;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.bbp-m{display:grid}
+.bbp-k{font-size:1.4cqw;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sodium)}
+.bbp-v{font-family:var(--disp);font-weight:820;font-stretch:62%;font-size:8.4cqw;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bbp-s{font-size:1.45cqw;font-weight:600}
+.bbp.pre{background:transparent;box-shadow:none}.bbp.pre .bbp-in,.bbp.pre:after{opacity:0}
+.bbp.best{background:var(--sodium);color:var(--ink)}
+.bbp.best .bbp-k{color:var(--ink)}
+.bbp .strips{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none;z-index:3}
+.bbp .strips i{background:#e9e4d8;transform:scaleY(0);transform-origin:top}
+.bbp.paste .strips i{animation:paste .9s var(--ease) both}
+.bbp.paste .strips i:nth-child(2){animation-delay:.05s}.bbp.paste .strips i:nth-child(3){animation-delay:.1s}.bbp.paste .strips i:nth-child(4){animation-delay:.15s}.bbp.paste .strips i:nth-child(5){animation-delay:.2s}.bbp.paste .strips i:nth-child(6){animation-delay:.25s}
+.bbp-v.fl{animation:flp .5s var(--ease)}
+.hc-cap{background:#fff;color:var(--ink);border-radius:0 0 4px 4px;padding:16px 18px 18px}
+.hc-off{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hc-off li{border-radius:3px;padding:10px 12px;box-shadow:inset 0 0 0 1.5px rgba(1,64,95,.18);display:grid;gap:2px;transition:background .4s,box-shadow .4s,color .4s}
+.hc-off li span{font-size:.75rem;font-weight:600}
+.hc-off li b{font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:1.5rem;line-height:1.05}
+.hc-off li.on{box-shadow:inset 0 0 0 2px var(--ink)}
+.hc-off li.best{background:var(--sodium);box-shadow:none}
+.hc-cap p{display:flex;gap:16px;align-items:center;margin-top:14px;font-size:.875rem;line-height:1.4}
+.av2{flex:none;width:40px;height:40px;border-radius:2px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--disp);font-weight:820;font-stretch:64%;font-size:1.1rem}
 .hstats{border-top:1px solid var(--dl);position:relative;background:rgba(1,44,68,.5)}
 .hstats .w{display:grid;grid-template-columns:repeat(4,1fr)}
 .hstats div.s{padding:22px 0 24px 24px;border-left:1px solid var(--dl)}
 .hstats div.s:first-child{border-left:0;padding-left:0}
 .hstats .n{display:block;font-family:var(--disp);font-weight:820;font-stretch:66%;font-size:clamp(30px,2.8vw,42px);line-height:1.04}
 .hstats .lbl{margin-top:6px;display:block}
-@media(max-width:1100px){.hin{grid-template-columns:1fr;padding-top:calc(env(safe-area-inset-top,0px) + 150px)}.hc{justify-self:stretch;aspect-ratio:16/10;max-height:none}}
+@media(max-width:1100px){.hin{grid-template-columns:1fr;padding-top:calc(env(safe-area-inset-top,0px) + 150px)}.hc{justify-self:stretch;max-width:720px}}
 @media(max-width:900px){.hin{padding-top:calc(env(safe-area-inset-top,0px) + 110px)}}
 @media(max-width:760px){.hstats .w{grid-template-columns:1fr 1fr}.hstats div.s:nth-child(3){border-left:0;padding-left:0}.hstats div.s{border-top:1px solid var(--dl)}.hstats div.s:nth-child(-n+2){border-top:0}}
-@media(max-width:600px){.hq{flex-direction:column;gap:6px}.hq-in input{height:52px}.hq .btn{width:100%}.hq .btn>span{flex:1}.hc{aspect-ratio:4/5}.hc-p{display:none}.o-t{font-size:.75rem}.hero h1 .ln{white-space:normal}}
+@media(max-width:600px){.hq{flex-direction:column;gap:6px}.hq-in input{height:52px}.hq .btn{width:100%}.hq .btn>span{flex:1}.hero h1 .ln{white-space:normal}.hc-off li{padding:8px}.hc-off li b{font-size:1.2rem}.hc-off li span{font-size:.6875rem}}
 
 /* Ticker */
 .tick{background:var(--sodium);color:var(--ink);display:flex;align-items:stretch;overflow:hidden;position:relative}
@@ -704,6 +714,22 @@ body.lock{overflow:hidden}
 .tip h3{font-size:clamp(30px,3vw,44px);margin:10px 0 8px}
 .tip p.dim{max-width:56ch}
 
+/* Bildschwerpunkt: Werbefläche immer im Ausschnitt */
+img[src*="/detail/"]{object-position:50% 50%!important}
+img[src$="/Plakathunter-Slider_01.jpg"]{object-position:75% 50%}
+img[src$="/GF_Hauswand_02.jpg"]{object-position:88% 40%}
+img[src$="/grossflaeche_07.jpg"]{object-position:41% 32%}
+img[src$="/feld-werbetafel.jpg"]{object-position:30% 86%}
+img[src$="/projekt-geruestwerbung.jpg"]{object-position:40% 18%}
+img[src$="/CSB_04-scaled.jpg"]{object-position:42% 38%}
+img[src$="/Plakathunter-CSB_2.jpg"]{object-position:15% 30%}
+img[src$="/Plakathunter_videoboard_01.jpg"]{object-position:85% 52%}
+img[src$="/Plakathunter_GF_beleuchtet_01.jpg"]{object-position:20% 50%}
+img[src$="/Plakathunter_CSB_07.jpg"]{object-position:41% 28%}
+img[src$="/Plakathunter_GF_U-Schiene_02.jpg"]{object-position:40% 50%}
+img[src$="/Plakathunter_premium-billboard_02.jpg"]{object-position:20% 42%}
+img[src$="/Plakathunter-CSB_01.jpg"]{object-position:42% 25%}
+img[src$="/Plakathunter_grossflaeche.jpg"]{object-position:61% 45%}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.hero h1 .ln>span{transform:none}.tick .tr{animation:none}}
 </style>
 </head>
@@ -833,15 +859,25 @@ body.lock{overflow:hidden}
       </div>
       <p class="hq-f">Kostenfrei für Eigentümer. Sie hören innerhalb von 48 Stunden von uns.</p>
     </div>
-    <figure class="hc" aria-label="Beispiel: drei Angebote für eine Hauswand, das beste mit 2.950 Euro pro Jahr">
-      <img src="img/Plakathunter-Slider_01.jpg" alt="" fetchpriority="high">
-      <figcaption class="hc-tag"><span class="lbl">Beispiel</span><b>Hauswand · Mainz</b><span>Großfläche 18/1, beleuchtet</span></figcaption>
-      <div class="hc-off" aria-hidden="true">
-        <div class="of"><span class="o-k">A</span><span class="o-t"><b>Außenwerber A</b>Großfläche</span><span class="o-v">1.850 €</span></div>
-        <div class="of"><span class="o-k">B</span><span class="o-t"><b>Außenwerber B</b>beleuchtet</span><span class="o-v">2.300 €</span></div>
-        <div class="of best"><span class="o-k">C</span><span class="o-t"><b>Außenwerber C</b>Premium, 10 Jahre</span><span class="o-v">2.950 €</span><span class="o-b">Empfehlung</span></div>
+    <figure class="hc" aria-label="Beispiel: Beleuchtete Großfläche an einer Hauswand. Das Plakat zeigt die Angebote von drei Außenwerbern, das beste mit 2.950 Euro pro Jahr.">
+      <div class="hc-img">
+        <img src="img/Plakathunter-Slider_01.jpg" alt="" fetchpriority="high">
+        <div class="bbp pre" id="bbp" aria-hidden="true">
+          <div class="bbp-in">
+            <div class="bbp-t"><img src="img/PH-Logo-Eckig-weiss.png" alt=""></div>
+            <div class="bbp-m"><span class="bbp-k" id="bbK">Angebot A</span><span class="bbp-v" id="bbV">1.850 €</span><span class="bbp-s" id="bbS">pro Jahr</span></div>
+          </div>
+          <div class="strips"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
       </div>
-      <div class="hc-p" aria-hidden="true"><span class="av2">MW</span><span><b>Martin Weiss</b>verhandelt für Sie</span></div>
+      <figcaption class="hc-cap">
+        <ol class="hc-off" id="hcOff">
+          <li data-i="0"><span>Außenwerber A</span><b>1.850 €</b></li>
+          <li data-i="1"><span>Außenwerber B</span><b>2.300 €</b></li>
+          <li data-i="2"><span>Außenwerber C</span><b>2.950 €</b></li>
+        </ol>
+        <p><span class="av2" aria-hidden="true">MW</span><span><b>Beispiel aus Mainz.</b> Von fünf Außenwerbern bot C am meisten, 1.100 € mehr als das niedrigste Angebot.</span></p>
+      </figcaption>
     </figure>
   </div>
   <div class="hstats">
@@ -896,7 +932,7 @@ body.lock{overflow:hidden}
           <ol class="bsteps" aria-hidden="true"><li data-n="1"><span>1</span>Anfrage</li><li data-n="2"><span>2</span>Marktabfrage</li><li data-n="3"><span>3</span>Vergleich</li></ol>
           <div class="req">
             <div class="rq-t"><span class="lbl">Ihre Anfrage</span><strong>Hauswand · Mainz</strong><span>Großfläche 18/1 · Hauptstraße · 2 Fotos</span></div>
-            <div class="rq-ph" aria-hidden="true"><img src="img/GF_Hauswand_02.jpg" alt=""><img src="img/grossflaeche_07.jpg" alt=""></div>
+            <div class="rq-ph" aria-hidden="true"><img src="img/detail/GF_Hauswand_02.jpg" alt=""><img src="img/detail/grossflaeche_07.jpg" alt=""></div>
           </div>
           <div class="bbody">
             <div class="bexp" aria-hidden="true">
@@ -1001,10 +1037,10 @@ body.lock{overflow:hidden}
       <p class="dim rv d2">Die meisten Anfragen kommen von privaten Eigentümern. Immer öfter melden sich auch Bauträger, Hausverwaltungen <span class="nb">und Gemeinden.</span></p>
     </div>
     <ul class="tl" id="tl">
-      <li class="rv"><button type="button" data-open data-who="privat" data-img="0"><span class="nr" aria-hidden="true">01</span><span class="tt">Private Eigentümer</span><span class="th" aria-hidden="true"><img src="img/GF_Hauswand_02.jpg" alt="" loading="lazy"></span><span class="ds">Hauswand, Giebel oder Grundstück an einer belebten Straße. Vertraglich sauber geregelt, ohne <span class="nb">eigenen Aufwand.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="projekt" data-img="1"><span class="nr" aria-hidden="true">02<small>Neu</small></span><span class="tt">Projektentwicklung</span><span class="th" aria-hidden="true"><img src="img/projekt-baustelle-kran.jpg" alt="" loading="lazy"></span><span class="ds">Bauzaun, Gerüst und Zwischennutzung als zusätzlicher Ertrag in der Projektkalkulation, mit fest <span class="nb">geregeltem Rückbau.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="gewerbe" data-img="2"><span class="nr" aria-hidden="true">03</span><span class="tt">Gewerbe, Verwaltung</span><span class="th" aria-hidden="true"><img src="img/CSB_04-scaled.jpg" alt="" loading="lazy"></span><span class="ds">Märkte, Parkplätze, Fassaden. Ein Makler und ein Rahmenvertrag für <span class="nb">alle Objekte.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
-      <li class="rv"><button type="button" data-open data-who="kommune" data-img="3"><span class="nr" aria-hidden="true">04</span><span class="tt">Kommunen, Landwirte</span><span class="th" aria-hidden="true"><img src="img/feld-werbetafel.jpg" alt="" loading="lazy"></span><span class="ds">Ortseinfahrten, städtische Flächen und Äcker an Bundesstraßen, mit <span class="nb">transparentem Verfahren.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="privat" data-img="0"><span class="nr" aria-hidden="true">01</span><span class="tt">Private Eigentümer</span><span class="th" aria-hidden="true"><img src="img/detail/Plakathunter-Slider_01.jpg" alt="" loading="lazy"></span><span class="ds">Hauswand, Giebel oder Grundstück an einer belebten Straße. Vertraglich sauber geregelt, ohne <span class="nb">eigenen Aufwand.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="projekt" data-img="1"><span class="nr" aria-hidden="true">02<small>Neu</small></span><span class="tt">Projektentwicklung</span><span class="th" aria-hidden="true"><img src="img/detail/projekt-geruestwerbung.jpg" alt="" loading="lazy"></span><span class="ds">Bauzaun, Gerüst und Zwischennutzung als zusätzlicher Ertrag in der Projektkalkulation, mit fest <span class="nb">geregeltem Rückbau.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="gewerbe" data-img="2"><span class="nr" aria-hidden="true">03</span><span class="tt">Gewerbe, Verwaltung</span><span class="th" aria-hidden="true"><img src="img/detail/CSB_04-scaled.jpg" alt="" loading="lazy"></span><span class="ds">Märkte, Parkplätze, Fassaden. Ein Makler und ein Rahmenvertrag für <span class="nb">alle Objekte.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
+      <li class="rv"><button type="button" data-open data-who="kommune" data-img="3"><span class="nr" aria-hidden="true">04</span><span class="tt">Kommunen, Landwirte</span><span class="th" aria-hidden="true"><img src="img/detail/feld-werbetafel.jpg" alt="" loading="lazy"></span><span class="ds">Ortseinfahrten, städtische Flächen und Äcker an Bundesstraßen, mit <span class="nb">transparentem Verfahren.</span></span><span class="ar" aria-hidden="true"><svg width="22" height="22"><use href="#i-ar"/></svg></span></button></li>
     </ul>
   </div>
 </section>
@@ -1080,7 +1116,7 @@ body.lock{overflow:hidden}
           <p class="mleg" aria-hidden="true"><span><i class="lq"></i>Unser Sitz in Eppstein</span><span><i class="lp"></i>Vermittelter Standort</span></p>
         </div>
         <article class="mcard" id="mcard" aria-live="polite">
-          <div class="mim"><img id="mImg" src="img/projekt-baustelle-kran.jpg" alt=""></div>
+          <div class="mim"><img id="mImg" src="img/projekt-geruestwerbung.jpg" alt=""></div>
           <div class="mbd">
             <p class="lbl" id="mTyp">Projektentwicklung</p>
             <h3 class="cap" id="mCity">Gießen</h3>
@@ -1447,8 +1483,14 @@ const flap=$('#flap');
 const setWord=(w,anim)=>{flap.innerHTML=[...w].map((c,i)=>c===' '?' ':`<i${anim?` class="fl" style="animation-delay:${i*45}ms"`:''}>${c}</i>`).join('')};
 if(RM)setWord('Ihre Fläche',false);else{setWord('Ihre Hauswand',false);setTimeout(()=>setWord('Ihr Grundstück',true),1700);setTimeout(()=>setWord('Ihre Fläche',true),3300)}
 
+/* Hero: eigenes Plakat auf der echten Großfläche */
+const bbp=$('#bbp'),offLi=$$('#hcOff li');
+const OF=[['Angebot A','1.850 €','pro Jahr'],['Angebot B','2.300 €','pro Jahr'],['Bestes Angebot','2.950 €','pro Jahr, 10 Jahre Laufzeit']];
+const showOf=(i,anim)=>{const[k,v,t]=OF[i];$('#bbK').textContent=k;const V=$('#bbV');V.textContent=v;if(anim){V.classList.remove('fl');void V.offsetWidth;V.classList.add('fl')}$('#bbS').textContent=t;bbp.classList.toggle('best',i===2);offLi.forEach((l,j)=>{l.classList.toggle('on',j===i&&i<2);l.classList.toggle('best',j===2&&i===2)})};
+if(RM){bbp.classList.remove('pre');showOf(2,false)}else{showOf(0,false);setTimeout(()=>{bbp.classList.add('paste')},900);setTimeout(()=>bbp.classList.remove('pre'),1330);setTimeout(()=>showOf(1,true),2500);setTimeout(()=>showOf(2,true),3700)}
+
 /* Referenzkarte */
-const PINS=[{"c": "Gießen", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun, 24 Monate", "y": 2024, "img": "projekt-baustelle-kran.jpg", "m": "11.000 € gesamt", "x": 30.97, "yy": 63.15}, {"c": "Koblenz", "t": "privat", "tn": "Private Eigentümer", "f": "Giebelwand, beleuchtet", "y": 2022, "img": "Plakathunter-Slider_01.jpg", "m": "3.600 € pro Jahr", "x": 19.25, "yy": 59.99}, {"c": "Mannheim", "t": "gewerbe", "tn": "Gewerbe", "f": "City Star am Marktparkplatz", "y": 2023, "img": "CSB_04-scaled.jpg", "m": "3.100 € pro Jahr", "x": 28.71, "yy": 70.99}, {"c": "Würzburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Acker an der B 8", "y": 2023, "img": "feld-werbetafel.jpg", "m": "4.200 € pro Jahr", "x": 44.62, "yy": 67.2}, {"c": "Kassel", "t": "privat", "tn": "Private Eigentümer", "f": "Zwei Großflächen am Grundstück", "y": 2021, "img": "Plakathunter_GF_beleuchtet_01.jpg", "m": "5.800 € pro Jahr", "x": 39.68, "yy": 47.96}, {"c": "Köln", "t": "gewerbe", "tn": "Gewerbe", "f": "Großfläche an Tankstelle", "y": 2023, "img": "Plakathunter_CSB_07.jpg", "m": "3.900 € pro Jahr", "x": 12.47, "yy": 52.65}, {"c": "Münster", "t": "privat", "tn": "Private Eigentümer", "f": "Hauswand an Ausfallstraße", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "2.700 € pro Jahr", "x": 19.68, "yy": 39.74}, {"c": "Bremen", "t": "privat", "tn": "Private Eigentümer", "f": "Großfläche an Hauswand", "y": 2022, "img": "grossflaeche_07.jpg", "m": "2.400 € pro Jahr", "x": 32.26, "yy": 25.56}, {"c": "Hamburg", "t": "projekt", "tn": "Projektentwicklung", "f": "Gerüstwerbung, 18 Monate", "y": 2025, "img": "projekt-baustelle-kran.jpg", "m": "14.500 € gesamt", "x": 45.05, "yy": 19.62}, {"c": "Hannover", "t": "gewerbe", "tn": "Gewerbe", "f": "Parkplatz Fachmarkt", "y": 2024, "img": "CSB_04-scaled.jpg", "m": "3.300 € pro Jahr", "x": 42.26, "yy": 34.55}, {"c": "Berlin", "t": "privat", "tn": "Private Eigentümer", "f": "Brandwand, zwei Flächen", "y": 2025, "img": "GF_Hauswand_02.jpg", "m": "6.400 € pro Jahr", "x": 81.72, "yy": 32.65}, {"c": "Leipzig", "t": "kommune", "tn": "Kommune, Landwirt", "f": "City Star an Ortseinfahrt", "y": 2024, "img": "Plakathunter-CSB_01.jpg", "m": "2.900 € pro Jahr", "x": 70.65, "yy": 47.58}, {"c": "Nürnberg", "t": "privat", "tn": "Private Eigentümer", "f": "Grundstück an Hauptstraße", "y": 2023, "img": "Plakathunter_grossflaeche.jpg", "m": "2.200 € pro Jahr", "x": 56.77, "yy": 71.5}, {"c": "München", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun Wohnquartier", "y": 2025, "img": "projekt-baustelle-kran.jpg", "m": "9.800 € gesamt", "x": 62.15, "yy": 88.08}, {"c": "Stuttgart", "t": "gewerbe", "tn": "Gewerbe", "f": "Fassade Autohaus", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "4.600 € pro Jahr", "x": 36.34, "yy": 79.98}, {"c": "Freiburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Feldrand an der B 31", "y": 2025, "img": "feld-werbetafel.jpg", "m": "3.800 € pro Jahr", "x": 22.04, "yy": 89.98}];
+const PINS=[{"c": "Gießen", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun, 24 Monate", "y": 2024, "img": "projekt-geruestwerbung.jpg", "m": "11.000 € gesamt", "x": 30.97, "yy": 63.15}, {"c": "Koblenz", "t": "privat", "tn": "Private Eigentümer", "f": "Giebelwand, beleuchtet", "y": 2022, "img": "Plakathunter-Slider_01.jpg", "m": "3.600 € pro Jahr", "x": 19.25, "yy": 59.99}, {"c": "Mannheim", "t": "gewerbe", "tn": "Gewerbe", "f": "City Star am Marktparkplatz", "y": 2023, "img": "CSB_04-scaled.jpg", "m": "3.100 € pro Jahr", "x": 28.71, "yy": 70.99}, {"c": "Würzburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Acker an der B 8", "y": 2023, "img": "feld-werbetafel.jpg", "m": "4.200 € pro Jahr", "x": 44.62, "yy": 67.2}, {"c": "Kassel", "t": "privat", "tn": "Private Eigentümer", "f": "Zwei Großflächen am Grundstück", "y": 2021, "img": "Plakathunter_GF_beleuchtet_01.jpg", "m": "5.800 € pro Jahr", "x": 39.68, "yy": 47.96}, {"c": "Köln", "t": "gewerbe", "tn": "Gewerbe", "f": "Großfläche an Tankstelle", "y": 2023, "img": "Plakathunter_CSB_07.jpg", "m": "3.900 € pro Jahr", "x": 12.47, "yy": 52.65}, {"c": "Münster", "t": "privat", "tn": "Private Eigentümer", "f": "Hauswand an Ausfallstraße", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "2.700 € pro Jahr", "x": 19.68, "yy": 39.74}, {"c": "Bremen", "t": "privat", "tn": "Private Eigentümer", "f": "Großfläche an Hauswand", "y": 2022, "img": "grossflaeche_07.jpg", "m": "2.400 € pro Jahr", "x": 32.26, "yy": 25.56}, {"c": "Hamburg", "t": "projekt", "tn": "Projektentwicklung", "f": "Gerüstwerbung, 18 Monate", "y": 2025, "img": "projekt-geruestwerbung.jpg", "m": "14.500 € gesamt", "x": 45.05, "yy": 19.62}, {"c": "Hannover", "t": "gewerbe", "tn": "Gewerbe", "f": "Parkplatz Fachmarkt", "y": 2024, "img": "CSB_04-scaled.jpg", "m": "3.300 € pro Jahr", "x": 42.26, "yy": 34.55}, {"c": "Berlin", "t": "privat", "tn": "Private Eigentümer", "f": "Brandwand, zwei Flächen", "y": 2025, "img": "detail/GF_Hauswand_02.jpg", "m": "6.400 € pro Jahr", "x": 81.72, "yy": 32.65}, {"c": "Leipzig", "t": "kommune", "tn": "Kommune, Landwirt", "f": "City Star an Ortseinfahrt", "y": 2024, "img": "Plakathunter-CSB_01.jpg", "m": "2.900 € pro Jahr", "x": 70.65, "yy": 47.58}, {"c": "Nürnberg", "t": "privat", "tn": "Private Eigentümer", "f": "Grundstück an Hauptstraße", "y": 2023, "img": "Plakathunter_grossflaeche.jpg", "m": "2.200 € pro Jahr", "x": 56.77, "yy": 71.5}, {"c": "München", "t": "projekt", "tn": "Projektentwicklung", "f": "Bauzaun Wohnquartier", "y": 2025, "img": "projekt-geruestwerbung.jpg", "m": "9.800 € gesamt", "x": 62.15, "yy": 88.08}, {"c": "Stuttgart", "t": "gewerbe", "tn": "Gewerbe", "f": "Fassade Autohaus", "y": 2024, "img": "Plakathunter_premium-billboard_02.jpg", "m": "4.600 € pro Jahr", "x": 36.34, "yy": 79.98}, {"c": "Freiburg", "t": "kommune", "tn": "Kommune, Landwirt", "f": "Feldrand an der B 31", "y": 2025, "img": "feld-werbetafel.jpg", "m": "3.800 € pro Jahr", "x": 22.04, "yy": 89.98}];
 const pinsEl=$$('.mp');
 const showPin=i=>{const d=PINS[i];pinsEl.forEach(b=>b.setAttribute('aria-pressed',b.dataset.i==i));const im=$('#mImg');im.style.opacity=0;setTimeout(()=>{im.src='img/'+d.img;im.style.opacity=1},RM?0:200);$('#mTyp').textContent=d.tn;$('#mCity').textContent=d.c;$('#mF').textContent=d.f;$('#mM').textContent=d.m;$('#mY').textContent=d.y};
 pinsEl.forEach(b=>b.addEventListener('click',()=>showPin(+b.dataset.i)));
