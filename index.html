@@ -155,11 +155,11 @@ p{text-wrap:pretty}
 .hin{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,6vw,120px);align-items:center;padding-top:calc(env(safe-area-inset-top,0px) + 176px);padding-bottom:64px;width:100%}
 .hk{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:24px}
 .hk span:first-child{color:var(--sodium)}
-.hero h1{font-size:clamp(40px,4.1vw,62px);position:relative}
+.hero h1{font-size:clamp(48px,5.7vw,82px);position:relative}
 .hero h1 .ln{display:block;overflow:hidden;padding:.08em 0 .02em;margin-top:-.08em;white-space:nowrap}
 .hero h1 .ln>span{display:block;transform:translateY(105%);animation:up 1s var(--ease) forwards}
 .hero h1 .ln:nth-child(2)>span{animation-delay:.12s}.hero h1 .ln:nth-child(3)>span{animation-delay:.24s}
-.hero h1 .ln:nth-child(4){color:var(--sodium)}
+.hero h1 .ln:nth-child(2){color:var(--sodium)}
 .hero h1 .ln:nth-child(4)>span{animation-delay:.36s}
 @keyframes up{to{transform:none}}
 .flap{position:relative;display:inline-block;vertical-align:top}
@@ -836,13 +836,12 @@ img[src$="/Plakathunter_grossflaeche.jpg"]{object-position:61% 45%}
   
   <div class="w hin">
     <div class="hl">
-            <h1 id="h1" class="cap">
-        <span class="ln"><span>Wir vermieten</span></span>
-        <span class="ln"><span><span class="flap" aria-hidden="true"><span class="ghost">Ihr Grundstück</span><span class="fv" id="flap">Ihre Hauswand</span></span><span class="sr">Ihre Fläche</span></span></span>
-        <span class="ln"><span>an den Außenwerber,</span></span>
-        <span class="ln"><span>der am meisten zahlt.</span></span>
+            <p class="lbl hk"><span>Makler für Werbeflächen</span></p>
+      <h1 id="h1" class="cap">
+        <span class="ln"><span>Mehr Miete für</span></span>
+        <span class="ln"><span><span class="flap" aria-hidden="true"><span class="ghost">Ihr Grundstück.</span><span class="fv" id="flap">Ihre Hauswand.</span></span><span class="sr">Ihre Fläche.</span></span></span>
       </h1>
-      <p class="lead">Plakathunter ist Makler, nicht Mieter. Martin Weiss fragt für Ihren Standort bei mehreren Außenwerbern an, legt Ihnen die Angebote nebeneinander und verhandelt nach. Sie zahlen dafür <span class="nb">nichts.</span></p>
+      <p class="lead">Wir holen für Ihren Standort Angebote von mehreren Außenwerbern ein und verhandeln für Sie. Für Eigentümer <span class="nb">ist das kostenfrei.</span></p>
       <form class="hq" id="heroCheck" novalidate aria-label="Standort-Check starten">
         <label class="hq-in"><span class="sr">Adresse der Fläche</span><svg width="22" height="22" aria-hidden="true"><use href="#i-pin"/></svg><input type="text" name="adr" autocomplete="street-address" placeholder="Adresse Ihrer Fläche"></label>
         <button class="btn btn-s" type="submit"><span>Standort prüfen</span><b><svg aria-hidden="true"><use href="#i-ar"/></svg></b></button>
@@ -857,7 +856,7 @@ img[src$="/Plakathunter_grossflaeche.jpg"]{object-position:61% 45%}
           <button type="button" aria-pressed="false" data-v="Acker an Straße">Acker</button>
         </div>
       </div>
-      <p class="hq-f">Kostenfrei für Eigentümer. Sie hören innerhalb von 48 Stunden von uns.</p>
+      <p class="hq-f">Sie hören innerhalb von 48 Stunden von uns, an Werktagen.</p>
     </div>
     <figure class="hc" aria-label="Beispiel: Beleuchtete Großfläche an einer Hauswand. Das Plakat zeigt die Angebote von drei Außenwerbern, das beste mit 2.950 Euro pro Jahr.">
       <div class="hc-img">
@@ -1481,7 +1480,7 @@ const evalE=()=>{const n=ans.filter(a=>a!==null).length,sc=ans.reduce((a,b)=>a+(
 /* Fallblatt-Headline: Hauswand -> Grundstück -> Fläche, endet nach ca. 4 s */
 const flap=$('#flap');
 const setWord=(w,anim)=>{flap.innerHTML=[...w].map((c,i)=>c===' '?' ':`<i${anim?` class="fl" style="animation-delay:${i*45}ms"`:''}>${c}</i>`).join('')};
-if(RM)setWord('Ihre Fläche',false);else{setWord('Ihre Hauswand',false);setTimeout(()=>setWord('Ihr Grundstück',true),1700);setTimeout(()=>setWord('Ihre Fläche',true),3300)}
+if(RM)setWord('Ihre Fläche.',false);else{setWord('Ihre Hauswand.',false);setTimeout(()=>setWord('Ihr Grundstück.',true),1700);setTimeout(()=>setWord('Ihre Fläche.',true),3300)}
 
 /* Hero: eigenes Plakat auf der echten Großfläche */
 const bbp=$('#bbp'),offLi=$$('#hcOff li');
