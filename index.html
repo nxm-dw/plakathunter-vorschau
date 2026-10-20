@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plakathunter · Makler für Werbeflächen</title>
+<meta name="description" content="Plakathunter vermittelt Ihre Werbefläche an Außenwerber. Wir holen mehrere Angebote ein, verhandeln für Sie und begleiten bis zur ersten Miete. Für Eigentümer kostenfrei.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"LocalBusiness","name":"Plakathunter","description":"Makler für Werbeflächen: Vermittlung von Werbestandorten an Außenwerbeunternehmen","url":"https://www.plakathunter.de/","email":"kontakt@plakathunter.de","telephone":"+4915156145220","address":{"@type":"PostalAddress","streetAddress":"Hessenring 13.1","postalCode":"65817","addressLocality":"Eppstein","addressCountry":"DE"},"founder":{"@type":"Person","name":"Martin Weiss"},"areaServed":"DE"},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Was kostet mich die Vermittlung?","acceptedAnswer":{"@type":"Answer","text":"Nichts. Baugenehmigung, Aufbau, Wartung, Versicherung und Strom übernimmt der Vertragspartner aus der Außenwerbung."}},
+{"@type":"Question","name":"Wie viel Miete bringt eine Werbefläche?","acceptedAnswer":{"@type":"Answer","text":"Je Werbeträger zwischen 600 und 7.000 Euro im Jahr, abhängig von Lage, Sichtbarkeit, Verkehr und Format."}},
+{"@type":"Question","name":"Wie lange läuft ein Vertrag?","acceptedAnswer":{"@type":"Answer","text":"Mindestens fünf Jahre. Gekündigt wird mit sechs Monaten zum Vertragsende."}},
+{"@type":"Question","name":"Brauche ich eine Baugenehmigung?","acceptedAnswer":{"@type":"Answer","text":"Ja, in der Regel. Den Bauantrag stellt der Außenwerber, Sie unterschreiben nur die Zustimmung als Eigentümer."}},
+{"@type":"Question","name":"Welche Werbung kommt auf meine Fläche?","acceptedAnswer":{"@type":"Answer","text":"Sittenwidrige und politische Werbung ist vertraglich ausgeschlossen. Auf Wunsch auch Konkurrenzwerbung zu Ihrem eigenen Betrieb."}}
+]}]}
+</script>
+<style>
+:root{
+  --ink:#0A1C2E;
+  --navy:#0B3A63;
+  --blue:#1468AA;
+  --blue-2:#2A86CF;
+  --sky:#E7F0F8;
+  --paper:#F5F3EE;
+  --paper-2:#ECE8DF;
+  --white:#fff;
+  --muted:#53606C;
+  --line:rgba(10,28,46,.12);
+  --amber:#F2A900;
+  --ok:#1E8A5A;
+  --r:22px;
+  --r-s:14px;
+  --shadow:0 1px 2px rgba(10,28,46,.06),0 12px 40px -12px rgba(10,28,46,.25);
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --pad:clamp(20px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;font-variation-settings:"wdth" 100;color:var(--ink);background:var(--paper);font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.w{max-width:1320px;margin:0 auto;padding-inline:var(--pad)}
+h1,h2,h3,.disp{font-stretch:78%;font-weight:760;letter-spacing:-.018em;line-height:1.02;text-wrap:balance}
+p{text-wrap:pretty}
+.nb{white-space:nowrap}
+@media(max-width:380px){h1 .nb,h2 .nb{white-space:normal}}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.kicker:before{content:"";width:22px;height:2px;background:currentColor}
+.sec{padding-block:clamp(72px,10vw,140px)}
+.sec-h{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-h h2{font-size:clamp(34px,4.3vw,62px);margin-top:16px}
+.sec-h p{color:var(--muted);font-size:18px;max-width:46ch}
+@media(max-width:860px){.sec-h{grid-template-columns:1fr;gap:16px}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 26px;border-radius:999px;font-weight:650;font-size:16px;white-space:nowrap;transition:transform .25s var(--ease),background .25s,box-shadow .25s,color .25s}
+.btn svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-p{background:var(--navy);color:#fff;box-shadow:0 8px 24px -10px rgba(11,58,99,.7)}
+.btn-p:hover{background:var(--blue);transform:translateY(-1px)}
+.btn-a{background:var(--amber);color:var(--ink)}
+.btn-a:hover{background:#ffbb1f;transform:translateY(-1px)}
+.btn-g{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-g:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-w{background:#fff;color:var(--navy)}
+.btn-w:hover{background:var(--sky)}
+.btn-wg{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
+.btn-wg:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.link{display:inline-flex;align-items:center;gap:8px;font-weight:650;color:var(--navy);border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.link:hover{color:var(--blue)}
+
+/* Header */
+.hd{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s,box-shadow .3s,transform .4s var(--ease)}
+.hd.sc{background:rgba(245,243,238,.86);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);box-shadow:0 1px 0 var(--line)}
+.hd .w{display:flex;align-items:center;gap:28px;height:84px;transition:height .3s}
+.hd.sc .w{height:70px}
+.logo{flex:none;display:block}.logo img{height:34px;width:auto;max-width:none}
+.hd nav{display:flex;gap:4px;margin-left:12px}
+.hd nav a{padding:8px 10px;border-radius:999px;font-weight:550;font-size:15px;color:var(--ink);opacity:.82;white-space:nowrap;transition:background .2s,opacity .2s}
+.hd nav a:hover{opacity:1;background:rgba(10,28,46,.06)}
+.hd .sp{flex:1}
+.hd .tel{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;white-space:nowrap}
+.hd .tel small{display:block;font-size:12px;font-weight:500;color:var(--muted);line-height:1.1}
+.hd .tel b{display:block;line-height:1.2}
+.hd .tel .ic{width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line)}
+.hd .btn{height:46px;padding:0 20px;font-size:15px}
+.burger{display:none;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--line);place-items:center}
+@media(max-width:1440px){.hd .tel>span:last-child{display:none}}
+@media(max-width:1180px){.hd nav{display:none}.burger{display:grid}.hd .tel>span:last-child{display:block}}
+@media(max-width:720px){.hd .tel{display:none}.hd .btn{display:none}.logo img{height:28px}}
+
+/* Mobile menu */
+.mm{position:fixed;inset:0;z-index:60;background:var(--paper);padding:calc(env(safe-area-inset-top,0px) + 90px) var(--pad) 40px;display:flex;flex-direction:column;gap:6px;transform:translateY(-100%);transition:transform .5s var(--ease)}
+.mm.open{transform:none}
+.mm a.ml{font-stretch:78%;font-weight:720;font-size:34px;padding:8px 0;border-bottom:1px solid var(--line)}
+.mm .x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 20px);right:var(--pad);width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--line);display:grid;place-items:center}
+.mm .btn{margin-top:24px}
+
+/* Hero */
+.hero{position:relative;padding-top:calc(env(safe-area-inset-top,0px) + 112px);padding-bottom:clamp(40px,6vw,80px)}
+.hero-g{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,64px);align-items:center}
+.hero h1{font-size:clamp(40px,4.9vw,74px);margin:18px 0 20px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero .lead{font-size:clamp(18px,1.5vw,21px);color:var(--muted);max-width:40ch}
+.check{margin-top:34px;background:#fff;border-radius:999px;padding:8px;display:flex;gap:8px;box-shadow:var(--shadow);max-width:600px;position:relative}
+.check .in{flex:1;display:flex;align-items:center;gap:12px;padding-left:18px;min-width:0}
+.check .in svg{flex:none;color:var(--blue)}
+.check input{border:0;outline:0;background:none;width:100%;font-size:17px;height:52px;min-width:0}
+.check input::placeholder{color:#8a96a1}
+.check .btn{height:52px}
+.sugg{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:18px;box-shadow:var(--shadow);overflow:hidden;z-index:5}
+.sugg button{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px 18px;font-size:15px;border-top:1px solid var(--line)}
+.sugg button:first-child{border-top:0}
+.sugg button:hover,.sugg button.on{background:var(--sky)}
+.sugg small{color:var(--muted)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;font-size:15px;color:var(--muted)}
+.hero .meta span{display:inline-flex;align-items:center;gap:8px}
+.hero .meta svg{color:var(--ok)}
+.hero-v{position:relative;aspect-ratio:4/4.4;max-height:calc(100svh - 150px);width:100%;border-radius:28px;overflow:hidden;box-shadow:var(--shadow)}
+.hero-v>img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:kb 18s var(--ease) forwards}
+@keyframes kb{to{transform:scale(1)}}
+.hero-v:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,28,46,0) 50%,rgba(10,28,46,.55))}
+.offers{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;display:grid;gap:8px}
+.offer{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:12px 16px;opacity:0;transform:translateY(14px) scale(.98);transition:all .6s var(--ease)}
+.offer.in{opacity:1;transform:none}
+.offer .lg{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--sky);color:var(--navy);font-weight:800;font-size:15px;flex:none}
+.offer .t{flex:1;min-width:0;font-size:14px;line-height:1.3}
+.offer .t b{display:block;font-size:15px}
+.offer .t small{color:var(--muted)}
+.offer .v{font-stretch:80%;font-weight:760;font-size:20px;white-space:nowrap}
+.offer.best{background:#fff;box-shadow:0 0 0 2px var(--amber),0 10px 30px -10px rgba(0,0,0,.4)}
+.offer.best .lg{background:var(--amber);color:var(--ink)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--amber);color:var(--ink);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+.person{position:absolute;top:22px;left:22px;z-index:2;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:999px;padding:6px 16px 6px 6px;font-size:14px;line-height:1.25}
+.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue-2));color:#fff;display:grid;place-items:center;font-weight:750;font-stretch:85%;flex:none}
+.person b{display:block}
+.person small{color:var(--muted)}
+.live{position:absolute;top:30px;right:22px;z-index:2;display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:600;background:rgba(10,28,46,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px}
+.live i{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+@media(max-width:980px){.hero-g{grid-template-columns:1fr}.hero-v{aspect-ratio:4/3.6}}
+@media(max-width:560px){.check{flex-direction:column;border-radius:22px}.check .in{padding:0 8px 0 14px}.check .btn{width:100%}.hero-v{aspect-ratio:4/5}.live{display:none}.offer .t small{display:none}}
+
+/* Stats strip */
+.strip{border-block:1px solid var(--line);background:var(--paper)}
+.strip .w{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:30px 24px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat .n{font-stretch:75%;font-weight:760;font-size:clamp(34px,3.6vw,50px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.stat .l{font-size:15px;color:var(--muted);margin-top:8px}
+@media(max-width:860px){.strip .w{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0;padding-left:0}.stat{border-top:1px solid var(--line)}.stat:nth-child(-n+2){border-top:0}}
+
+/* Makler-Prinzip */
+.mk{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,80px);align-items:center}
+.steps{display:grid;gap:10px}
+.step{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:22px 24px;border-radius:var(--r);text-align:left;transition:background .3s,box-shadow .3s}
+.step .no{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-stretch:80%;font-weight:760;font-size:20px;box-shadow:inset 0 0 0 1.5px var(--line);transition:all .3s}
+.step h3{font-size:24px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:16px}
+.step.on{background:#fff;box-shadow:var(--shadow)}
+.step.on .no{background:var(--navy);color:#fff;box-shadow:none}
+.step .bar{grid-column:2;height:3px;border-radius:3px;background:var(--line);margin-top:14px;overflow:hidden;display:none}
+.step.on .bar{display:block}
+.step .bar i{display:block;height:100%;width:0;background:var(--blue)}
+.step.on .bar i{animation:fill 5s linear forwards}
+@keyframes fill{to{width:100%}}
+.dia{position:relative;background:var(--navy);border-radius:28px;aspect-ratio:1/0.9;overflow:hidden;color:#fff}
+.dia:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px}
+.dia svg.lines{position:absolute;inset:0;width:100%;height:100%}
+.dia .lines path{fill:none;stroke:rgba(255,255,255,.18);stroke-width:2}
+.dia .lines path.fl{stroke:var(--amber);stroke-width:2.5;stroke-dasharray:6 10;opacity:0;transition:opacity .4s}
+.dia[data-s="1"] .lines .p1,.dia[data-s="2"] .lines .p2,.dia[data-s="3"] .lines .p3{opacity:1;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-32}}
+.node{position:absolute;transform:translate(-50%,-32px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;font-size:14px;line-height:1.25;transition:all .5s var(--ease)}
+.node .c{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);transition:all .5s var(--ease)}
+.node b{font-weight:650}
+.node small{opacity:.65}
+.node.hub{transform:translate(-50%,-48px)}.node.hub .c{width:96px;height:96px;border-radius:26px;background:#fff}
+.node.hub .c img{width:62px}
+.dia[data-s="3"] .n-c .c{background:var(--amber);color:var(--ink);box-shadow:0 0 0 6px rgba(242,169,0,.25)}
+.dia[data-s="1"] .n-own .c{background:#fff;color:var(--navy)}
+.tag{position:absolute;transform:translate(-50%,-50%);font-size:12.5px;font-weight:650;background:#fff;color:var(--navy);padding:4px 10px;border-radius:999px;white-space:nowrap;opacity:0;transition:opacity .4s,transform .4s var(--ease)}
+.dia[data-s="2"] .tg2,.dia[data-s="3"] .tg3,.dia[data-s="1"] .tg1{opacity:1}
+.tg3{background:var(--amber)!important;color:var(--ink)!important}
+.dia .cap{position:absolute;left:24px;right:24px;bottom:20px;font-size:14px;opacity:.75;text-align:center}
+@media(max-width:980px){.mk{grid-template-columns:1fr}.dia{order:-1}}
+@media(max-width:560px){.dia{aspect-ratio:1/1.05}.node{font-size:12px}.node .c{width:48px;height:48px;border-radius:14px}.node.hub .c{width:72px;height:72px}.node.hub .c img{width:46px}.node small{display:none}.node{transform:translate(-50%,-24px)}.node.hub{transform:translate(-50%,-36px)}}
+
+/* Rechner */
+.calc{background:#fff;border-radius:32px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
+.calc .l{padding:clamp(26px,4vw,56px)}
+.calc .r{background:var(--ink);color:#fff;padding:clamp(26px,4vw,56px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.calc .r:before{content:"";position:absolute;width:520px;height:520px;right:-200px;top:-220px;border-radius:50%;background:radial-gradient(closest-side,rgba(42,134,207,.55),transparent)}
+.calc h2{font-size:clamp(32px,3.6vw,50px);margin:14px 0 30px}
+.q{margin-bottom:26px}
+.q>label,.q>.lb{display:block;font-weight:650;font-size:15px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:11px 18px;border-radius:999px;font-size:15px;font-weight:550;box-shadow:inset 0 0 0 1.5px var(--line);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.chip:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.chip.on{background:var(--navy);color:#fff;box-shadow:none}
+.chip svg{width:18px;height:18px}
+.range{display:flex;align-items:center;gap:16px}
+.range input{flex:1;accent-color:var(--navy);height:28px}
+.range output{font-weight:700;min-width:3ch}
+.res{position:relative;margin-top:auto}
+.res .lb{font-size:14px;opacity:.7;margin-bottom:8px}
+.res .big{font-stretch:70%;font-weight:760;font-size:clamp(40px,4.1vw,58px);line-height:.95;letter-spacing:-.025em}
+.res .big small{font-size:.38em;font-stretch:90%;font-weight:550;opacity:.75;letter-spacing:0;display:block;margin-top:10px}
+.res .five{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:16px;font-size:15px}
+.res .five b{font-size:20px;font-stretch:85%}
+.meter{position:relative;height:10px;border-radius:10px;background:rgba(255,255,255,.12);margin:26px 0 10px}
+.meter i{position:absolute;top:0;bottom:0;border-radius:10px;background:linear-gradient(90deg,var(--blue-2),var(--amber));transition:left .6s var(--ease),right .6s var(--ease)}
+.meter-l{display:flex;justify-content:space-between;font-size:12.5px;opacity:.6}
+.calc .r .btn{margin-top:30px;align-self:flex-start;position:relative}
+.calc .r .fine{font-size:13px;opacity:.55;margin-top:16px;position:relative}
+@media(max-width:980px){.calc{grid-template-columns:1fr}}
+
+/* Zielgruppen */
+.tg-g{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{position:relative;border-radius:var(--r);overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .im{aspect-ratio:4/3.1;overflow:hidden;position:relative}
+.card .im img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.card:hover .im img{transform:scale(1.06)}
+.card .im .new{position:absolute;top:14px;left:14px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--amber);padding:4px 10px;border-radius:999px}
+.card .bd{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:25px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15.5px;flex:1}
+.card .go{margin-top:18px;display:flex;align-items:center;justify-content:space-between;font-weight:650;font-size:15px;color:var(--navy)}
+.card .go span.ar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--line);transition:all .3s}
+.card:hover .go span.ar{background:var(--navy);color:#fff;box-shadow:none}
+@media(max-width:1100px){.tg-g{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.tg-g{grid-template-columns:1fr}}
+
+/* Konditionen */
+.dark{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.dark .kicker{color:#8cc4ee}
+.dark .sec-h p{color:rgba(255,255,255,.66)}
+.kd{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.12);border-radius:var(--r);overflow:hidden}
+.kd>div{background:var(--ink);padding:34px 28px}
+.kd .n{font-stretch:70%;font-weight:760;white-space:nowrap;font-size:clamp(38px,3.5vw,50px);line-height:1;letter-spacing:-.02em}
+.kd .n sup{font-size:.45em;vertical-align:.9em;margin-left:2px}
+.kd h3{font-size:20px;margin:16px 0 6px;font-stretch:90%}
+.kd p{font-size:15px;color:rgba(255,255,255,.62)}
+.incl{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 40px;margin-top:56px}
+.incl li{list-style:none;display:flex;gap:14px;align-items:flex-start;font-size:16.5px;color:rgba(255,255,255,.85)}
+.incl li svg{flex:none;color:var(--amber);margin-top:3px}
+.dark-bg{position:absolute;right:-8%;top:-10%;width:60%;opacity:.07;pointer-events:none}
+@media(max-width:980px){.kd{grid-template-columns:1fr 1fr}.incl{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.kd{grid-template-columns:1fr}.incl{grid-template-columns:1fr}}
+
+/* Ablauf */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative;counter-reset:s}
+.tl:before{content:"";position:absolute;left:0;right:0;top:27px;height:2px;background:var(--line)}
+.tl .pr{position:absolute;left:0;top:27px;height:2px;background:var(--navy);width:0;transition:width 1.6s var(--ease)}
+.tl.vis .pr{width:100%}
+.tl>div.it{position:relative}
+.tl .dot{width:56px;height:56px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 2px var(--navy);display:grid;place-items:center;font-weight:760;font-stretch:80%;font-size:19px;color:var(--navy);position:relative;transition:background .4s,color .4s}
+.tl.vis .dot{background:var(--navy);color:#fff}
+.tl .who{display:inline-block;margin:22px 0 10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--sky);color:var(--navy)}
+.tl .who.you{background:var(--amber);color:var(--ink)}
+.tl h3{font-size:24px;margin-bottom:8px}
+.tl p{color:var(--muted);font-size:15.5px}
+.tl .d{margin-top:12px;font-size:14px;font-weight:600;color:var(--ink)}
+@media(max-width:980px){.tl{grid-template-columns:1fr 1fr;row-gap:40px}.tl:before,.tl .pr{display:none}}
+@media(max-width:560px){.tl{grid-template-columns:1fr}}
+
+/* Referenzen */
+.refs{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:auto auto;gap:18px}
+.ref{position:relative;border-radius:var(--r);overflow:hidden;min-height:260px;color:#fff}
+.ref img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.ref:hover img{transform:scale(1.05)}
+.ref:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,28,46,.85))}
+.ref .cp{position:absolute;left:20px;right:20px;bottom:18px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:14px}
+.ref .cp b{display:block;font-size:18px;font-stretch:88%}
+.ref .cp .y{font-size:13px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.ref.big{grid-row:span 2;min-height:540px}
+.quote{background:#fff;border-radius:var(--r);padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.quote blockquote{font-size:20px;line-height:1.4;font-stretch:92%;font-weight:450}
+.quote .who{display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.3}
+.quote .who small{color:var(--muted)}
+.stars{color:var(--amber);letter-spacing:2px;font-size:16px}
+@media(max-width:980px){.refs{grid-template-columns:1fr 1fr}.ref.big{grid-column:span 2;grid-row:auto;min-height:380px}}
+@media(max-width:560px){.refs{grid-template-columns:1fr}.ref.big{grid-column:auto;min-height:300px}}
+
+/* Persönlich */
+.pers{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,5vw,80px);align-items:center}
+.ph{position:relative;aspect-ratio:4/4.6;border-radius:28px;overflow:hidden;background:var(--paper-2)}
+.ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
+.ph .ov{position:absolute;inset:0;background:linear-gradient(160deg,rgba(11,58,99,.82),rgba(10,28,46,.94)),repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.05) 39px 40px)}
+.ph .mono{position:absolute;inset:0;display:grid;place-items:center;font-stretch:62%;font-weight:800;font-size:clamp(140px,18vw,260px);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.35);padding-bottom:70px}
+.ph .note{position:absolute;left:20px;top:20px;font-size:12.5px;font-weight:650;background:rgba(255,255,255,.9);padding:6px 12px;border-radius:999px}
+.ph .card2{position:absolute;left:20px;right:20px;bottom:20px;background:#fff;border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px}
+.ph .card2 b{display:block;font-size:17px}
+.ph .card2 small{color:var(--muted);font-size:14px}
+.ph .card2 .av{width:52px;height:52px;font-size:18px}
+.pers blockquote{font-size:clamp(26px,2.8vw,38px);line-height:1.18;font-stretch:84%;font-weight:600;letter-spacing:-.01em;margin:22px 0 26px;text-wrap:balance}
+.pers p.t{color:var(--muted);font-size:18px;max-width:52ch}
+.contact{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.contact a,.contact button{background:#fff;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px;text-align:left;transition:transform .3s var(--ease),box-shadow .3s}
+.contact a:hover,.contact button:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.contact .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--sky);color:var(--navy)}
+.contact b{font-size:16px}
+.contact small{color:var(--muted);font-size:13.5px;line-height:1.35}
+@media(max-width:980px){.pers{grid-template-columns:1fr}.ph{aspect-ratio:4/3.4}}
+@media(max-width:560px){.contact{grid-template-columns:1fr}.ph{aspect-ratio:4/4.4}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,80px)}
+.faq h2{font-size:clamp(34px,4vw,56px);margin-top:16px}
+.faq .side p{color:var(--muted);margin-top:18px;max-width:36ch}
+.faq .side .btn{margin-top:28px}
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:clamp(19px,1.6vw,22px);font-weight:650;font-stretch:90%;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary .pl{flex:none;width:40px;height:40px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);display:grid;place-items:center;transition:transform .35s var(--ease),background .3s}
+details[open] summary .pl{transform:rotate(45deg);background:var(--navy);color:#fff;box-shadow:none}
+details .a{padding:0 60px 26px 0;color:var(--muted);font-size:17px;max-width:62ch}
+@media(max-width:860px){.faq{grid-template-columns:1fr}}
+
+/* CTA */
+.cta{position:relative;border-radius:36px;overflow:hidden;color:#fff;padding:clamp(40px,7vw,100px) clamp(24px,6vw,90px);background:var(--navy)}
+.cta>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+.cta:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,58,99,.96) 30%,rgba(11,58,99,.5))}
+.cta .in2{position:relative;z-index:2;max-width:720px}
+.cta h2{font-size:clamp(36px,4.6vw,66px);margin:16px 0 18px}
+.cta p{font-size:19px;opacity:.82;max-width:48ch}
+.cta .kicker{color:#a9d4f5}
+.cta .check{margin-top:32px}
+.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+
+/* Footer */
+.ft{background:var(--ink);color:rgba(255,255,255,.7);padding:80px 0 calc(40px + env(safe-area-inset-bottom,0px));margin-top:clamp(72px,10vw,140px);font-size:15px}
+.ft-g{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.ft img{height:32px;width:auto;margin-bottom:20px}
+.ft h4{color:#fff;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;font-weight:650}
+.ft ul{list-style:none;display:grid;gap:9px}
+.ft a:hover{color:#fff}
+.ft .bt{margin-top:60px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:13.5px}
+@media(max-width:860px){.ft-g{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ft-g{grid-template-columns:1fr}.ft a{overflow-wrap:anywhere}}
+
+/* Mobile bar */
+.mbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;display:none;gap:8px;padding:8px;border-radius:999px;background:rgba(10,28,46,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px -8px rgba(0,0,0,.5);transform:translateY(140%);transition:transform .5s var(--ease)}
+.mbar.show{transform:none}
+.mbar .btn{flex:1;height:50px}
+.mbar a.ic{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff;flex:none}
+@media(max-width:720px){.mbar{display:flex}}
+
+/* Draft badge */
+.draft{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;font-size:12px;font-weight:600;background:#fff;color:var(--muted);padding:7px 12px;border-radius:999px;box-shadow:var(--shadow)}
+.draft b{color:var(--navy)}
+@media(max-width:720px){.draft{display:none}}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* ============ FUNNEL ============ */
+.fn{position:fixed;inset:0;z-index:100;display:grid;grid-template-columns:minmax(0,1fr) 420px;background:var(--paper);opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.fn.open{opacity:1;visibility:visible}
+body.lock{overflow:hidden}
+.fn-m{display:flex;flex-direction:column;min-height:0;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 22px) clamp(20px,5vw,72px) calc(28px + env(safe-area-inset-bottom,0px))}
+.fn-top{display:flex;align-items:center;gap:20px}
+.fn-top img{height:28px}
+.fn-top .sp{flex:1}
+.fn-x{width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--line);display:grid;place-items:center;flex:none}
+.prog{margin-top:30px;display:flex;align-items:center;gap:16px}
+.prog .tr{flex:1;height:6px;background:rgba(10,28,46,.08);border-radius:6px;overflow:hidden}
+.prog .tr i{display:block;height:100%;width:20%;background:var(--navy);border-radius:6px;transition:width .6s var(--ease)}
+.prog span{font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap}
+.pane-w{flex:1;position:relative;margin-top:clamp(28px,5vh,56px);max-width:860px;width:100%}
+.pane{display:none;animation:pin .55s var(--ease)}
+.pane.on{display:block}
+.pane.back{animation:pinb .55s var(--ease)}
+@keyframes pin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes pinb{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+.pane h2{font-size:clamp(30px,3.4vw,46px);margin:12px 0 10px}
+.pane .sub{color:var(--muted);font-size:18px;max-width:56ch;margin-bottom:28px}
+.fn .check{margin-top:0;max-width:none;border-radius:20px}
+.map{height:clamp(240px,38vh,400px);border-radius:22px;overflow:hidden;margin-top:16px;background:var(--paper-2);position:relative;box-shadow:inset 0 0 0 1px var(--line)}
+.map .ph0{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:15px;padding:20px;z-index:1}
+.map .hint{position:absolute;left:12px;right:auto;max-width:calc(100% - 24px);top:12px;z-index:500;background:rgba(255,255,255,.94);padding:8px 14px;border-radius:999px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow)}
+.leaflet-container{font:inherit}
+.pin{width:46px;height:46px;transform:translate(-4px,-30px)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{position:relative;background:#fff;border-radius:20px;padding:22px 20px;text-align:left;display:flex;flex-direction:column;gap:12px;box-shadow:inset 0 0 0 1.5px transparent;transition:all .25s var(--ease)}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tile .ic{width:52px;height:52px;border-radius:14px;background:var(--sky);color:var(--navy);display:grid;place-items:center;transition:all .25s}
+.tile b{font-size:18px;font-stretch:90%;font-weight:680}
+.tile small{color:var(--muted);font-size:14px;line-height:1.35}
+.tile.on{box-shadow:inset 0 0 0 2px var(--navy),var(--shadow)}
+.tile.on .ic{background:var(--navy);color:#fff}
+.tile .ck{position:absolute;top:16px;right:16px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;transform:scale(0);transition:transform .3s var(--ease)}
+.tile.on .ck{transform:scale(1)}
+@media(max-width:760px){.tiles{grid-template-columns:1fr 1fr}.tile{padding:16px}.tile small{display:none}}
+.qrow{margin-top:28px}
+.qrow .lb{font-weight:650;margin-bottom:12px;display:block}
+.drop{border:2px dashed rgba(10,28,46,.2);border-radius:22px;padding:34px 24px;text-align:center;background:#fff;transition:all .2s;cursor:pointer;display:block}
+.drop:hover,.drop.ov{border-color:var(--navy);background:var(--sky)}
+.drop .ic{width:60px;height:60px;border-radius:50%;background:var(--sky);color:var(--navy);display:grid;place-items:center;margin:0 auto 14px}
+.drop b{display:block;font-size:18px}
+.drop small{color:var(--muted)}
+.thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.thumbs div{width:96px;height:96px;border-radius:14px;overflow:hidden;position:relative;animation:pin .4s var(--ease)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.tips div{display:flex;gap:10px;font-size:14px;color:var(--muted);align-items:flex-start}
+.tips svg{flex:none;color:var(--ok);margin-top:2px}
+@media(max-width:760px){.tips{grid-template-columns:1fr}}
+.est{background:var(--ink);color:#fff;border-radius:24px;padding:26px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;position:relative;overflow:hidden;margin-bottom:28px}
+.est:before{content:"";position:absolute;width:300px;height:300px;right:-80px;top:-140px;border-radius:50%;background:radial-gradient(closest-side,rgba(42,134,207,.6),transparent)}
+.est .lb{font-size:14px;opacity:.7;position:relative}
+.est .v{font-stretch:72%;font-weight:760;font-size:clamp(36px,4vw,52px);line-height:1;position:relative;margin-top:6px}
+.est .v small{font-size:.4em;font-stretch:90%;font-weight:550;opacity:.7}
+.est .sm{position:relative;font-size:14px;opacity:.75;max-width:30ch;text-align:right}
+@media(max-width:620px){.est{grid-template-columns:1fr}.est .sm{text-align:left}}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{position:relative}
+.f input{width:100%;height:60px;border-radius:16px;border:0;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);padding:22px 18px 6px;font-size:16.5px;outline:0;transition:box-shadow .2s}
+.f input:focus{box-shadow:inset 0 0 0 2px var(--navy)}
+.f label{position:absolute;left:18px;top:19px;font-size:16px;color:#7b8792;pointer-events:none;transition:all .2s var(--ease)}
+.f input:focus+label,.f input:not(:placeholder-shown)+label{top:9px;font-size:12px;font-weight:600;color:var(--blue)}
+.f.err input{box-shadow:inset 0 0 0 2px #d14343}
+.f.full{grid-column:1/-1}
+@media(max-width:560px){.fg{grid-template-columns:1fr}}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted);margin-top:22px;cursor:pointer}
+.consent input{width:20px;height:20px;accent-color:var(--navy);flex:none;margin-top:1px}
+.fn-nav{display:flex;align-items:center;gap:14px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+.fn-nav .sp{flex:1}
+.fn-nav .bk{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--muted);padding:10px 4px}
+.fn-nav .bk:hover{color:var(--ink)}
+.fn-nav .btn[disabled]{opacity:.35;pointer-events:none}
+.kbd{font-size:13px;color:var(--muted)}
+.kbd kbd{font:inherit;font-weight:650;background:#fff;box-shadow:inset 0 0 0 1px var(--line);border-radius:6px;padding:1px 6px}
+@media(max-width:560px){.kbd{display:none}}
+.fn-s{background:var(--navy);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 34px) 36px 34px;display:flex;flex-direction:column;gap:26px;overflow:auto;position:relative}
+.fn-s:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.fn-s>*{position:relative}
+.fn-s .pc{display:flex;gap:14px;align-items:center}
+.fn-s .pc .av{width:60px;height:60px;font-size:20px;background:#fff;color:var(--navy)}
+.fn-s .pc b{display:block;font-size:18px}
+.fn-s .pc small{opacity:.7}
+.fn-s blockquote{font-size:19px;line-height:1.45;font-stretch:92%;opacity:.92}
+.sum{background:rgba(255,255,255,.08);border-radius:18px;padding:18px 20px;display:grid;gap:12px;font-size:14.5px}
+.sum h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;font-weight:650}
+.sum div{display:flex;justify-content:space-between;gap:16px}
+.sum div span{opacity:.65}
+.sum div b{text-align:right;font-weight:600}
+.sum div b.e{opacity:.35;font-weight:500}
+.fn-s ul{list-style:none;display:grid;gap:12px;font-size:15px}
+.fn-s li{display:flex;gap:12px;align-items:flex-start;opacity:.9}
+.fn-s li svg{flex:none;color:var(--amber);margin-top:3px}
+.fn-s .tel2{margin-top:auto;font-size:14px;opacity:.75}
+.fn-s .tel2 a{display:block;font-size:20px;font-weight:700;opacity:1;color:#fff;margin-top:4px}
+@media(max-width:1080px){.fn{grid-template-columns:1fr}.fn-s{display:none}}
+.done{text-align:left}
+.done .ok{width:86px;height:86px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;margin-bottom:26px;animation:pop .7s var(--ease)}
+@keyframes pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.08)}100%{transform:none;opacity:1}}
+.done .ok svg{stroke-dasharray:40;stroke-dashoffset:40;animation:draw .6s .3s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.next{display:grid;gap:0;margin-top:30px;max-width:640px}
+.next div{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+.next div:last-child{border-bottom:1px solid var(--line)}
+.next .n{width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);display:grid;place-items:center;font-weight:700}
+.next div.cur .n{background:var(--ok);color:#fff;box-shadow:none}
+.next b{display:block}
+.next small{color:var(--muted)}
+.next .when{font-size:14px;font-weight:600;color:var(--navy);white-space:nowrap}
+.vg{display:inline-flex;gap:10px;align-items:center;margin-top:20px;background:#fff;padding:10px 16px;border-radius:999px;font-size:14px;box-shadow:inset 0 0 0 1px var(--line)}
+.vg b{font-feature-settings:"tnum";letter-spacing:.04em}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path d="M5 4h3.5l1.7 4.3-2.2 1.4a11 11 0 0 0 6.3 6.3l1.4-2.2L20 15.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.8L4 20z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a3.5 3.5 0 0 1-1.8-1.8l.8-1-1-2L9 9.5z" fill="currentColor"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-wall" viewBox="0 0 24 24"><path d="M4 20V8l8-5 8 5v12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="7.5" y="9.5" width="9" height="6" rx="1" fill="currentColor" opacity=".9"/></symbol>
+    <symbol id="i-lot" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 13v7M15 13v7M3 20h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-fence" viewBox="0 0 24 24"><path d="M3 7h18M3 17h18M5 4v16M10 4v16M14 4v16M19 4v16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 4l5 6M14 10l5 6" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".6"/></symbol>
+    <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9M4 9h16v11H4zM4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-field" viewBox="0 0 24 24"><path d="M3 19c4-3 14-3 18 0M5 15c3-2 11-2 14 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="4" width="8" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10v3" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="18" cy="12" r="1.8" fill="currentColor"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-crane" viewBox="0 0 24 24"><path d="M6 21V4h2v17M3 21h9M8 5h13l-3 3M8 5l4 4M16 5v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="14.5" y="11" width="3" height="3" fill="currentColor"/></symbol>
+    <symbol id="i-keys" viewBox="0 0 24 24"><path d="M3 21V9l6-4 6 4v12M15 21V12h6v9M3 21h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 12h4M7 16h4" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-town" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6M12 5V2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- Header -->
+<header class="hd" id="hd">
+  <div class="w">
+    <a href="#top" class="logo" aria-label="Plakathunter Startseite"><img src="img/PH-Logo_Eckig.png" alt="Plakathunter out of home media" width="707" height="114"></a>
+    <nav aria-label="Hauptmenü">
+      <a href="#zielgruppen">Für Eigentümer</a>
+      <a href="#zielgruppen">Projektentwicklung</a>
+      <a href="#zielgruppen">Kommunen</a>
+      <a href="#prinzip">So arbeiten wir</a>
+      <a href="#faq">Ratgeber</a>
+      <a href="#martin">Über uns</a>
+    </nav>
+    <div class="sp"></div>
+    <a class="tel" href="tel:+4915156145220"><span class="ic"><svg width="18" height="18"><use href="#i-tel"/></svg></span><span><small>Martin Weiss direkt</small><b>0151 561 452 20</b></span></a>
+    <button class="btn btn-p" data-open>Standort prüfen <svg><use href="#i-ar"/></svg></button>
+    <button class="burger" id="burger" aria-label="Menü öffnen"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<div class="mm" id="mm" aria-hidden="true">
+  <button class="x" id="mmx" aria-label="Menü schließen"><svg width="22" height="22"><use href="#i-x"/></svg></button>
+  <a class="ml" href="#zielgruppen">Für Eigentümer</a>
+  <a class="ml" href="#zielgruppen">Projektentwicklung</a>
+  <a class="ml" href="#zielgruppen">Kommunen</a>
+  <a class="ml" href="#prinzip">So arbeiten wir</a>
+  <a class="ml" href="#faq">Ratgeber</a>
+  <a class="ml" href="#martin">Über uns</a>
+  <button class="btn btn-p" data-open>Standort prüfen <svg><use href="#i-ar"/></svg></button>
+  <a class="btn btn-g" href="tel:+4915156145220"><svg><use href="#i-tel"/></svg> 0151 561 452 20</a>
+</div>
+
+<main id="top">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="w hero-g">
+    <div>
+      <span class="kicker rv">Makler für Werbeflächen</span>
+      <h1 class="rv d1">Mehr Miete für Ihre <span class="nb">Fläche.</span><br> Mit einem Makler an <em class="nb">Ihrer Seite.</em></h1>
+      <p class="lead rv d2">Wir prüfen Ihren Standort, holen Angebote mehrerer Außenwerber ein und verhandeln für Sie. Für Eigentümer <span class="nb">komplett kostenfrei.</span></p>
+      <form class="check rv d3" data-check autocomplete="off">
+        <label class="in"><svg width="22" height="22"><use href="#i-pin"/></svg><input type="text" name="adr" placeholder="Straße und Ort Ihrer Fläche" aria-label="Adresse Ihrer Fläche"></label>
+        <button class="btn btn-p" type="submit">Standort prüfen <svg><use href="#i-ar"/></svg></button>
+      </form>
+      <div class="meta rv d3">
+        <span><svg width="18" height="18"><use href="#i-ck"/></svg>Ersteinschätzung in 2 Minuten</span>
+        <span><svg width="18" height="18"><use href="#i-ck"/></svg>Unverbindlich</span>
+        <span><svg width="18" height="18"><use href="#i-ck"/></svg>Rückruf am selben Werktag</span>
+      </div>
+    </div>
+    <div class="hero-v rv d2">
+      <img src="img/Plakathunter-Slider_01.jpg" alt="Beleuchtete Großfläche an einer Hauswand in der Abenddämmerung" fetchpriority="high">
+      <div class="person"><span class="av">MW</span><span><b>Martin Weiss</b><small>verhandelt für Sie</small></span></div>
+      <div class="live"><i></i>Angebote laufen ein</div>
+      <div class="offers" id="offers">
+        <div class="offer"><span class="lg">A</span><span class="t"><b>Außenwerber A</b><small>Großfläche, unbeleuchtet</small></span><span class="v">1.850 €</span></div>
+        <div class="offer"><span class="lg">B</span><span class="t"><b>Außenwerber B</b><small>Großfläche, beleuchtet</small></span><span class="v">2.300 €</span></div>
+        <div class="offer"><span class="lg">C</span><span class="t"><b>Außenwerber C <span class="badge">Bestes Angebot</span></b><small>Premium, beleuchtet, 10 Jahre</small></span><span class="v">2.950 €</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Zahlen -->
+<div class="strip">
+  <div class="w">
+    <div class="stat rv"><div class="n" data-count="780">0</div><div class="l">Werbeflächen vermittelt</div></div>
+    <div class="stat rv d1"><div class="n"><span data-count="570" >0</span>.000 €</div><div class="l">Miete pro Jahr an Eigentümer</div></div>
+    <div class="stat rv d2"><div class="n">0 €</div><div class="l">Kosten für Sie, immer</div></div>
+    <div class="stat rv d3"><div class="n">bis <span data-count="7000" data-fmt="1">0</span> €</div><div class="l">Jahresmiete je Werbeträger</div></div>
+  </div>
+</div>
+
+<!-- Makler-Prinzip -->
+<section class="sec" id="prinzip">
+  <div class="w">
+    <div class="sec-h">
+      <div><span class="kicker rv">Das Makler-Prinzip</span><h2 class="rv d1">Eine Anfrage. Mehrere Angebote. Ein <span class="nb">Ansprechpartner.</span></h2></div>
+      <p class="rv d2">Wer direkt an einen Außenwerber vermietet, bekommt genau ein Angebot. Wir fragen den Markt an, vergleichen Konditionen und verhandeln, bevor Sie <span class="nb">etwas unterschreiben.</span></p>
+    </div>
+    <div class="mk">
+      <div class="steps" id="steps">
+        <button class="step on" data-s="1"><span class="no">1</span><span><h3>Sie beschreiben Ihre Fläche</h3><p>Adresse, Art der Fläche, ein paar Fotos. Das dauert etwa fünf Minuten.</p></span><span class="bar"><i></i></span></button>
+        <button class="step" data-s="2"><span class="no">2</span><span><h3>Wir fragen den Markt an</h3><p>Wir prüfen Lage und Sichtbarkeit und stellen den Standort allen passenden Außenwerbern vor.</p></span><span class="bar"><i></i></span></button>
+        <button class="step" data-s="3"><span class="no">3</span><span><h3>Sie wählen das beste Angebot</h3><p>Wir legen die Angebote nebeneinander, erklären Unterschiede und verhandeln nach.</p></span><span class="bar"><i></i></span></button>
+      </div>
+      <div class="dia rv" id="dia" data-s="1" aria-hidden="true">
+        <svg class="lines" viewBox="0 0 100 90" preserveAspectRatio="none">
+          <path d="M18 45 C 32 45, 34 45, 50 45"/>
+          <path d="M50 45 C 66 45, 66 18, 82 18"/><path d="M50 45 C 66 45, 70 45, 82 45"/><path d="M50 45 C 66 45, 66 72, 82 72"/>
+          <path class="fl p1" d="M18 45 C 32 45, 34 45, 50 45"/>
+          <path class="fl p2" d="M50 45 C 66 45, 66 18, 82 18"/><path class="fl p2" d="M50 45 C 66 45, 70 45, 82 45"/><path class="fl p2" d="M50 45 C 66 45, 66 72, 82 72"/>
+          <path class="fl p3" d="M82 72 C 66 72, 66 45, 50 45"/><path class="fl p3" d="M50 45 C 34 45, 32 45, 18 45"/>
+        </svg>
+        <div class="node n-own" style="left:18%;top:50%"><span class="c"><svg width="28" height="28"><use href="#i-wall"/></svg></span><b>Ihre Fläche</b><small>Wand, Grundstück, Bauzaun</small></div>
+        <div class="node hub" style="left:50%;top:50%"><span class="c"><img src="img/favicon.png" alt=""></span><b>Plakathunter</b><small>prüft, fragt an, verhandelt</small></div>
+        <div class="node" style="left:82%;top:20%"><span class="c">A</span><b>Außenwerber A</b></div>
+        <div class="node" style="left:82%;top:50%"><span class="c">B</span><b>Außenwerber B</b></div>
+        <div class="node n-c" style="left:82%;top:80%"><span class="c">C</span><b>Außenwerber C</b></div>
+        <span class="tag tg1" style="left:34%;top:42%">Anfrage</span>
+        <span class="tag tg2" style="left:66%;top:28%">Standortexposé</span>
+        <span class="tag tg3" style="left:34%;top:42%">2.950 € / Jahr</span>
+        <div class="cap" id="cap">Sie stellen eine Anfrage, nicht drei.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rechner -->
+<section class="sec" id="rechner" style="padding-top:0">
+  <div class="w">
+    <div class="calc rv">
+      <div class="l">
+        <span class="kicker">Ertragsrechner</span>
+        <h2>Was bringt <span class="nb">Ihre Fläche?</span></h2>
+        <div class="q"><span class="lb">Welche Fläche haben Sie?</span>
+          <div class="chips" data-g="typ">
+            <button class="chip on" data-v="wand"><svg><use href="#i-wall"/></svg>Hauswand</button>
+            <button class="chip" data-v="grund"><svg><use href="#i-lot"/></svg>Grundstück</button>
+            <button class="chip" data-v="bau"><svg><use href="#i-fence"/></svg>Bauzaun, Gerüst</button>
+            <button class="chip" data-v="gew"><svg><use href="#i-shop"/></svg>Gewerbe, Parkplatz</button>
+            <button class="chip" data-v="feld"><svg><use href="#i-field"/></svg>Acker an Straße</button>
+          </div>
+        </div>
+        <div class="q"><span class="lb">Wie liegt die Fläche?</span>
+          <div class="chips" data-g="lage">
+            <button class="chip" data-v="0.55">Wohnstraße</button>
+            <button class="chip on" data-v="1">Hauptstraße</button>
+            <button class="chip" data-v="1.2">Kreuzung, Ampel</button>
+            <button class="chip" data-v="1.35">Bundesstraße, Ortseinfahrt</button>
+          </div>
+        </div>
+        <div class="q"><label for="anz">Wie viele Werbeträger passen?</label>
+          <div class="range"><input type="range" id="anz" min="1" max="4" value="1"><output id="anzo">1</output></div>
+        </div>
+      </div>
+      <div class="r">
+        <div class="res">
+          <div class="lb">Erwartbare Miete pro Jahr</div>
+          <div class="big" id="rv">1.100 – <span class="nb">2.600 €</span><small>pro Jahr, im Voraus gezahlt</small></div>
+          <div class="meter"><i id="mt"></i></div>
+          <div class="meter-l"><span>600 €</span><span>7.000 € und mehr</span></div>
+          <div class="five"><span>Über die Mindestlaufzeit von 5 Jahren</span><b id="r5" class="nb">5.500 – 13.000 €</b></div>
+        </div>
+        <button class="btn btn-a" data-open data-from="calc">Genaues Angebot anfordern <svg><use href="#i-ar"/></svg></button>
+        <p class="fine">Orientierung auf Basis vermittelter Standorte. Das verbindliche Angebot hängt von Sichtbarkeit, Verkehr und Genehmigung ab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Zielgruppen -->
+<section class="sec" id="zielgruppen" style="padding-top:0">
+  <div class="w">
+    <div class="sec-h">
+      <div><span class="kicker rv">Für wen wir arbeiten</span><h2 class="rv d1">Jede Fläche hat ihren <span class="nb">eigenen Markt.</span></h2></div>
+      <p class="rv d2">Ob Giebelwand, Brachfläche oder Baustelle: Wir kennen die Formate, die Genehmigungswege und die Außenwerber, die genau dafür <span class="nb">gut zahlen.</span></p>
+    </div>
+    <div class="tg-g">
+      <a class="card rv" href="#" data-open data-who="privat"><div class="im"><img src="img/GF_Hauswand_02.jpg" alt="Beleuchtete Werbefläche an einer Hausfassade" loading="lazy"></div><div class="bd"><h3>Private Eigentümer</h3><p>Hauswand, Giebel oder Grundstück an einer belebten Straße. Sicher geregelt und ohne <span class="nb">eigenen Aufwand.</span></p><div class="go">Für Eigentümer<span class="ar"><svg width="18" height="18"><use href="#i-ar"/></svg></span></div></div></a>
+      <a class="card rv d1" href="#" data-open data-who="projekt"><div class="im"><img src="img/Plakathunter-CSB_2.jpg" alt="Digitaler Werbeträger an einer Ausfallstraße im Gewerbegebiet" loading="lazy"><span class="new">Neu</span></div><div class="bd"><h3>Projektentwicklung</h3><p>Bauzaun, Gerüst und Zwischennutzung als zusätzlicher Ertrag in Ihrer <span class="nb">Projektkalkulation.</span></p><div class="go">Für Bauträger<span class="ar"><svg width="18" height="18"><use href="#i-ar"/></svg></span></div></div></a>
+      <a class="card rv d2" href="#" data-open data-who="gewerbe"><div class="im"><img src="img/CSB_04-scaled.jpg" alt="Werbeträger auf einem Gewerbeparkplatz" loading="lazy"></div><div class="bd"><h3>Gewerbe und Verwaltung</h3><p>Märkte, Parkplätze, Fassaden. Ein Makler und ein Rahmen für <span class="nb">alle Objekte.</span></p><div class="go">Für Gewerbe<span class="ar"><svg width="18" height="18"><use href="#i-ar"/></svg></span></div></div></a>
+      <a class="card rv d3" href="#" data-open data-who="kommune"><div class="im"><img src="img/Plakathunter_videoboard_01.jpg" alt="Digitale Werbefläche an einer Ortsdurchfahrt" loading="lazy"></div><div class="bd"><h3>Kommunen und Landwirte</h3><p>Ortseinfahrten, städtische Flächen, Äcker an Bundesstraßen. Mit sauberem <span class="nb">Verfahren.</span></p><div class="go">Für Kommunen<span class="ar"><svg width="18" height="18"><use href="#i-ar"/></svg></span></div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Konditionen -->
+<section class="sec dark" id="konditionen">
+  
+  <div class="w" style="position:relative">
+    <div class="sec-h">
+      <div><span class="kicker rv">Konditionen</span><h2 class="rv d1">Klare Zahlen statt <span class="nb">großer Versprechen.</span></h2></div>
+      <p class="rv d2">Was Sie bekommen, was Sie nichts kostet und wie lange Sie gebunden sind. Alles steht vorher im Vertrag, alles erklären wir <span class="nb">vor der Unterschrift.</span></p>
+    </div>
+    <div class="kd rv">
+      <div><div class="n">600–7.000<sup>€</sup></div><h3>Miete pro Jahr</h3><p>je Werbeträger, abhängig von Lage, Format und Sichtbarkeit</p></div>
+      <div><div class="n">0<sup>€</sup></div><h3>Kosten für Sie</h3><p>Genehmigung, Aufbau, Wartung, Versicherung und Strom zahlt der Partner</p></div>
+      <div><div class="n">5<sup>Jahre</sup></div><h3>Mindestlaufzeit</h3><p>Kündigung mit sechs Monaten zum Vertragsende</p></div>
+      <div><div class="n">¼<sup>jährl.</sup></div><h3>Miete im Voraus</h3><p>pünktlich auf Ihr Konto, Stromkosten auf den Cent erstattet</p></div>
+    </div>
+    <ul class="incl">
+      <li class="rv"><svg width="20" height="20"><use href="#i-ck"/></svg>Bauantrag stellt der Außenwerber, Sie stimmen nur als Eigentümer zu</li>
+      <li class="rv d1"><svg width="20" height="20"><use href="#i-ck"/></svg>Politische und sittenwidrige Werbung ist vertraglich ausgeschlossen</li>
+      <li class="rv d2"><svg width="20" height="20"><use href="#i-ck"/></svg>Rückbau am Vertragsende ist fest geregelt und kostenfrei</li>
+      <li class="rv"><svg width="20" height="20"><use href="#i-ck"/></svg>Haftung und Versicherung liegen beim Vertragspartner</li>
+      <li class="rv d1"><svg width="20" height="20"><use href="#i-ck"/></svg>Auf Wunsch keine Konkurrenzwerbung zu Ihrem eigenen Betrieb</li>
+      <li class="rv d2"><svg width="20" height="20"><use href="#i-ck"/></svg>Ein fester Ansprechpartner über die gesamte Laufzeit</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Ablauf -->
+<section class="sec" id="ablauf">
+  <div class="w">
+    <div class="sec-h">
+      <div><span class="kicker rv">Der Ablauf</span><h2 class="rv d1">Sie brauchen fünf Minuten. Den Rest <span class="nb">machen wir.</span></h2></div>
+      <p class="rv d2">Von der ersten Anfrage bis zur ersten Mietzahlung vergehen meist wenige Wochen. Genehmigung und Aufbau organisiert der Partner, wir halten Sie auf <span class="nb">dem Laufenden.</span></p>
+    </div>
+    <div class="tl" id="tl">
+      <span class="pr"></span>
+      <div class="it rv"><span class="dot">1</span><span class="who you">Sie</span><h3>Standort prüfen</h3><p>Adresse eingeben, Fläche beschreiben, Fotos hochladen. Sie sehen sofort eine <span class="nb">erste Spanne.</span></p><div class="d">5 Minuten</div></div>
+      <div class="it rv d1"><span class="dot">2</span><span class="who">Plakathunter</span><h3>Angebote einholen</h3><p>Wir rufen Sie an, klären Details und stellen den Standort den passenden <span class="nb">Außenwerbern vor.</span></p><div class="d">wenige Tage</div></div>
+      <div class="it rv d2"><span class="dot">3</span><span class="who you">Sie</span><h3>Vertrag wählen</h3><p>Sie bekommen die Angebote im Vergleich und unterschreiben nur das, <span class="nb">was passt.</span></p><div class="d">ein Termin</div></div>
+      <div class="it rv d3"><span class="dot">4</span><span class="who">Partner</span><h3>Aufbau und Miete</h3><p>Genehmigung, Montage, Wartung. Die Miete kommt vierteljährlich <span class="nb">im Voraus.</span></p><div class="d">ab Aufbau</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Referenzen -->
+<section class="sec" id="referenzen" style="padding-top:0">
+  <div class="w">
+    <div class="sec-h">
+      <div><span class="kicker rv">Vermittelte Standorte</span><h2 class="rv d1">Echte Flächen, <span class="nb">echte Partner.</span></h2></div>
+      <p class="rv d2">Eine Auswahl der Standorte, die wir vermittelt haben. Auf der neuen Website als Karte mit Ort, Format und Jahr, filterbar <span class="nb">nach Zielgruppe.</span></p>
+    </div>
+    <div class="refs">
+      <div class="ref big rv"><img src="img/grossflaeche_07.jpg" alt="Großfläche an einer Hausfassade an einer Kreuzung bei Nacht" loading="lazy"><div class="cp"><span><b>Großfläche an Wohnhaus</b>Innenstadt, Hauptverkehrsstraße</span><span class="y">seit 2022</span></div></div>
+      <div class="ref rv d1"><img src="img/Plakathunter_GF_beleuchtet_01.jpg" alt="Drei beleuchtete Großflächen an einem Grundstück" loading="lazy"><div class="cp"><span><b>3 Großflächen, beleuchtet</b>Privatgrundstück</span><span class="y">seit 2021</span></div></div>
+      <div class="quote rv d2"><div class="stars">★★★★★</div><blockquote>„Drei Angebote bekommen, das beste ausgesucht. Herr Weiss hat alles mit dem Außenwerber geregelt, ich musste nur unterschreiben.“</blockquote><div class="who"><span class="av">RK</span><span><b>R. K., Eigentümer</b><br><small>Hauswand in Mainz, Platzhalter</small></span></div></div>
+      <div class="quote rv d1"><div class="stars">★★★★★</div><blockquote>„Für unsere Baustelle brachte der Bauzaun über zwei Jahre einen fünfstelligen Betrag. Das hatten wir in keiner Kalkulation.“</blockquote><div class="who"><span class="av">PE</span><span><b>Projektentwickler</b><br><small>Rhein-Main, Platzhalter</small></span></div></div>
+      <div class="ref rv d2"><img src="img/Plakathunter-CSB_01.jpg" alt="City-Star-Werbeträger an einer belebten Straße" loading="lazy"><div class="cp"><span><b>City Star</b>Gewerbegrundstück, Ausfallstraße</span><span class="y">seit 2023</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Persönlich -->
+<section class="sec" id="martin" style="padding-top:0">
+  <div class="w pers">
+    <div class="ph rv">
+      <img src="img/Plakathunter_grossflaeche.jpg" alt="" loading="lazy">
+      <div class="ov"></div><div class="mono">MW</div>
+      <span class="note">Platzhalter: Porträt beim Foto-Shooting am Standort</span>
+      <div class="card2"><span class="av">MW</span><span><b>Martin Weiss</b><small>Inhaber Plakathunter, Eppstein</small></span></div>
+    </div>
+    <div>
+      <span class="kicker rv">Ihr Ansprechpartner</span>
+      <blockquote class="rv d1">„Ich arbeite für den Eigentümer, nicht für den Außenwerber. Deshalb sehen Sie bei mir mehrere Angebote, nicht nur eines.“</blockquote>
+      <p class="t rv d2">Sie sprechen von der ersten Frage bis zum laufenden Vertrag mit derselben Person. Kein Callcenter, keine Warteschleife, und wenn etwas an der Fläche ist, rufen Sie <span class="nb">einfach an.</span></p>
+      <div class="contact rv d3">
+        <a href="tel:+4915156145220"><span class="ic"><svg width="20" height="20"><use href="#i-tel"/></svg></span><b>Anrufen</b><small>0151 561 452 20<br>Mo bis Fr, 8 bis 18 Uhr</small></a>
+        <a href="https://wa.me/4915156145220" target="_blank" rel="noopener"><span class="ic"><svg width="20" height="20"><use href="#i-wa"/></svg></span><b>WhatsApp</b><small>Fotos schicken,<br>Antwort am selben Tag</small></a>
+        <button data-open data-from="rueckruf"><span class="ic"><svg width="20" height="20"><use href="#i-cal"/></svg></span><b>Rückruf wählen</b><small>Termin passend zu Ihnen,<br>15 Minuten</small></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="w faq">
+    <div class="side">
+      <span class="kicker rv">Häufige Fragen</span>
+      <h2 class="rv d1">Was Eigentümer vorher <span class="nb">wissen wollen.</span></h2>
+      <p class="rv d2">Weitere Antworten zu Steuer, Genehmigung, Abständen und Rückbau finden Sie in <span class="nb">unserem Ratgeber.</span></p>
+      <a class="btn btn-g rv d3" href="#faq">Zum Ratgeber <svg><use href="#i-ar"/></svg></a>
+    </div>
+    <div class="rv d1">
+      <details open><summary>Was kostet mich die Vermittlung?<span class="pl"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Nichts. Baugenehmigung, Aufbau, Wartung, Versicherung und Strom übernimmt der Vertragspartner aus der Außenwerbung. Unsere Vermittlung ist für Eigentümer <span class="nb">kostenfrei.</span></p></details>
+      <details><summary>Wie viel Miete bringt eine Werbefläche?<span class="pl"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Je Werbeträger zwischen 600 und 7.000 Euro im Jahr. Entscheidend sind Lage, Sichtbarkeit, Verkehr und Format. Manche Standorte eignen sich für mehrere <span class="nb">Werbeträger.</span></p></details>
+      <details><summary>Wie lange läuft ein Vertrag?<span class="pl"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Mindestens fünf Jahre. Gekündigt wird mit sechs Monaten zum Vertragsende. Der Rückbau ist im Vertrag geregelt und für <span class="nb">Sie kostenfrei.</span></p></details>
+      <details><summary>Brauche ich eine Baugenehmigung?<span class="pl"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">In der Regel ja. Den Bauantrag stellt der Außenwerber, Sie unterschreiben nur die Zustimmung als Eigentümer. Wir sagen Ihnen vorher, wie die Chancen an Ihrem <span class="nb">Standort stehen.</span></p></details>
+      <details><summary>Welche Werbung kommt auf meine Fläche?<span class="pl"><svg width="18" height="18"><use href="#i-plus"/></svg></span></summary><p class="a">Sittenwidrige und politische Werbung ist vertraglich ausgeschlossen. Auf Wunsch schließen wir auch Konkurrenzwerbung zu Ihrem eigenen Betrieb oder Ihren <span class="nb">Mietern aus.</span></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0">
+  <div class="w">
+    <div class="cta rv">
+      <img src="img/Plakathunter_GF_beleuchtet_01.jpg" alt="" loading="lazy">
+      <div class="in2">
+        <span class="kicker">Kostenlos und unverbindlich</span>
+        <h2>Was ist Ihre Fläche wert? Finden wir <span class="nb">es heraus.</span></h2>
+        <p>Adresse eingeben, Fläche beschreiben, Ersteinschätzung sehen. Martin Weiss meldet sich am selben <span class="nb">Werktag bei Ihnen.</span></p>
+        <form class="check" data-check autocomplete="off">
+          <label class="in"><svg width="22" height="22"><use href="#i-pin"/></svg><input type="text" name="adr" placeholder="Straße und Ort Ihrer Fläche" aria-label="Adresse Ihrer Fläche"></label>
+          <button class="btn btn-p" type="submit">Standort prüfen <svg><use href="#i-ar"/></svg></button>
+        </form>
+        <div class="row">
+          <a class="btn btn-wg" href="tel:+4915156145220"><svg><use href="#i-tel"/></svg>0151 561 452 20</a>
+          <a class="btn btn-wg" href="https://wa.me/4915156145220" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="w">
+    <div class="ft-g">
+      <div><img src="img/PH-Logo-Eckig-weiss.png" alt="Plakathunter"><p style="max-width:34ch">Makler für Werbeflächen. Wir vermitteln Standorte an Außenwerbeunternehmen in ganz Deutschland, für Eigentümer kostenfrei.</p></div>
+      <div><h4>Für wen</h4><ul><li><a href="#zielgruppen">Private Eigentümer</a></li><li><a href="#zielgruppen">Projektentwicklung</a></li><li><a href="#zielgruppen">Gewerbe und Verwaltung</a></li><li><a href="#zielgruppen">Kommunen und Landwirte</a></li></ul></div>
+      <div><h4>Plakathunter</h4><ul><li><a href="#prinzip">So arbeiten wir</a></li><li><a href="#konditionen">Konditionen</a></li><li><a href="#faq">Ratgeber und FAQ</a></li><li><a href="#martin">Über uns</a></li></ul></div>
+      <div><h4>Kontakt</h4><ul><li>Hessenring 13.1<br>65817 Eppstein</li><li><a href="tel:+4915156145220">0151 561 452 20</a></li><li><a href="mailto:kontakt@plakathunter.de">kontakt@plakathunter.de</a></li></ul></div>
+    </div>
+    <div class="bt"><span>© 2026 Plakathunter, Martin Weiss</span><span>Impressum · Datenschutz · Cookie-Einstellungen</span></div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar">
+  <a class="ic" href="tel:+4915156145220" aria-label="Anrufen"><svg width="22" height="22"><use href="#i-tel"/></svg></a>
+  <a class="ic" href="https://wa.me/4915156145220" aria-label="WhatsApp" target="_blank" rel="noopener"><svg width="22" height="22"><use href="#i-wa"/></svg></a>
+  <button class="btn btn-a" data-open>Standort prüfen <svg><use href="#i-ar"/></svg></button>
+</div>
+
+<div class="draft"><b>Entwurf</b> NEXAS Media · Startseite Relaunch 2027</div>
+
+<!-- ============ FUNNEL ============ -->
+<div class="fn" id="fn" role="dialog" aria-modal="true" aria-label="Standort prüfen">
+  <div class="fn-m">
+    <div class="fn-top">
+      <img src="img/PH-Logo_Eckig.png" alt="Plakathunter">
+      <div class="sp"></div>
+      <button class="fn-x" id="fnx" aria-label="Schließen"><svg width="22" height="22"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="prog"><div class="tr"><i id="pbar"></i></div><span id="ptxt">Schritt 1 von 5</span></div>
+
+    <div class="pane-w">
+      <!-- 1 Adresse -->
+      <div class="pane on" data-p="1">
+        <span class="kicker">Standort</span>
+        <h2>Wo liegt <span class="nb">Ihre Fläche?</span></h2>
+        <p class="sub">Geben Sie die Adresse ein und setzen Sie den Pin genau auf die Wand oder die Stelle am Grundstück.</p>
+        <form class="check" id="fadrf" autocomplete="off">
+          <label class="in"><svg width="22" height="22"><use href="#i-pin"/></svg><input type="text" id="fadr" placeholder="Straße, Hausnummer, Ort" aria-label="Adresse"></label>
+          <button class="btn btn-p" type="submit">Suchen</button>
+        </form>
+        <div class="map" id="map"><div class="ph0" id="map0">Luftbild erscheint nach der Adresseingabe</div></div>
+      </div>
+
+      <!-- 2 Fläche -->
+      <div class="pane" data-p="2">
+        <span class="kicker">Fläche</span>
+        <h2>Welche Fläche <span class="nb">bieten Sie an?</span></h2>
+        <p class="sub">Mehrfachnennung ist möglich, manche Standorte eignen sich für mehrere Formate.</p>
+        <div class="tiles" data-multi="flaeche">
+          <button class="tile" data-v="Hauswand"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-wall"/></svg></span><b>Hauswand, Giebel</b><small>ab ca. 9 m² freie Wand ohne Fenster</small></button>
+          <button class="tile" data-v="Grundstück"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-lot"/></svg></span><b>Grundstück</b><small>ab ca. 2 m² an einer Straße</small></button>
+          <button class="tile" data-v="Bauzaun, Gerüst"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-fence"/></svg></span><b>Bauzaun, Gerüst</b><small>befristet während der Bauphase</small></button>
+          <button class="tile" data-v="Gewerbe, Parkplatz"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-shop"/></svg></span><b>Gewerbe, Parkplatz</b><small>Markt, Zufahrt, Fassade</small></button>
+          <button class="tile" data-v="Acker an Straße"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-field"/></svg></span><b>Acker an Straße</b><small>Bundesstraße, Ortseinfahrt</small></button>
+          <button class="tile" data-v="Sonstiges"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-dots"/></svg></span><b>Etwas anderes</b><small>Mauer, Zaun, Dach, Brache</small></button>
+        </div>
+        <div class="qrow"><span class="lb">Wie liegt die Fläche?</span>
+          <div class="chips" data-single="lage">
+            <button class="chip" data-v="Wohnstraße">Wohnstraße</button>
+            <button class="chip" data-v="Hauptstraße">Hauptstraße</button>
+            <button class="chip" data-v="Kreuzung">Kreuzung, Ampel</button>
+            <button class="chip" data-v="Bundesstraße">Bundesstraße, Ortseinfahrt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Wer -->
+      <div class="pane" data-p="3">
+        <span class="kicker">Über Sie</span>
+        <h2>In welcher Rolle <span class="nb">fragen Sie an?</span></h2>
+        <p class="sub">So bekommen Sie den passenden Ansprechpartner und Unterlagen, die zu Ihrer Situation passen.</p>
+        <div class="tiles" data-single="rolle">
+          <button class="tile" data-v="Privater Eigentümer"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-user"/></svg></span><b>Privater Eigentümer</b><small>Haus oder Grundstück im eigenen Besitz</small></button>
+          <button class="tile" data-v="Projektentwicklung"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-crane"/></svg></span><b>Projektentwicklung</b><small>Bauträger, Investor, Baustelle</small></button>
+          <button class="tile" data-v="Hausverwaltung"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-keys"/></svg></span><b>Hausverwaltung</b><small>für ein oder mehrere Objekte</small></button>
+          <button class="tile" data-v="Gewerbe"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-shop"/></svg></span><b>Gewerbe</b><small>Markt, Autohaus, Tankstelle</small></button>
+          <button class="tile" data-v="Landwirtschaft"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-field"/></svg></span><b>Landwirtschaft</b><small>Flächen im Außenbereich</small></button>
+          <button class="tile" data-v="Kommune"><span class="ck"><svg width="14" height="14"><use href="#i-ck"/></svg></span><span class="ic"><svg width="26" height="26"><use href="#i-town"/></svg></span><b>Kommune</b><small>städtische Flächen</small></button>
+        </div>
+      </div>
+
+      <!-- 4 Fotos -->
+      <div class="pane" data-p="4">
+        <span class="kicker">Fotos</span>
+        <h2>Zeigen Sie uns <span class="nb">die Fläche.</span></h2>
+        <p class="sub">Zwei bis drei Handyfotos genügen. Damit können Außenwerber den Standort ohne Vor-Ort-Termin bewerten. Sie können sie auch später nachreichen.</p>
+        <label class="drop" id="drop"><input type="file" id="files" accept="image/*" multiple hidden><span class="ic"><svg width="28" height="28"><use href="#i-cam"/></svg></span><b>Fotos hier ablegen oder auswählen</b><small>JPG oder PNG, bis zu drei Bilder</small></label>
+        <div class="thumbs" id="thumbs"></div>
+        <div class="tips">
+          <div><svg width="18" height="18"><use href="#i-ck"/></svg>Von der Straße aus, so wie Autofahrer die Fläche sehen</div>
+          <div><svg width="18" height="18"><use href="#i-ck"/></svg>Einmal frontal, einmal aus der Fahrtrichtung</div>
+          <div><svg width="18" height="18"><use href="#i-ck"/></svg>Bei Tageslicht, ganze Fläche im Bild</div>
+        </div>
+      </div>
+
+      <!-- 5 Kontakt -->
+      <div class="pane" data-p="5">
+        <div class="est"><div><div class="lb">Ihre Ersteinschätzung</div><div class="v" id="fest">1.100 – 2.600 € <small>pro Jahr</small></div></div><div class="sm">Orientierung. Das verbindliche Angebot erhalten Sie nach Prüfung durch die Außenwerber.</div></div>
+        <h2>Wohin schicken wir <span class="nb">die Angebote?</span></h2>
+        <p class="sub">Martin Weiss ruft Sie zum gewählten Zeitpunkt an und bespricht die nächsten Schritte.</p>
+        <form id="cform" novalidate>
+          <div class="fg">
+            <div class="f"><input id="fn1" placeholder=" " required autocomplete="given-name"><label for="fn1">Vorname</label></div>
+            <div class="f"><input id="fn2" placeholder=" " required autocomplete="family-name"><label for="fn2">Nachname</label></div>
+            <div class="f"><input id="fem" type="email" placeholder=" " required autocomplete="email"><label for="fem">E-Mail</label></div>
+            <div class="f"><input id="ftel" type="tel" placeholder=" " required autocomplete="tel"><label for="ftel">Telefon</label></div>
+          </div>
+          <div class="qrow"><span class="lb">Wann passt Ihnen der Rückruf?</span><div class="chips slots" data-single="slot" id="slots"></div></div>
+          <label class="consent"><input type="checkbox" id="fok">Ich bin einverstanden, dass Plakathunter meine Angaben zur Bearbeitung der Anfrage verarbeitet und den Standort passenden Außenwerbern vorstellt. Widerruf jederzeit möglich.</label>
+        </form>
+      </div>
+
+      <!-- 6 Fertig -->
+      <div class="pane done" data-p="6">
+        <div class="ok"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="kicker">Anfrage eingegangen</span>
+        <h2 id="dtitle">Danke. Wir melden uns <span class="nb">wie vereinbart.</span></h2>
+        <p class="sub" id="dsub">Sie bekommen gleich eine Bestätigung per E-Mail mit allen Angaben.</p>
+        <div class="vg">Vorgangsnummer <b id="vgn">PH-2026-0000</b></div>
+        <div class="next">
+          <div class="cur"><span class="n"><svg width="18" height="18"><use href="#i-ck"/></svg></span><span><b>Anfrage und Ersteinschätzung</b><small>Ihre Angaben liegen bei Martin Weiss</small></span><span class="when">erledigt</span></div>
+          <div><span class="n">2</span><span><b>Rückruf und Standortprüfung</b><small>Details klären, Fotos besprechen</small></span><span class="when" id="dwhen">heute</span></div>
+          <div><span class="n">3</span><span><b>Angebote der Außenwerber</b><small>im Vergleich, mit Empfehlung</small></span><span class="when">in 5 bis 10 Tagen</span></div>
+          <div><span class="n">4</span><span><b>Vertrag und Aufbau</b><small>nur wenn Sie zustimmen</small></span><span class="when">danach</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fn-nav" id="fnav">
+      <button class="bk" id="bk" hidden><svg width="18" height="18"><use href="#i-left"/></svg>Zurück</button>
+      <div class="sp"></div>
+      <span class="kbd" id="kbd"><kbd>Enter</kbd> weiter</span>
+      <button class="btn btn-p" id="nx">Weiter <svg><use href="#i-ar"/></svg></button>
+    </div>
+  </div>
+
+  <aside class="fn-s">
+    <div class="pc"><span class="av">MW</span><span><b>Martin Weiss</b><small>Inhaber, Ihr Ansprechpartner</small></span></div>
+    <blockquote>„Ich schaue mir jeden Standort persönlich an und sage Ihnen ehrlich, ob sich die Fläche lohnt.“</blockquote>
+    <div class="sum">
+      <h4>Ihre Angaben</h4>
+      <div><span>Standort</span><b id="s-adr" class="e">offen</b></div>
+      <div><span>Fläche</span><b id="s-fl" class="e">offen</b></div>
+      <div><span>Lage</span><b id="s-lg" class="e">offen</b></div>
+      <div><span>Rolle</span><b id="s-rl" class="e">offen</b></div>
+      <div><span>Fotos</span><b id="s-ft" class="e">keine</b></div>
+    </div>
+    <ul>
+      <li><svg width="18" height="18"><use href="#i-shield"/></svg>Kostenfrei und unverbindlich</li>
+      <li><svg width="18" height="18"><use href="#i-ck"/></svg>Angebote mehrerer Außenwerber im Vergleich</li>
+      <li><svg width="18" height="18"><use href="#i-ck"/></svg>Ihre Daten gehen nur an passende Partner</li>
+    </ul>
+    <div class="tel2">Lieber direkt sprechen?<a href="tel:+4915156145220">0151 561 452 20</a></div>
+  </aside>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+(()=>{
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const eur=n=>n.toLocaleString('de-DE',{maximumFractionDigits:0});
+const r100=n=>Math.round(n/100)*100;
+
+/* Header + Mobile bar */
+const hd=$('#hd'), mbar=$('#mbar');
+const onScroll=()=>{const y=scrollY;hd.classList.toggle('sc',y>20);mbar.classList.toggle('show',y>500)};
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+const mm=$('#mm');
+$('#burger').onclick=()=>{mm.classList.add('open');mm.setAttribute('aria-hidden','false')};
+const closeMM=()=>{mm.classList.remove('open');mm.setAttribute('aria-hidden','true')};
+$('#mmx').onclick=closeMM;$$('#mm a').forEach(a=>a.addEventListener('click',closeMM));
+
+/* Reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.14,rootMargin:'0px 0px -40px 0px'});
+$$('.rv,#tl').forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,to=+el.dataset.count,t0=performance.now(),d=1600;
+  const tick=t=>{const p=Math.min(1,(t-t0)/d),v=Math.round(to*(1-Math.pow(1-p,3)));el.textContent=el.dataset.fmt?eur(v):v;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick);cio.unobserve(el)}),{threshold:.6});
+$$('[data-count]').forEach(el=>cio.observe(el));
+
+/* Hero offers loop */
+const offers=$$('#offers .offer');
+let oi=0;
+const offerLoop=()=>{
+  if(oi<offers.length){offers[oi].classList.add('in');if(oi===offers.length-1)offers[oi].classList.add('best');oi++;setTimeout(offerLoop,oi===offers.length?4200:1100)}
+  else{offers.forEach(o=>o.classList.remove('in','best'));oi=0;setTimeout(offerLoop,700)}
+};
+setTimeout(offerLoop,900);
+
+/* Makler-Prinzip steps */
+const steps=$$('#steps .step'),dia=$('#dia'),cap=$('#cap');
+const caps={1:'Sie stellen eine Anfrage, nicht drei.',2:'Wir stellen Ihren Standort allen passenden Außenwerbern vor.',3:'Das beste Angebot kommt zu Ihnen, mit Empfehlung.'};
+let cur=1,stTimer,stVisible=false;
+const setStep=(n,auto)=>{cur=n;steps.forEach(s=>{const on=+s.dataset.s===n;s.classList.toggle('on',on);if(on){const i=s.querySelector('.bar i');i.style.animation='none';i.offsetWidth;i.style.animation=''}});dia.dataset.s=n;cap.textContent=caps[n];clearTimeout(stTimer);if(stVisible)stTimer=setTimeout(()=>setStep(n%3+1,true),5000)};
+steps.forEach(s=>s.addEventListener('click',()=>setStep(+s.dataset.s)));
+new IntersectionObserver(es=>{stVisible=es[0].isIntersecting;if(stVisible)setStep(cur);else clearTimeout(stTimer)},{threshold:.35}).observe(dia);
+
+/* Ertragsrechner */
+const BASE={wand:[1100,2600],grund:[1400,4200],bau:[900,3000],gew:[1600,4800],feld:[1800,5200]};
+const calc={typ:'wand',lage:1,anz:1};
+const range=()=>{const b=BASE[calc.typ],m=calc.lage,k=calc.anz;let lo=r100(Math.max(600,b[0]*m))*k,hi=r100(Math.min(7000,b[1]*m))*k;return[lo,hi]};
+const showCalc=()=>{const[lo,hi]=range();$('#rv').innerHTML=`<span class="nb">${eur(lo)} –</span> <span class="nb">${eur(hi)} €</span><small>pro Jahr, im Voraus gezahlt</small>`;$('#r5').textContent=`${eur(lo*5)} – ${eur(hi*5)} €`;
+  const mx=7000*Math.max(1,calc.anz*.8),L=Math.min(96,(lo-600)/(mx-600)*100),R=Math.min(100,(hi-600)/(mx-600)*100);$('#mt').style.left=Math.max(0,L)+'%';$('#mt').style.right=(100-Math.max(R,L+4))+'%'};
+$$('#rechner .chips').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip',g).forEach(c=>c.classList.toggle('on',c===b));const k=g.dataset.g;calc[k]=k==='lage'?+b.dataset.v:b.dataset.v;showCalc()}));
+$('#anz').addEventListener('input',e=>{calc.anz=+e.target.value;$('#anzo').textContent=e.target.value;showCalc()});
+showCalc();
+
+/* ================= FUNNEL ================= */
+const fn=$('#fn'),panes=$$('.pane',fn),N=5;
+const st={adr:'',lat:null,lng:null,flaeche:[],lage:'',rolle:'',files:[],slot:''};
+let step=1,map,marker;
+const TYP_MAP={'Hauswand':'wand','Grundstück':'grund','Bauzaun, Gerüst':'bau','Gewerbe, Parkplatz':'gew','Acker an Straße':'feld','Sonstiges':'wand'};
+const LAGE_MAP={'Wohnstraße':.55,'Hauptstraße':1,'Kreuzung':1.2,'Bundesstraße':1.35};
+const ROLE_FROM={privat:'Privater Eigentümer',projekt:'Projektentwicklung',gewerbe:'Gewerbe',kommune:'Kommune'};
+const LAGE_FROM={0.55:'Wohnstraße',1:'Hauptstraße',1.2:'Kreuzung',1.35:'Bundesstraße'};
+const TYP_FROM={wand:'Hauswand',grund:'Grundstück',bau:'Bauzaun, Gerüst',gew:'Gewerbe, Parkplatz',feld:'Acker an Straße'};
+
+const openFn=(opts={})=>{
+  fn.classList.add('open');document.body.classList.add('lock');
+  if(opts.adr){st.adr=opts.adr;$('#fadr').value=opts.adr}
+  if(opts.from==='calc'){st.flaeche=[TYP_FROM[calc.typ]];st.lage=LAGE_FROM[calc.lage];syncSel()}
+  if(opts.who){st.rolle=ROLE_FROM[opts.who];syncSel()}
+  go(1,false);
+  setTimeout(()=>{initMap();if(st.adr)geocode(st.adr);else $('#fadr').focus()},120);
+};
+const closeFn=()=>{fn.classList.remove('open');document.body.classList.remove('lock')};
+$('#fnx').onclick=closeFn;
+addEventListener('keydown',e=>{if(!fn.classList.contains('open'))return;if(e.key==='Escape')closeFn();if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'&&e.target.id!=='fadr'&&!e.target.closest('.check')){e.preventDefault();next()}});
+
+$$('[data-open]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();closeMM();openFn({from:b.dataset.from,who:b.dataset.who})}));
+$$('form[data-check]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();openFn({adr:f.adr.value.trim()})}));
+
+const syncSel=()=>{
+  $$('[data-multi="flaeche"] .tile').forEach(t=>t.classList.toggle('on',st.flaeche.includes(t.dataset.v)));
+  $$('[data-single="lage"] .chip').forEach(t=>t.classList.toggle('on',t.dataset.v===st.lage));
+  $$('[data-single="rolle"] .tile').forEach(t=>t.classList.toggle('on',t.dataset.v===st.rolle));
+  summary();
+};
+$('[data-multi="flaeche"]').addEventListener('click',e=>{const t=e.target.closest('.tile');if(!t)return;const v=t.dataset.v;st.flaeche=st.flaeche.includes(v)?st.flaeche.filter(x=>x!==v):[...st.flaeche,v];syncSel();valid()});
+$('[data-single="lage"]').addEventListener('click',e=>{const t=e.target.closest('.chip');if(!t)return;st.lage=t.dataset.v;syncSel();valid()});
+$('[data-single="rolle"]').addEventListener('click',e=>{const t=e.target.closest('.tile');if(!t)return;st.rolle=t.dataset.v;syncSel();valid();setTimeout(()=>step===3&&next(),380)});
+
+const summary=()=>{
+  const set=(id,v,empty='offen')=>{const el=$(id);el.textContent=v||empty;el.classList.toggle('e',!v)};
+  set('#s-adr',st.adr?st.adr.split(',').slice(0,2).join(','):'');set('#s-fl',st.flaeche.join(', '));set('#s-lg',st.lage);set('#s-rl',st.rolle);set('#s-ft',st.files.length?st.files.length+' Foto'+(st.files.length>1?'s':''):'','keine');
+};
+const estimate=()=>{
+  const types=st.flaeche.length?st.flaeche.map(f=>TYP_MAP[f]):['wand'];const m=LAGE_MAP[st.lage]||1;
+  const los=types.map(t=>BASE[t][0]),his=types.map(t=>BASE[t][1]);
+  const lo=r100(Math.max(600,Math.min(...los)*m)),hi=r100(Math.min(7000,Math.max(...his)*m))*(types.length>1?Math.min(types.length,2):1);
+  return[lo,hi];
+};
+const valid=()=>{
+  let ok=true;
+  if(step===1)ok=!!st.adr&&st.lat!==null;
+  if(step===2)ok=st.flaeche.length>0&&!!st.lage;
+  if(step===3)ok=!!st.rolle;
+  $('#nx').disabled=!ok;return ok;
+};
+const go=(n,anim=true)=>{
+  const back=n<step;step=n;
+  panes.forEach(p=>{const on=+p.dataset.p===n;p.classList.toggle('on',on);p.classList.toggle('back',on&&back&&anim)});
+  $('#pbar').style.width=(Math.min(n,N)/N*100)+'%';
+  $('#ptxt').textContent=n>N?'Fertig':`Schritt ${n} von ${N}`;
+  $('#bk').hidden=n===1||n>N;
+  $('#fnav').hidden=n>N;
+  $('#nx').innerHTML=n===N?'Angebote anfordern <svg><use href="#i-ar"/></svg>':(n===4&&!st.files.length?'Später nachreichen <svg><use href="#i-ar"/></svg>':'Weiter <svg><use href="#i-ar"/></svg>');
+  if(n===5){const[lo,hi]=estimate();$('#fest').innerHTML=`${eur(lo)} – ${eur(hi)} € <small>pro Jahr</small>`;buildSlots();setTimeout(()=>$('#fn1').focus(),300)}
+  if(n===1&&map)setTimeout(()=>map.invalidateSize(),60);
+  $('.fn-m').scrollTop=0;
+  valid();
+};
+const next=()=>{
+  if(step===N)return submit();
+  if(!valid())return;
+  go(step+1);
+};
+$('#nx').onclick=next;$('#bk').onclick=()=>go(step-1);
+
+/* Map + geocoding (Photon / OSM, Luftbild Esri) */
+const initMap=()=>{
+  if(map||!window.L)return;
+  map=L.map('map',{attributionControl:true,scrollWheelZoom:false,zoomControl:false});L.control.zoom({position:'topright'}).addTo(map);map.setView([50.14,8.39],6);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Luftbild © Esri'}).addTo(map);
+  map.on('click',e=>placePin(e.latlng.lat,e.latlng.lng,true));
+};
+const pinIcon=()=>L.divIcon({className:'',html:'<svg class="pin" viewBox="0 0 24 24"><path d="M12 22s-7.5-6.6-7.5-12.2a7.5 7.5 0 0 1 15 0C19.5 15.4 12 22 12 22z" fill="#F2A900" stroke="#0A1C2E" stroke-width="1.4"/><circle cx="12" cy="9.8" r="2.8" fill="#0A1C2E"/></svg>',iconSize:[46,46],iconAnchor:[19,16]});
+const placePin=(lat,lng,manual)=>{
+  st.lat=lat;st.lng=lng;
+  if(!marker){marker=L.marker([lat,lng],{icon:pinIcon(),draggable:true}).addTo(map);marker.on('dragend',()=>{const p=marker.getLatLng();st.lat=p.lat;st.lng=p.lng})}
+  else marker.setLatLng([lat,lng]);
+  $('#map0')&&$('#map0').remove();
+  let h=$('#map .hint');if(!h){h=document.createElement('div');h.className='hint';$('#map').appendChild(h)}
+  h.textContent=manual?'Pin gesetzt. Sie können ihn noch verschieben.':'Pin auf die genaue Fläche ziehen oder ins Bild tippen';
+  valid();
+};
+const geocode=async q=>{
+  if(!q)return;st.adr=q;summary();
+  try{
+    const r=await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&lang=de&limit=1&bbox=5.8,47.2,15.1,55.1`);
+    const j=await r.json();const f=j.features&&j.features[0];
+    if(f){const[lng,lat]=f.geometry.coordinates;map.setView([lat,lng],18,{animate:true});placePin(lat,lng,false);st.adr=fmtAdr(f.properties)||q;$('#fadr').value=st.adr;summary();return}
+  }catch(e){}
+  // Fallback: Region um Eppstein, Nutzer setzt Pin selbst
+  map.setView([50.14,8.39],14);placePin(50.14,8.39,false);
+};
+const fmtAdr=p=>[[p.street||p.name,p.housenumber].filter(Boolean).join(' '),[p.postcode,p.city||p.town||p.village].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+$('#fadrf').addEventListener('submit',e=>{e.preventDefault();sugBox&&sugBox.remove();geocode($('#fadr').value.trim())});
+
+/* Autocomplete for all address inputs */
+let sugBox,sugT;
+const attachSug=(input,onPick)=>{
+  input.addEventListener('input',()=>{
+    clearTimeout(sugT);const q=input.value.trim();if(q.length<4){sugBox&&sugBox.remove();return}
+    sugT=setTimeout(async()=>{
+      try{const r=await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&lang=de&limit=4&bbox=5.8,47.2,15.1,55.1`);const j=await r.json();
+        sugBox&&sugBox.remove();if(!j.features||!j.features.length)return;
+        sugBox=document.createElement('div');sugBox.className='sugg';
+        j.features.forEach(f=>{const a=fmtAdr(f.properties);if(!a)return;const b=document.createElement('button');b.type='button';b.innerHTML=`<svg width="18" height="18" style="color:#1468AA;flex:none"><use href="#i-pin"/></svg><span>${a}<br><small>${f.properties.state||''}</small></span>`;
+          b.onmousedown=ev=>{ev.preventDefault();input.value=a;sugBox.remove();onPick(a)};sugBox.appendChild(b)});
+        input.closest('.check').appendChild(sugBox);
+      }catch(e){}
+    },220);
+  });
+  input.addEventListener('blur',()=>setTimeout(()=>sugBox&&sugBox.remove(),150));
+};
+$$('form[data-check] input').forEach(i=>attachSug(i,a=>openFn({adr:a})));
+attachSug($('#fadr'),a=>geocode(a));
+
+/* Fotos */
+const drop=$('#drop'),files=$('#files');
+const addFiles=list=>{[...list].filter(f=>f.type.startsWith('image/')).slice(0,3-st.files.length).forEach(f=>{st.files.push(f);const d=document.createElement('div');const im=document.createElement('img');im.src=URL.createObjectURL(f);d.appendChild(im);$('#thumbs').appendChild(d)});summary();go(4,false)};
+files.addEventListener('change',()=>addFiles(files.files));
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('ov')}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('ov')}));
+drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
+
+/* Rückruf-Slots */
+const buildSlots=()=>{
+  const box=$('#slots');if(box.dataset.built)return;box.dataset.built=1;
+  const d=new Date(),wd=['So','Mo','Di','Mi','Do','Fr','Sa'],out=[];
+  let day=new Date(d);if(d.getHours()<15&&d.getDay()%6)out.push(['Heute, 16 bis 18 Uhr','heute zwischen 16 und 18 Uhr']);
+  while(out.length<5){day.setDate(day.getDate()+1);if(!(day.getDay()%6))continue;const lab=`${wd[day.getDay()]} ${day.getDate()}.${day.getMonth()+1}.`;
+    out.push([`${lab}, 9 bis 12 Uhr`,`am ${lab} zwischen 9 und 12 Uhr`]);if(out.length<5)out.push([`${lab}, 14 bis 17 Uhr`,`am ${lab} zwischen 14 und 17 Uhr`])}
+  out.push(['Lieber per E-Mail','per E-Mail']);
+  box.innerHTML=out.map(([l,v])=>`<button type="button" class="chip" data-v="${v}">${l}</button>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;st.slot=b.dataset.v;$$('.chip',box).forEach(c=>c.classList.toggle('on',c===b))});
+};
+
+/* Absenden (Prototyp, keine Übertragung) */
+const submit=()=>{
+  let ok=true;
+  ['#fn1','#fn2','#fem','#ftel'].forEach(id=>{const i=$(id),bad=!i.value.trim()||(i.type==='email'&&!/^\S+@\S+\.\S+$/.test(i.value));i.parentElement.classList.toggle('err',bad);if(bad)ok=false});
+  if(!$('#fok').checked){$('.consent').style.color='#d14343';ok=false}else $('.consent').style.color='';
+  if(!ok)return;
+  const name=$('#fn1').value.trim();
+  $('#dtitle').innerHTML=`Danke, ${name}. Wir melden uns <span class="nb">wie vereinbart.</span>`;
+  const slot=st.slot||'am selben Werktag';
+  $('#dsub').textContent=st.slot==='per E-Mail'?'Sie bekommen gleich eine Bestätigung per E-Mail. Die Angebote schicken wir Ihnen ebenfalls per E-Mail.':`Martin Weiss ruft Sie ${slot} an. Eine Bestätigung mit allen Angaben ist per E-Mail unterwegs.`;
+  $('#dwhen').textContent=st.slot&&st.slot!=='per E-Mail'?st.slot.replace(/^am /,'').replace(' zwischen',',').replace(' und ','–'):'am selben Werktag';
+  $('#vgn').textContent='PH-2026-'+String(Math.floor(1000+Math.random()*9000));
+  go(6);
+};
+summary();
+})();
+</script>
+</body>
+</html>
